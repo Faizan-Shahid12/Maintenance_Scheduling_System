@@ -9,10 +9,10 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
 {
     public interface IAppUserRepo
     {
-        public Task CreateNewAppUser(AppUser user);
+        public Task CreateNewAppUser(AppUser user, string password);
         public Task DeleteAppUser(AppUser user);
         public Task UpdateAppUser(AppUser user);
-        public Task<List<AppUser>> GetAppUserByName(string Name);
+        public Task<AppUser> GetAppUserByUserName(string Name);
         public Task<List<AppUser>> GetAllAppUser();
         public Task<List<AppUser>> GetAppUsersByRole(string Role);
     }
