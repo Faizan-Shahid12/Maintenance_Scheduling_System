@@ -1,0 +1,15 @@
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Application\bin\Debug\net8.0\Maintenance_Scheduling_System.Application.deps.json
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Application\bin\Debug\net8.0\Maintenance_Scheduling_System.Application.dll
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Application\bin\Debug\net8.0\Maintenance_Scheduling_System.Application.pdb
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Application\bin\Debug\net8.0\Maintenance_Scheduling_System.Domain.dll
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Application\bin\Debug\net8.0\Maintenance_Scheduling_System.Domain.pdb
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Application\obj\Debug\net8.0\Maintenance_Scheduling_System.Application.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Application\obj\Debug\net8.0\Maintenance_Scheduling_System.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Application\obj\Debug\net8.0\Maintenance_Scheduling_System.Application.AssemblyInfoInputs.cache
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Application\obj\Debug\net8.0\Maintenance_Scheduling_System.Application.AssemblyInfo.cs
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Application\obj\Debug\net8.0\Maintenance_Scheduling_System.Application.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Application\obj\Debug\net8.0\Maintena.010D41C5.Up2Date
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Application\obj\Debug\net8.0\Maintenance_Scheduling_System.Application.dll
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Application\obj\Debug\net8.0\refint\Maintenance_Scheduling_System.Application.dll
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Application\obj\Debug\net8.0\Maintenance_Scheduling_System.Application.pdb
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Application\obj\Debug\net8.0\ref\Maintenance_Scheduling_System.Application.dll

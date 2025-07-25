@@ -1,0 +1,381 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{16F76E72-E460-456D-8622-5345C722DE78}|Maintenance_Scheduling_System.Application\\Maintenance_Scheduling_System.Application.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.application\\interfaces\\iequipmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16F76E72-E460-456D-8622-5345C722DE78}|Maintenance_Scheduling_System.Application\\Maintenance_Scheduling_System.Application.csproj|solutionrelative:maintenance_scheduling_system.application\\interfaces\\iequipmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEBC623A-E10C-4D38-A39C-075E7BF70559}|Maintenance_Scheduling_System.Infrastructure\\Maintenance_Scheduling_System.Infrastructure.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.infrastructure\\dbcontext\\maintenance_dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEBC623A-E10C-4D38-A39C-075E7BF70559}|Maintenance_Scheduling_System.Infrastructure\\Maintenance_Scheduling_System.Infrastructure.csproj|solutionrelative:maintenance_scheduling_system.infrastructure\\dbcontext\\maintenance_dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.domain\\entities\\workshoploc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|solutionrelative:maintenance_scheduling_system.domain\\entities\\workshoploc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.domain\\entities\\equipment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|solutionrelative:maintenance_scheduling_system.domain\\entities\\equipment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D402493-04F9-4CF5-8E8D-738267D06ABB}|Maintenance_Scheduling_System\\Maintenance_Scheduling_System.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D402493-04F9-4CF5-8E8D-738267D06ABB}|Maintenance_Scheduling_System\\Maintenance_Scheduling_System.csproj|solutionrelative:maintenance_scheduling_system\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16F76E72-E460-456D-8622-5345C722DE78}|Maintenance_Scheduling_System.Application\\Maintenance_Scheduling_System.Application.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.application\\maintenance_scheduling_system.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{16F76E72-E460-456D-8622-5345C722DE78}|Maintenance_Scheduling_System.Application\\Maintenance_Scheduling_System.Application.csproj|solutionrelative:maintenance_scheduling_system.application\\maintenance_scheduling_system.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEBC623A-E10C-4D38-A39C-075E7BF70559}|Maintenance_Scheduling_System.Infrastructure\\Maintenance_Scheduling_System.Infrastructure.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.infrastructure\\maintenance_scheduling_system.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{EEBC623A-E10C-4D38-A39C-075E7BF70559}|Maintenance_Scheduling_System.Infrastructure\\Maintenance_Scheduling_System.Infrastructure.csproj|solutionrelative:maintenance_scheduling_system.infrastructure\\maintenance_scheduling_system.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEBC623A-E10C-4D38-A39C-075E7BF70559}|Maintenance_Scheduling_System.Infrastructure\\Maintenance_Scheduling_System.Infrastructure.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.infrastructure\\settings\\connectionsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEBC623A-E10C-4D38-A39C-075E7BF70559}|Maintenance_Scheduling_System.Infrastructure\\Maintenance_Scheduling_System.Infrastructure.csproj|solutionrelative:maintenance_scheduling_system.infrastructure\\settings\\connectionsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D402493-04F9-4CF5-8E8D-738267D06ABB}|Maintenance_Scheduling_System\\Maintenance_Scheduling_System.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8D402493-04F9-4CF5-8E8D-738267D06ABB}|Maintenance_Scheduling_System\\Maintenance_Scheduling_System.csproj|solutionrelative:maintenance_scheduling_system\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D402493-04F9-4CF5-8E8D-738267D06ABB}|Maintenance_Scheduling_System\\Maintenance_Scheduling_System.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system\\maintenance_scheduling_system.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{8D402493-04F9-4CF5-8E8D-738267D06ABB}|Maintenance_Scheduling_System\\Maintenance_Scheduling_System.csproj|solutionrelative:maintenance_scheduling_system\\maintenance_scheduling_system.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.domain\\entities\\maintenancehistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|solutionrelative:maintenance_scheduling_system.domain\\entities\\maintenancehistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.domain\\entities\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|solutionrelative:maintenance_scheduling_system.domain\\entities\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.domain\\maintenance_scheduling_system.domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|solutionrelative:maintenance_scheduling_system.domain\\maintenance_scheduling_system.domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.domain\\entities\\maintask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|solutionrelative:maintenance_scheduling_system.domain\\entities\\maintask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.domain\\entities\\tasklogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|solutionrelative:maintenance_scheduling_system.domain\\entities\\tasklogs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.domain\\entities\\tasklogattachments.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|solutionrelative:maintenance_scheduling_system.domain\\entities\\tasklogattachments.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.domain\\entities\\scheduletask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|solutionrelative:maintenance_scheduling_system.domain\\entities\\scheduletask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.domain\\entities\\maintenanceschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|solutionrelative:maintenance_scheduling_system.domain\\entities\\maintenanceschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.domain\\enums\\priorityenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|solutionrelative:maintenance_scheduling_system.domain\\enums\\priorityenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.domain\\interface\\iaudit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|solutionrelative:maintenance_scheduling_system.domain\\interface\\iaudit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|c:\\users\\administrator\\source\\repos\\maintenance_scheduling_system\\maintenance_scheduling_system.domain\\enums\\statusenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E2A8B3B-FDF9-4AC1-9B9A-294996A3C23A}|Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj|solutionrelative:maintenance_scheduling_system.domain\\enums\\statusenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IEquipmentService.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Application\\Interfaces\\IEquipmentService.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Application\\Interfaces\\IEquipmentService.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Application\\Interfaces\\IEquipmentService.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Application\\Interfaces\\IEquipmentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T13:08:45.817Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Maintenance_Scheduling_System.Application",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Application\\Maintenance_Scheduling_System.Application.csproj",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Application\\Maintenance_Scheduling_System.Application.csproj",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Application\\Maintenance_Scheduling_System.Application.csproj",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Application\\Maintenance_Scheduling_System.Application.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-25T11:33:57.782Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Maintenance_Scheduling_System.Infrastructure",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Infrastructure\\Maintenance_Scheduling_System.Infrastructure.csproj",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Infrastructure\\Maintenance_Scheduling_System.Infrastructure.csproj",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Infrastructure\\Maintenance_Scheduling_System.Infrastructure.csproj",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Infrastructure\\Maintenance_Scheduling_System.Infrastructure.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-25T11:32:34.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System\\appsettings.json",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System\\appsettings.json",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System\\appsettings.json",
+              "RelativeToolTip": "Maintenance_Scheduling_System\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-25T11:30:03.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Maintenance_Scheduling_System",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.csproj",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System\\Maintenance_Scheduling_System.csproj",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.csproj",
+              "RelativeToolTip": "Maintenance_Scheduling_System\\Maintenance_Scheduling_System.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-25T11:15:02.956Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ScheduleTask.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\ScheduleTask.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Domain\\Entities\\ScheduleTask.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\ScheduleTask.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Domain\\Entities\\ScheduleTask.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T10:17:29.658Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AppUser.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\AppUser.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Domain\\Entities\\AppUser.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\AppUser.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Domain\\Entities\\AppUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T09:12:17.052Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "PriorityEnum.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Enums\\PriorityEnum.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Domain\\Enums\\PriorityEnum.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Enums\\PriorityEnum.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Domain\\Enums\\PriorityEnum.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T07:53:02.664Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System\\Program.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System\\Program.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System\\Program.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System\\Program.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwB0AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T07:28:12.975Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ConnectionSettings.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Infrastructure\\Settings\\ConnectionSettings.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Infrastructure\\Settings\\ConnectionSettings.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Infrastructure\\Settings\\ConnectionSettings.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Infrastructure\\Settings\\ConnectionSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T07:26:56.786Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Maintenance_DbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Infrastructure\\DbContext\\Maintenance_DbContext.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Infrastructure\\DbContext\\Maintenance_DbContext.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Infrastructure\\DbContext\\Maintenance_DbContext.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Infrastructure\\DbContext\\Maintenance_DbContext.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAADwvzQAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T07:24:09.759Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "TaskLogAttachments.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\TaskLogAttachments.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Domain\\Entities\\TaskLogAttachments.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\TaskLogAttachments.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Domain\\Entities\\TaskLogAttachments.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T07:11:54.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "StatusEnum.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Enums\\StatusEnum.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Domain\\Enums\\StatusEnum.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Enums\\StatusEnum.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Domain\\Enums\\StatusEnum.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T07:03:37.467Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Maintenance_Scheduling_System.Domain",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Domain\\Maintenance_Scheduling_System.Domain.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-24T13:57:46.066Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "TaskLogs.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\TaskLogs.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Domain\\Entities\\TaskLogs.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\TaskLogs.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Domain\\Entities\\TaskLogs.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAAAkAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T06:22:53.788Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "MainTask.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\MainTask.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Domain\\Entities\\MainTask.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\MainTask.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Domain\\Entities\\MainTask.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T06:22:30.735Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "MaintenanceHistory.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\MaintenanceHistory.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Domain\\Entities\\MaintenanceHistory.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\MaintenanceHistory.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Domain\\Entities\\MaintenanceHistory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T06:22:11.559Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "MaintenanceSchedule.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\MaintenanceSchedule.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Domain\\Entities\\MaintenanceSchedule.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\MaintenanceSchedule.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Domain\\Entities\\MaintenanceSchedule.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T06:21:48.366Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WorkShopLoc.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\WorkShopLoc.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Domain\\Entities\\WorkShopLoc.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\WorkShopLoc.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Domain\\Entities\\WorkShopLoc.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-25T06:19:33.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "IAudit.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Interface\\IAudit.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Domain\\Interface\\IAudit.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Interface\\IAudit.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Domain\\Interface\\IAudit.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-24T13:58:33.108Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Equipment.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\Equipment.cs",
+              "RelativeDocumentMoniker": "Maintenance_Scheduling_System.Domain\\Entities\\Equipment.cs",
+              "ToolTip": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Domain\\Entities\\Equipment.cs",
+              "RelativeToolTip": "Maintenance_Scheduling_System.Domain\\Entities\\Equipment.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAgwBcAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-24T12:16:26.482Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
