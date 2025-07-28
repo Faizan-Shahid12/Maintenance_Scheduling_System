@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Maintenance_Scheduling_System.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aed588ee28d2a74bfc4dfa14fde3709bb7e4b9ff")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d2f42932891219e3663c5381dc83a915c3d68b13")]
 [assembly: System.Reflection.AssemblyProductAttribute("Maintenance_Scheduling_System.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Maintenance_Scheduling_System.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
