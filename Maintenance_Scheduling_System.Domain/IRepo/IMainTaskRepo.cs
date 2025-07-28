@@ -13,7 +13,7 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
         public Task CreateNewTask(MainTask Task1);
         public Task DeleteTask(MainTask Task1);
         public Task UpdateTask(MainTask Task1);
-        public Task<MainTask> GetTask(string Name);
+        public Task<MainTask> GetTaskById(int Id);
         public Task<List<MainTask>> GetAllTask();
         public Task<List<MainTask>> GetTaskByName(string Name);
         public Task<List<MainTask>> GetTaskByStatus(StatusEnum  Status);

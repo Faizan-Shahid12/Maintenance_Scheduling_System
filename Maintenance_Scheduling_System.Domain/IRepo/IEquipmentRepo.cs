@@ -12,8 +12,8 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
         public Task CreateNewEquipment(Equipment equip);
         public Task DeleteEquipment(Equipment equip);
         public Task UpdateEquipment(Equipment equip);
-        public Task<Equipment> GetEquipment(string Name);
+        public Task<Equipment> GetEquipmentById(int equipId);
         public Task<List<Equipment>> GetAllEquipment();
-        public Task<Equipment> GetEquipmentByName(string Name);
+        public Task<List<Equipment>> GetEquipmentByName(string Name);
     }
 }

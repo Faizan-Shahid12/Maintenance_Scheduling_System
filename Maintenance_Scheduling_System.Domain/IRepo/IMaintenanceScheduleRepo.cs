@@ -15,6 +15,6 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
         public Task<List<MaintenanceSchedule>> GetMaintenanceScheduleByName(string Name);
         public Task<List<MaintenanceSchedule>> GetAllMaintenanceSchedule();
         public Task<List<MaintenanceSchedule>> GetAllMaintenanceScheduleByType(string Type);
-        public Task<List<MaintenanceSchedule>> GetAllMaintenanceScheduleByStartDate(DateTime dates);
+        public Task<List<MaintenanceSchedule>> GetAllMaintenanceScheduleByStartDate(DateOnly dates);
     }
 }

@@ -12,7 +12,6 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
         public Task CreateNewTaskLogs(TaskLogs tasklogs);
         public Task DeleteTaskLogs(TaskLogs taskLogs);
         public Task UpdateTaskLogs(TaskLogs tasklogs);
-        public Task<List<TaskLogs>> GetAllTaskLogs();
         public Task<List<TaskLogs>> GetAllTaskLogsByTaskId(int TaskId);
     }
 }
