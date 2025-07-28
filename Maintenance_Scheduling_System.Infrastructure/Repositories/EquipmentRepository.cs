@@ -1,0 +1,97 @@
+﻿using Azure.Identity;
+using Maintenance_Scheduling_System.Domain.Entities;
+using Maintenance_Scheduling_System.Domain.IRepo;
+using Maintenance_Scheduling_System.Infrastructure.DbContext;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Maintenance_Scheduling_System.Infrastructure.Repositories
+{
+    public class EquipmentRepository : IEquipmentRepo
+    {
+        public Maintenance_DbContext DbContext { get; set; }
+
+        public EquipmentRepository(Maintenance_DbContext dbContext)
+        {
+            DbContext = dbContext;
+        }
+
+        public async Task AssignNewWorkShopLocation(int equipId,int WorkShopId,string Username)
+        {
+            var equip = await DbContext.Equipment.FindAsync(equipId);
+
+            equip.WorkshopId = WorkShopId;
+            equip.LastModifiedAt = DateTime.UtcNow;
+            equip.LastModifiedBy = Username;
+
+            DbContext.Equipment.Update(equip);
+            await DbContext.SaveChangesAsync();
+        }
+
+        public async Task CreateNewEquipment(Equipment equip)
+        {
+            await DbContext.Equipment.AddAsync(equip);
+            await DbContext.SaveChangesAsync();
+
+        }
+
+        public async Task DeleteEquipment(Equipment equip1)
+        {
+            var equip = await GetEquipmentById(equip1.EquipmentId);
+
+            equip.LastModifiedAt = DateTime.UtcNow;
+            equip.IsDeleted = true;
+
+            DbContext.Equipment.Update(equip);
+
+            await DbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdateEquipment(Equipment equip)
+        {
+           
+            var existingEquip = await DbContext.Equipment.FindAsync(equip.EquipmentId);
+
+            if (existingEquip == null)
+                throw new Exception("Equipment not found");
+
+            existingEquip.Name = equip.Name;
+            existingEquip.Type = equip.Type;
+            existingEquip.location = equip.location;
+            existingEquip.LastModifiedAt = DateTime.UtcNow;
+            existingEquip.LastModifiedBy = equip.LastModifiedBy;
+
+            await DbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<Equipment>> GetAllEquipment()
+        {
+            return await DbContext.Equipment
+                .Where(e => !e.IsDeleted)
+                .ToListAsync();
+        }
+
+        public async Task<List<Equipment>> GetEquipmentByName(string name)
+        {
+            return await DbContext.Equipment
+                .Where(e => !e.IsDeleted && e.Name.ToLower() == name.ToLower())
+                .ToListAsync();
+        }
+
+        public async Task<Equipment> GetEquipmentById(int equipId)
+        {
+            var equip = await DbContext.Equipment
+                .Where(e => e.EquipmentId == equipId && !e.IsDeleted)
+                .FirstOrDefaultAsync();
+
+            if (equip == null) 
+                throw new Exception("Equipment not found");
+
+            return equip;
+        }
+    }
+}

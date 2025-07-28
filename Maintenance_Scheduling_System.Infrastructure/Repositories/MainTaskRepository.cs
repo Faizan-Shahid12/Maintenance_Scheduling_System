@@ -1,0 +1,71 @@
+﻿using Maintenance_Scheduling_System.Domain.Entities;
+using Maintenance_Scheduling_System.Domain.Enums;
+using Maintenance_Scheduling_System.Domain.IRepo;
+using Maintenance_Scheduling_System.Infrastructure.DbContext;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Maintenance_Scheduling_System.Infrastructure.Repositories
+{
+    public class MainTaskRepository : IMainTaskRepo
+    {
+        public Maintenance_DbContext DbContext { get; set; }
+
+        public MainTaskRepository(Maintenance_DbContext dbContext)
+        {
+            DbContext = dbContext;
+        }
+
+        public async Task CreateNewTask(MainTask task)
+        {
+            await DbContext.MainTask.AddAsync(task);
+            await DbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteTask(MainTask task)
+        {
+            task.LastModifiedAt = DateTime.UtcNow;
+            task.IsDeleted = true;
+
+            DbContext.MainTask.Update(task);
+            await DbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdateTask(MainTask task)
+        {
+            task.LastModifiedAt = DateTime.UtcNow;
+            DbContext.MainTask.Update(task);
+            await DbContext.SaveChangesAsync();
+        }
+
+        public async Task<MainTask?> GetTaskById(int id)
+        {
+            return await DbContext.MainTask
+                .Where(t => t.TaskId == id && !t.IsDeleted)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<List<MainTask>> GetAllTask()
+        {
+            return await DbContext.MainTask
+                .Where(t => !t.IsDeleted)
+                .ToListAsync();
+        }
+
+        public async Task<List<MainTask>> GetTaskByName(string name)
+        {
+            return await DbContext.MainTask
+                .Where(t => t.TaskName.ToLower() == name.ToLower() && !t.IsDeleted)
+                .ToListAsync();
+        }
+
+        public async Task<List<MainTask>> GetTaskByStatus(StatusEnum status)
+        {
+            return await DbContext.MainTask
+                .Where(t => t.Status == status && !t.IsDeleted)
+                .ToListAsync();
+        }
+    }
+}
