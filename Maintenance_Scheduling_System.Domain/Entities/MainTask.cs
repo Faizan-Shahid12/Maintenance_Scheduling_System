@@ -14,8 +14,8 @@ namespace Maintenance_Scheduling_System.Domain.Entities
 
         public string EquipmentName { get; set; } = string.Empty;
         public string TaskName { get; set; } = string.Empty;
-        public PriorityEnum Priority { get; set; }
-        public StatusEnum Status { get; set; }
+        public PriorityEnum Priority { get; set; } = PriorityEnum.Low;
+        public StatusEnum Status { get; set; } = StatusEnum.Pending;
         public DateOnly DueDate {  get; set; }
 
         public int? HistoryId { get; set; }

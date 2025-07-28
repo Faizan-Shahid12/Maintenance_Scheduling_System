@@ -15,11 +15,11 @@ namespace Maintenance_Scheduling_System.Domain.Entities
         public int? WorkshopId { get; set; }
         public WorkShopLoc? WorkShopLocation { get; set; }
 
-        public List<MaintenanceSchedule> Schedule { get; set; }
+        public List<MaintenanceSchedule> Schedule { get; set; } = new();
 
-        public List<MaintenanceHistory> History { get; set; }
+        public List<MaintenanceHistory> History { get; set; } = new();
 
-        public List<MainTask> Tasks { get; set; }
+        public List<MainTask> Tasks { get; set; } = new();
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime LastModifiedAt { get; set; } = DateTime.Now;
