@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,19 +37,9 @@ namespace Maintenance_Scheduling_System.Infrastructure.DbContext
 
             optionsBuilder.UseSqlServer(ConnectionString, b => b.MigrationsAssembly("Maintenance_Scheduling_System"));
         }
-
-        private void SeedRole(ModelBuilder builder)
-        {
-            builder.Entity<IdentityRole>().HasData(
-                   new IdentityRole() { Id = "A1", Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "ADMIN" },
-                   new IdentityRole() { Id = "T1", Name = "Technician", ConcurrencyStamp = "2", NormalizedName = "TECHNICIAN" }
-                );
-        }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            SeedRole(builder);
 
             builder.Entity<AppUser>(entity =>
             {
@@ -143,7 +134,7 @@ namespace Maintenance_Scheduling_System.Infrastructure.DbContext
         public DbSet<MainTask> MainTask { get; set; }
         public DbSet<TaskLogs> TaskLogs { get; set; }
         public DbSet<TaskLogAttachment> TaskLogsAttachments { get; set; }
-        public DbSet<WorkShopLoc> workShopLocs { get; set; }
+        public DbSet<WorkShopLoc> WorkShopLocs { get; set; }
 
     }
 }
