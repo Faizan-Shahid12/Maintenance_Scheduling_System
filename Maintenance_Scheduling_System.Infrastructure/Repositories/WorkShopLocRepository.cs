@@ -21,7 +21,7 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
 
         public async Task<List<WorkShopLoc>> GetAllWorkShopLoc()
         {
-             return await DbContext.workShopLocs.ToListAsync();
+             return await DbContext.WorkShopLocs.ToListAsync();
         }
     }
 }
