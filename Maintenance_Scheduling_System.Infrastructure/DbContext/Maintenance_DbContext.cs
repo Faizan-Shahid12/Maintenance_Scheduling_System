@@ -139,7 +139,8 @@ namespace Maintenance_Scheduling_System.Infrastructure.DbContext
         public DbSet<Equipment> Equipment { get; set; }
         public DbSet<MaintenanceHistory> MaintenanceHistories { get; set; }
         public DbSet<MaintenanceSchedule> MaintenanceSchedules { get; set; }
-        public DbSet<MainTask> Tasks { get; set; }
+        public DbSet<ScheduleTask> ScheduleTasks { get; set; }
+        public DbSet<MainTask> MainTask { get; set; }
         public DbSet<TaskLogs> TaskLogs { get; set; }
         public DbSet<TaskLogAttachment> TaskLogsAttachments { get; set; }
         public DbSet<WorkShopLoc> workShopLocs { get; set; }
