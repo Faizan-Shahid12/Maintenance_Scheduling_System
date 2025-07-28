@@ -41,30 +41,16 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
 
         public async Task DeleteEquipment(Equipment equip1)
         {
-            var equip = await GetEquipmentById(equip1.EquipmentId);
+            equip1.IsDeleted = true;
 
-            equip.LastModifiedAt = DateTime.UtcNow;
-            equip.IsDeleted = true;
-
-            DbContext.Equipment.Update(equip);
+            DbContext.Equipment.Update(equip1);
 
             await DbContext.SaveChangesAsync();
         }
 
         public async Task UpdateEquipment(Equipment equip)
         {
-           
-            var existingEquip = await DbContext.Equipment.FindAsync(equip.EquipmentId);
-
-            if (existingEquip == null)
-                throw new Exception("Equipment not found");
-
-            existingEquip.Name = equip.Name;
-            existingEquip.Type = equip.Type;
-            existingEquip.location = equip.location;
-            existingEquip.LastModifiedAt = DateTime.UtcNow;
-            existingEquip.LastModifiedBy = equip.LastModifiedBy;
-
+            DbContext.Equipment.Update(equip);
             await DbContext.SaveChangesAsync();
         }
 
