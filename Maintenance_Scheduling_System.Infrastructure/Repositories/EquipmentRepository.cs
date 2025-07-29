@@ -56,21 +56,21 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
 
         public async Task<List<Equipment>> GetAllEquipment()
         {
-            return await DbContext.Equipment
+            return await DbContext.Equipment.Include(ws => ws.WorkShopLocation)
                 .Where(e => !e.IsDeleted)
                 .ToListAsync();
         }
 
         public async Task<List<Equipment>> GetEquipmentByName(string name)
         {
-            return await DbContext.Equipment
+            return await DbContext.Equipment.Include(ws => ws.WorkShopLocation)
                 .Where(e => !e.IsDeleted && e.Name.ToLower() == name.ToLower())
                 .ToListAsync();
         }
 
         public async Task<Equipment> GetEquipmentById(int equipId)
         {
-            var equip = await DbContext.Equipment
+            var equip = await DbContext.Equipment.Include(ws => ws.WorkShopLocation)
                 .Where(e => e.EquipmentId == equipId && !e.IsDeleted)
                 .FirstOrDefaultAsync();
 
