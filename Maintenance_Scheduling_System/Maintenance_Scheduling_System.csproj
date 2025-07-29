@@ -28,8 +28,4 @@
     <ProjectReference Include="..\Maintenance_Scheduling_System.Infrastructure\Maintenance_Scheduling_System.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

@@ -4,6 +4,7 @@ using Maintenance_Scheduling_System.Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Maintenance_Scheduling_System.Migrations
 {
     [DbContext(typeof(Maintenance_DbContext))]
-    partial class Maintenance_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20250728091002_Changed Name and Added New Table")]
+    partial class ChangedNameandAddedNewTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -243,9 +246,6 @@ namespace Maintenance_Scheduling_System.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("EndDate")
-                        .HasColumnType("date");
-
                     b.Property<int>("EquipmentId")
                         .HasColumnType("int");
 
@@ -266,9 +266,6 @@ namespace Maintenance_Scheduling_System.Migrations
                     b.Property<string>("LastModifiedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly>("StartDate")
-                        .HasColumnType("date");
 
                     b.HasKey("HistoryId");
 
@@ -482,7 +479,7 @@ namespace Maintenance_Scheduling_System.Migrations
 
                     b.HasKey("WorkShopId");
 
-                    b.ToTable("WorkShopLocs");
+                    b.ToTable("workShopLocs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -510,6 +507,22 @@ namespace Maintenance_Scheduling_System.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "A1",
+                            ConcurrencyStamp = "1",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "T1",
+                            ConcurrencyStamp = "2",
+                            Name = "Technician",
+                            NormalizedName = "TECHNICIAN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
