@@ -43,6 +43,8 @@ namespace Maintenance_Scheduling_System.Infrastructure.DbContext
                     roleManager.CreateAsync(new IdentityRole(role));
                 }
             }
+
+            context.SaveChanges();
         }
     }
 
