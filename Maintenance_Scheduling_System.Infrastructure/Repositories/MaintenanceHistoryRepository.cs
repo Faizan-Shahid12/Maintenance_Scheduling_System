@@ -41,25 +41,24 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
             return await DbContext.MaintenanceHistories.Where(x => x.IsDeleted == false).ToListAsync();
         }
 
-        public async Task<MaintenanceHistory?> GetMaintenanceHistory(int Id)
+        public async Task<List<MaintenanceHistory>> GetMaintenanceHistoryByEquipId(int equipId)
         {
-            return await DbContext.MaintenanceHistories.Where( x => x.EquipmentId == Id && x.IsDeleted == false).FirstOrDefaultAsync();
+            return await DbContext.MaintenanceHistories.Where(x => x.IsDeleted == false && x.EquipmentId == equipId).ToListAsync();
         }
 
-        public async Task UpdateMaintenanceHistory(MaintenanceHistory mainHis)
+        public async Task<MaintenanceHistory?> GetMaintenanceHistory(int Id)
         {
-            var existing = await DbContext.MaintenanceHistories.FindAsync(mainHis.HistoryId);
+            return await DbContext.MaintenanceHistories.Where( x => x.HistoryId == Id && x.IsDeleted == false).FirstOrDefaultAsync();
+        }
 
-            if (existing != null && !existing.IsDeleted)
-            {
-                existing.EquipmentName = mainHis.EquipmentName;
-                existing.EquipmentType = mainHis.EquipmentType;
+        public async Task AddTask()
+        {
+            await DbContext.SaveChangesAsync();
+        }
 
-                existing.LastModifiedAt = DateTime.Now;
-                existing.LastModifiedBy = mainHis.LastModifiedBy;
-
-                await DbContext.SaveChangesAsync();
-            }
+        public async Task UpdateMaintenanceHistory()
+        {
+            await DbContext.SaveChangesAsync();
         }
     }
 }
