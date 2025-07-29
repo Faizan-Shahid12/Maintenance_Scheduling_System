@@ -12,7 +12,9 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
     {
         public Task CreateNewMaintenanceHistory(MaintenanceHistory MainHis);
         public Task DeleteMaintenanceHistory(MaintenanceHistory MainHis);
-        public Task UpdateMaintenanceHistory(MaintenanceHistory MainHis);
+        public Task UpdateMaintenanceHistory();
+        public Task<List<MaintenanceHistory>> GetMaintenanceHistoryByEquipId(int equipId);
+        public Task AddTask();
         public Task<MaintenanceHistory?> GetMaintenanceHistory(int Id);
         public Task<List<MaintenanceHistory>> GetAllMaintenanceHistory();
     }
