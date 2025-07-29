@@ -9,7 +9,7 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
 {
     public interface IAppUserRepo
     {
-        public Task CreateNewAppUser(AppUser user, string password);
+        public Task CreateNewAppUser(AppUser user, string password, string role);
         public Task DeleteAppUser(AppUser user);
         public Task UpdateAppUser(AppUser user);
         public Task<AppUser> GetAppUserByUserName(string Name);
