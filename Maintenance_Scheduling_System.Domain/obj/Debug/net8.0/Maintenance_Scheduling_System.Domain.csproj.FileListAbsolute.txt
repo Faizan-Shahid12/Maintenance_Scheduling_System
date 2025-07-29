@@ -6,6 +6,7 @@ C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Sc
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Domain\obj\Debug\net8.0\Maintenance_Scheduling_System.Domain.AssemblyInfoInputs.cache
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Domain\obj\Debug\net8.0\Maintenance_Scheduling_System.Domain.AssemblyInfo.cs
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Domain\obj\Debug\net8.0\Maintenance_Scheduling_System.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Domain\obj\Debug\net8.0\Maintenance_Scheduling_System.Domain.sourcelink.json
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Domain\obj\Debug\net8.0\Maintenance_Scheduling_System.Domain.dll
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Domain\obj\Debug\net8.0\refint\Maintenance_Scheduling_System.Domain.dll
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System.Domain\obj\Debug\net8.0\Maintenance_Scheduling_System.Domain.pdb
