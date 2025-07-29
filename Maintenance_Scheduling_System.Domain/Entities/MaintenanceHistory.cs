@@ -12,6 +12,8 @@ namespace Maintenance_Scheduling_System.Domain.Entities
         public int HistoryId { get; set; }
         public string EquipmentName { get; set; } = string.Empty;
         public string EquipmentType { get; set; } = string.Empty;
+        public DateOnly StartDate { get; set; }
+        public DateOnly EndDate { get; set; }
 
         public int EquipmentId { get; set; }
         public Equipment equipment { get; set; }
@@ -24,5 +26,13 @@ namespace Maintenance_Scheduling_System.Domain.Entities
         public string LastModifiedBy { get; set; } = string.Empty;
         public bool IsDeleted { get; set; } = false;
 
+        public void AddTask(MainTask task)
+        {
+            if (tasks == null)
+                tasks = new ();
+
+            tasks.Add(task);
+        }
+    
     }
 }
