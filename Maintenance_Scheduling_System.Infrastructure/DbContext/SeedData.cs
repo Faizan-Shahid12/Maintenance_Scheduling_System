@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Maintenance_Scheduling_System.Infrastructure.DbContext
 {
-    public static class SeedData
+    public class SeedData
     {
-        public static void Seed(IServiceProvider serviceProvider)
+        public async Task Seed(IServiceProvider serviceProvider)
         {
             using var scope = serviceProvider.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<Maintenance_DbContext>();
@@ -34,17 +34,19 @@ namespace Maintenance_Scheduling_System.Infrastructure.DbContext
             }
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            string [] roles = { "Admin", "Techinican" };
+            string [] roles = { "Admin", "Technician" };
 
             foreach (var role in roles)
             {
-                if(!roleManager.RoleExistsAsync(role).Result)
+                var roleExists = await roleManager.RoleExistsAsync(role);
+
+                if (!roleExists)
                 {
-                    roleManager.CreateAsync(new IdentityRole(role));
+                    await roleManager.CreateAsync(new IdentityRole(role));
                 }
             }
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 
