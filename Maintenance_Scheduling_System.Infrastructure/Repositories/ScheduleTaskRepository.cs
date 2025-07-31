@@ -24,12 +24,8 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
             await DbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteScheduleTask(ScheduleTask task)
+        public async Task DeleteScheduleTask()
         {
-            task.IsDeleted = true;
-            task.LastModifiedAt = DateTime.UtcNow;
-
-            DbContext.ScheduleTasks.Update(task);
             await DbContext.SaveChangesAsync();
         }
 
@@ -47,16 +43,8 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public async Task UpdateScheduleTask(ScheduleTask task)
+        public async Task UpdateScheduleTask()
         {
-            var existing = await DbContext.ScheduleTasks.FindAsync(task.ScheduleTaskId);
-
-            if (existing == null || existing.IsDeleted)
-                throw new Exception("ScheduleTask not found or has been deleted.");
-
-            existing.TaskName = task.TaskName;
-
-            DbContext.ScheduleTasks.Update(existing);
             await DbContext.SaveChangesAsync();
         }
     }
