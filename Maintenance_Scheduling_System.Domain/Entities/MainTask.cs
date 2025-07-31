@@ -11,7 +11,6 @@ namespace Maintenance_Scheduling_System.Domain.Entities
     public class MainTask : IAudit
     {
         public int TaskId { get; set; }
-
         public string EquipmentName { get; set; } = string.Empty;
         public string TaskName { get; set; } = string.Empty;
         public PriorityEnum Priority { get; set; } = PriorityEnum.Low;

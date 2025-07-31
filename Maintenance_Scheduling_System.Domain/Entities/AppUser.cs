@@ -11,6 +11,8 @@ namespace Maintenance_Scheduling_System.Domain.Entities
     public class AppUser : IdentityUser , IAudit
     {
         public string FullName { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty ;
+        public string Gender { get; set; } = string.Empty;
         public List<MainTask>? AssignedTasks { get; set; }
 
 
