@@ -10,11 +10,15 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
     public interface IMaintenanceScheduleRepo
     {
         public Task CreateNewMaintenanceSchedule(MaintenanceSchedule MainHis);
-        public Task DeleteMaintenanceSchedule(MaintenanceSchedule MainHis);
-        public Task UpdateMaintenanceSchedule(MaintenanceSchedule MainHis);
+        public Task DeleteMaintenanceSchedule();
+        public Task UpdateMaintenanceSchedule();
         public Task<List<MaintenanceSchedule>> GetMaintenanceScheduleByName(string Name);
         public Task<List<MaintenanceSchedule>> GetAllMaintenanceSchedule();
         public Task<List<MaintenanceSchedule>> GetAllMaintenanceScheduleByType(string Type);
         public Task<List<MaintenanceSchedule>> GetAllMaintenanceScheduleByStartDate(DateOnly dates);
+        public Task<MaintenanceSchedule> GetMaintenanceScheduleById(int id);
+        public Task<List<MaintenanceSchedule>> GetAllMaintenanceScheduleByEquipId(int EquipId);
+
+
     }
 }
