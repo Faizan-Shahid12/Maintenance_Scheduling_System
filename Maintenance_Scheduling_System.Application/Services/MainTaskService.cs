@@ -72,12 +72,51 @@ namespace Maintenance_Scheduling_System.Application.Services
 
             equip.AddMainTask(mainTask);
 
-
         }
 
         public async Task CreateNewMainTaskByScheduleTask(int EquipId, List<ScheduleTask> scheduleTasks)
         {
-            return;
+            foreach (var scheduleTask in scheduleTasks)
+            {
+                var mainTask = new MainTask{
+                    EquipmentName= scheduleTask.EquipmentName,
+                    TaskName= scheduleTask.TaskName,
+                    DueDate= scheduleTask.DueDate,
+                    Priority = scheduleTask.Priority
+                };
+
+                var MainHis = await MaintenanceHistoryService.GetMaintenanceHistoryByEquipId(EquipId);
+
+                mainTask.EquipmentId = EquipId;
+
+                mainTask.CreatedBy = currentUser.Name;
+
+                AuditModify(mainTask);
+
+                foreach (var mainHis in MainHis)
+                {
+                    if (mainHis.StartDate == DateOnly.FromDateTime(DateTime.Now))
+                    {
+                        await MaintenanceHistoryService.AddNewTasktoHistory(mainHis.HistoryId, mainTask);
+                        return;
+                    }
+                }
+
+                await MainTaskRepository.CreateNewTask(mainTask);
+
+                var equip = await EquipmentReposity.GetEquipmentById(EquipId);
+
+                CreateMaintenanceHistoryDTO mainhisDTO = new CreateMaintenanceHistoryDTO();
+
+                mainhisDTO.EquipmentId = EquipId;
+                mainhisDTO.EquipmentName = equip.Name;
+                mainhisDTO.EquipmentType = equip.Type;
+                mainhisDTO.StartDate = DateOnly.FromDateTime(DateTime.Now);
+
+                await MaintenanceHistoryService.CreateMaintenanceHistoryFromTask(mainhisDTO, mainTask, equip);
+
+                equip.AddMainTask(mainTask);
+            }
         }
 
         public async Task<List<MainTaskDTO>> GetAllMainTask()
@@ -155,7 +194,7 @@ namespace Maintenance_Scheduling_System.Application.Services
             {
                 if(mainTask.DueDate < DateOnly.FromDateTime(DateTime.Now) && mainTask.Status != StatusEnum.Completed)
                 {
-                    await ChangeTaskStatus(mainTask.TaskId, StatusEnum.OverDue);
+                    mainTask.Status = StatusEnum.OverDue;
                 }
             }
 
