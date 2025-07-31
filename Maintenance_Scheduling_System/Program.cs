@@ -73,6 +73,10 @@ namespace Maintenance_Scheduling_System
 
             builder.Services.Configure<ConnectionSettings>(builder.Configuration.GetSection("ConnectionStrings"));
 
+            builder.Services.AddIdentity<AppUser, IdentityRole>()
+               .AddEntityFrameworkStores<Maintenance_DbContext>()
+               .AddDefaultTokenProviders();
+
 
             builder.Services.AddAuthentication(opt =>
             {
@@ -88,10 +92,11 @@ namespace Maintenance_Scheduling_System
                 opt.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateLifetime = true,
-                    ValidateAudience = false,
+                    ValidateAudience = true,
                     ValidateIssuer = true,
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwt.Issuer,
+                    ValidAudience = jwt.Audience,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key))
                 };
 
@@ -100,8 +105,7 @@ namespace Maintenance_Scheduling_System
             builder.Services.AddAuthorization(opt =>
             {
                 opt.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
-                opt.AddPolicy("StudentPolicy", policy => policy.RequireRole("Student"));
-                opt.AddPolicy("TeacherPolicy", policy => policy.RequireRole("Teacher"));
+                opt.AddPolicy("TechnicianPolicy", policy => policy.RequireRole("Technician"));
             });
 
             builder.Services.AddAutoMapper(typeof(AssemblyReference).Assembly);
@@ -110,10 +114,7 @@ namespace Maintenance_Scheduling_System
 
            builder.Services.AddDbContext<Maintenance_DbContext>();
 
-           builder.Services.AddIdentity<AppUser, IdentityRole>()
-                .AddEntityFrameworkStores<Maintenance_DbContext>()
-                .AddDefaultTokenProviders();
-
+          
            builder.Services.AddScoped<ICurrentUser, CurrentUserService>();
 
             builder.Services.AddScoped<IEquipmentRepo, EquipmentRepository>();
