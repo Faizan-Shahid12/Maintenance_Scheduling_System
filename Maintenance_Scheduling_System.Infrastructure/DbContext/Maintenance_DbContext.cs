@@ -22,15 +22,7 @@ namespace Maintenance_Scheduling_System.Infrastructure.DbContext
         {
                   ConnectionString = options1.Value.DefaultString;
         }
-        public Maintenance_DbContext()
-    : base(new DbContextOptionsBuilder<Maintenance_DbContext>()
-        .UseSqlServer("Server=localhost;Database=MaintenanceDb;Trusted_Connection=True;TrustServerCertificate=True;",
-            b => b.MigrationsAssembly("Maintenance_Scheduling_System.Infrastructure"))
-        .Options)
-        {
-            ConnectionString = "Server=localhost;Database=MaintenanceDb;Trusted_Connection=True;TrustServerCertificate=True;";
-        }
-
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -88,7 +80,11 @@ namespace Maintenance_Scheduling_System.Infrastructure.DbContext
                 .WithOne(st => st.schedule)
                 .HasForeignKey(st => st.ScheduleId)
                 .IsRequired();
-                
+
+                entity.Property(s => s.Interval)
+                    .HasConversion(interval => interval.TotalDays, interval => TimeSpan.FromDays(interval))
+                    .HasColumnType("float");
+
             });
 
             builder.Entity<MaintenanceHistory>(entity =>
