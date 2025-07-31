@@ -4,6 +4,7 @@ using Maintenance_Scheduling_System.Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Maintenance_Scheduling_System.Migrations
 {
     [DbContext(typeof(Maintenance_DbContext))]
-    partial class Maintenance_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20250830085436_Fixed Bug Step 1")]
+    partial class FixedBugStep1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,10 +32,6 @@ namespace Maintenance_Scheduling_System.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -53,10 +52,6 @@ namespace Maintenance_Scheduling_System.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -305,9 +300,6 @@ namespace Maintenance_Scheduling_System.Migrations
 
                     b.Property<int>("EquipmentId")
                         .HasColumnType("int");
-
-                    b.Property<double>("Interval")
-                        .HasColumnType("float");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
