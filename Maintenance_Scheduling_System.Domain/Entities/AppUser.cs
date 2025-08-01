@@ -14,7 +14,7 @@ namespace Maintenance_Scheduling_System.Domain.Entities
         public string Address { get; set; } = string.Empty ;
         public string Gender { get; set; } = string.Empty;
         public List<MainTask>? AssignedTasks { get; set; }
-
+        public List<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime LastModifiedAt { get; set; } = DateTime.Now;

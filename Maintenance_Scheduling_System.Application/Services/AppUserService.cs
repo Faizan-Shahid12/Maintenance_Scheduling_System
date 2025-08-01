@@ -23,15 +23,16 @@ namespace Maintenance_Scheduling_System.Application.Services
         public IAppUserRepo AppUserRepository { get; set; }
         public IMapper mapper { get; set; }
         public ICurrentUser currentUser { get; set; }
-
         public TokenSetting tokenOptions { get; set; }
+        public IRefreshTokenService refreshTokenService { get; set; }
 
-        public AppUserService(IAppUserRepo appuserrepo,IMapper mapper1,ICurrentUser user1, IOptions<TokenSetting> option)
+        public AppUserService(IAppUserRepo appuserrepo,IMapper mapper1,ICurrentUser user1, IOptions<TokenSetting> option,IRefreshTokenService tokenService)
         {
             AppUserRepository = appuserrepo;
             mapper = mapper1;
             currentUser = user1;
             tokenOptions = option.Value;
+            refreshTokenService = tokenService;
         }
 
         public async Task CreateAppUser(AppUserDTO appuser,string role)
@@ -97,7 +98,7 @@ namespace Maintenance_Scheduling_System.Application.Services
             var token = new JwtSecurityToken(
                 issuer: tokenOptions.Issuer,
                 audience: tokenOptions.Audience,
-                expires: DateTime.Now.AddMinutes(tokenOptions.Expiry),
+                expires: DateTime.UtcNow.AddMinutes(tokenOptions.AccessExpiryInMins),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenOptions.Key)),
@@ -105,9 +106,13 @@ namespace Maintenance_Scheduling_System.Application.Services
                 )
             );
 
+            var refreshToken = await refreshTokenService.GenerateRefreshTokenAsync(user.Id);
+
             return new TokenResponseDTO
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
+                RefreshToken = refreshToken,
+                AccessTokenExpiry = token.ValidTo,
                 UserId = user.Id,
                 Roles = userRoles.ToList()
             };

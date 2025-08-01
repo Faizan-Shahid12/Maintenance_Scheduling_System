@@ -1,7 +1,9 @@
 ﻿using Maintenance_Scheduling_System.Application.DTO.AppUserDTOs;
 using Maintenance_Scheduling_System.Application.Interfaces;
+using Maintenance_Scheduling_System.Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Maintenance_Scheduling_System.Controllers
 {
@@ -10,10 +12,12 @@ namespace Maintenance_Scheduling_System.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IAppUserService _appUserService;
+        private readonly IRefreshTokenService RefreshTokenService;
 
-        public AuthenticationController(IAppUserService appUserService)
+        public AuthenticationController(IAppUserService appUserService, IRefreshTokenService rtser)
         {
             _appUserService = appUserService;
+            RefreshTokenService = rtser;
         }
 
         [HttpPost]
@@ -68,13 +72,27 @@ namespace Maintenance_Scheduling_System.Controllers
             var token = await _appUserService.CreateToken(user);
             return Ok(token);
         }
-
-        [Route("api/test-authorize")]
-        [HttpGet]
-        
-        public IActionResult TestAuth()
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> RefreshToken([FromBody] string token)
         {
-            return Ok("You are authorized!");
+            var RefreshToken = await RefreshTokenService.GetRefreshToken(token);
+            
+            if (await RefreshTokenService.ValidateRefreshTokenAsync(RefreshToken))
+            {
+                return Unauthorized("Invalid refresh Token");
+            }
+
+            if (await RefreshTokenService.IsRefreshTokenExpiredAsync(RefreshToken))
+            {
+                return Unauthorized("Refresh token expired");
+            }
+
+            await RefreshTokenService.RevokeRefreshTokenAsync(RefreshToken);
+
+            var response = await _appUserService.CreateToken(RefreshToken.User);
+
+            return Ok(response);
         }
 
     }
