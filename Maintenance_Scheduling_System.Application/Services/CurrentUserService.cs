@@ -22,7 +22,7 @@ namespace Maintenance_Scheduling_System.Application.Services
             _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
         public string? Name =>
-            _httpContextAccessor.HttpContext?.User?.Identity?.Name;
+            _httpContextAccessor.HttpContext?.User?.FindFirstValue("FullName");
     }
 
 }
