@@ -184,10 +184,10 @@ C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Sc
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\obj\Debug\net8.0\Maintena.8716B60F.Up2Date
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\obj\Debug\net8.0\Maintenance_Scheduling_System.dll
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\obj\Debug\net8.0\refint\Maintenance_Scheduling_System.dll
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\obj\Debug\net8.0\Maintenance_Scheduling_System.pdb
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\obj\Debug\net8.0\Maintenance_Scheduling_System.genruntimeconfig.cache
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\obj\Debug\net8.0\ref\Maintenance_Scheduling_System.dll
-C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

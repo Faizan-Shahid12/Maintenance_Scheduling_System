@@ -1,5 +1,146 @@
 [
   {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
+    "Method": "CreateAdmin",
+    "RelativePath": "Authentication/CreateAdmin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "FullName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Gender",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
+    "Method": "CreateTechnician",
+    "RelativePath": "Authentication/CreateTechnician",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Maintenance_Scheduling_System.Application.DTO.AppUserDTOs.AppUserDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
+    "Method": "DeleteTechnician",
+    "RelativePath": "Authentication/DeleteTechnician/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
+    "Method": "GetTechnicians",
+    "RelativePath": "Authentication/GetTechnicians",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
+    "Method": "Login",
+    "RelativePath": "Authentication/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
+    "Method": "RefreshToken",
+    "RelativePath": "Authentication/RefreshToken/refresh-token",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
+    "Method": "UpdateTechnician",
+    "RelativePath": "Authentication/UpdateTechnician/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "Maintenance_Scheduling_System.Application.DTO.AppUserDTOs.AppUserDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.EquipmentController",
     "Method": "ArchiveEquipment",
     "RelativePath": "Equipment/ArchiveEquipment/{equipId}",
@@ -479,6 +620,164 @@
         "Name": "EquipId",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
+    "Method": "ActivateSchedule",
+    "RelativePath": "MaintenanceSchedule/ActivateSchedule/{scheduleId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "scheduleId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
+    "Method": "AddNewTaskToSchedule",
+    "RelativePath": "MaintenanceSchedule/AddNewTaskToSchedule/{scheduleId}/task",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "scheduleId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "Maintenance_Scheduling_System.Application.DTO.ScheduleTaskDTOs.CreateScheduleTaskDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
+    "Method": "CreateMaintenanceSchedule",
+    "RelativePath": "MaintenanceSchedule/CreateMaintenanceSchedule",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Maintenance_Scheduling_System.Application.DTO.MaintenanceScheduleDTOs.CreateMaintenanceScheduleDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
+    "Method": "DeleteMaintenanceSchedule",
+    "RelativePath": "MaintenanceSchedule/DeleteMaintenanceSchedule/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
+    "Method": "DeleteTaskFromSchedule",
+    "RelativePath": "MaintenanceSchedule/DeleteTaskFromSchedule/{scheduleId}/task/{taskId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "scheduleId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
+    "Method": "GetAllMaintenanceSchedules",
+    "RelativePath": "MaintenanceSchedule/GetAllMaintenanceSchedules",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
+    "Method": "GetAllSortedByStartDate",
+    "RelativePath": "MaintenanceSchedule/GetAllSortedByStartDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
+    "Method": "GetScheduleByEquipment",
+    "RelativePath": "MaintenanceSchedule/GetScheduleByEquipment/{equipmentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "equipmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
+    "Method": "UnActivateSchedule",
+    "RelativePath": "MaintenanceSchedule/UnActivateSchedule/{scheduleId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "scheduleId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
+    "Method": "UpdateMaintenanceSchedule",
+    "RelativePath": "MaintenanceSchedule/UpdateMaintenanceSchedule",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Maintenance_Scheduling_System.Application.DTO.MaintenanceScheduleDTOs.MaintenanceScheduleDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
