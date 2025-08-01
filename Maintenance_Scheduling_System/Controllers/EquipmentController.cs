@@ -1,5 +1,6 @@
 ﻿using Maintenance_Scheduling_System.Application.DTO.EquipmentDTOs;
 using Maintenance_Scheduling_System.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Maintenance_Scheduling_System.Controllers
@@ -16,6 +17,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateEquipment([FromBody] CreateEquipmentDTO dto)
         {
             if (!ModelState.IsValid)
@@ -26,6 +28,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateEquipment([FromBody] EquipmentDTO dto)
         {
             if (dto.EquipmentId == null)
@@ -36,6 +39,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteEquipment(int id)
         {
             if (id == null)
@@ -46,12 +50,14 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllEquipments()
         {
             var result = await EquipmentService.GetAllEquipments();
             return Ok(result);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetArchivedEquipments()
         {
             var result = await EquipmentService.GetArchivedEquipments();
@@ -59,6 +65,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpGet("{name}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetEquipmentByName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -72,6 +79,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetEquipmentById(int id)
         {
             var result = await EquipmentService.GetEquipmentById(id);
@@ -82,6 +90,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpPut("{equipId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AssignEquipType(int equipId, [FromQuery] string type)
         {
             if (string.IsNullOrWhiteSpace(type))
@@ -92,6 +101,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpPut("{equipId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AssignWorkShopLocation(int equipId, [FromQuery] int workShopId)
         {
             if (workShopId <= 0)
@@ -102,6 +112,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpPut("{equipId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ArchiveEquipment(int equipId)
         {
             await EquipmentService.ArchiveEquipment(equipId);
@@ -109,6 +120,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpPut("{equipId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UnArchiveEquipment(int equipId)
         {
             await EquipmentService.UnArchiveEquipment(equipId);

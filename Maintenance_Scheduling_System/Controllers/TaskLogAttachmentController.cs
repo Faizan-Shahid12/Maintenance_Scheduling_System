@@ -1,5 +1,6 @@
 ﻿using Maintenance_Scheduling_System.Application.DTO.AttachmentDTOs;
 using Maintenance_Scheduling_System.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,6 +21,7 @@ namespace Maintenance_Scheduling_System.Controllers
 
         [HttpPost]
         [Consumes("multipart/form-data")]
+        [Authorize(Roles = "Admin,Technician")]
         public async Task<IActionResult> UploadAttachment([FromForm] UploadAttachmentDTO attach)
         {
             await AttachmentService.UploadAttachment(attach.LogId, attach.File);
@@ -27,6 +29,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpGet("{attachId}")]
+        [Authorize(Roles = "Admin,Technician")]
         public async Task<IActionResult> DownloadAttachment(int attachId)
         {
             var attachment = await AttachmentService.DownloadAttachment(attachId);
@@ -42,6 +45,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpDelete("{attachId}")]
+        [Authorize(Roles = "Admin,Technician")]
         public async Task<IActionResult> DeleteAttachment(int attachId)
         {
             await AttachmentService.DeleteAttachment(attachId);

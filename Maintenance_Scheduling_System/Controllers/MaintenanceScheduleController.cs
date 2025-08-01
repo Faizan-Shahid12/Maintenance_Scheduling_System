@@ -2,6 +2,7 @@
 using Maintenance_Scheduling_System.Application.DTO.ScheduleTaskDTOs;
 using Maintenance_Scheduling_System.Application.Interfaces;
 using Maintenance_Scheduling_System.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Maintenance_Scheduling_System.API.Controllers
@@ -10,6 +11,12 @@ namespace Maintenance_Scheduling_System.API.Controllers
     [Route("[controller]/[Action]")]
     public class MaintenanceScheduleController : ControllerBase
     {
+        /// <summary>
+        /// 
+        /// Apply the logic to Add Existing Task to Schedules
+        /// 
+        /// </summary>
+
         private IMaintenanceScheduleService MaintenanceScheduleService {  get; set; }
 
         public MaintenanceScheduleController(IMaintenanceScheduleService maintenanceScheduleService)
@@ -18,6 +25,7 @@ namespace Maintenance_Scheduling_System.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateMaintenanceSchedule([FromBody] CreateMaintenanceScheduleDTO dto)
         {
             await MaintenanceScheduleService.CreateMaintenanceSchedule(dto);
@@ -25,6 +33,7 @@ namespace Maintenance_Scheduling_System.API.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateMaintenanceSchedule([FromBody] MaintenanceScheduleDTO dto)
         {
             await MaintenanceScheduleService.UpdateMaintenanceSchedule(dto);
@@ -32,6 +41,7 @@ namespace Maintenance_Scheduling_System.API.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteMaintenanceSchedule(int id)
         {
             await MaintenanceScheduleService.DeleteMaintenanceSchedule(id);
@@ -39,6 +49,7 @@ namespace Maintenance_Scheduling_System.API.Controllers
         }
 
         [HttpPost("{scheduleId:int}/task")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddNewTaskToSchedule(int scheduleId, [FromBody] CreateScheduleTaskDTO dto)
         {
             await MaintenanceScheduleService.AddNewTasktoSchedule(scheduleId, dto);
@@ -46,6 +57,7 @@ namespace Maintenance_Scheduling_System.API.Controllers
         }
 
         [HttpDelete("{scheduleId:int}/task/{taskId:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteTaskFromSchedule(int scheduleId, int taskId)
         {
             await MaintenanceScheduleService.DeleteTaskFromSchedule(scheduleId, taskId);
@@ -53,6 +65,7 @@ namespace Maintenance_Scheduling_System.API.Controllers
         }
 
         [HttpGet("{equipmentId:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetScheduleByEquipment(int equipmentId)
         {
             var result = await MaintenanceScheduleService.GetMaintenanceScheduleByEquipmentId(equipmentId);
@@ -60,6 +73,7 @@ namespace Maintenance_Scheduling_System.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllMaintenanceSchedules()
         {
             var result = await MaintenanceScheduleService.GetAllMaintenanceSchedule();
@@ -67,6 +81,7 @@ namespace Maintenance_Scheduling_System.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllSortedByStartDate()
         {
             var result = await MaintenanceScheduleService.GetAllMaintenanceScheduleByStartDate();
@@ -74,6 +89,7 @@ namespace Maintenance_Scheduling_System.API.Controllers
         }
 
         [HttpPut("{scheduleId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ActivateSchedule(int scheduleId)
         {
             try
@@ -88,6 +104,7 @@ namespace Maintenance_Scheduling_System.API.Controllers
         }
 
         [HttpPut("{scheduleId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UnActivateSchedule(int scheduleId)
         {
             try

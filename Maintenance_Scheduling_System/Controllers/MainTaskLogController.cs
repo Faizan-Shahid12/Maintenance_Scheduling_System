@@ -1,5 +1,6 @@
 ﻿using Maintenance_Scheduling_System.Application.DTO.TaskLogDTOs;
 using Maintenance_Scheduling_System.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -18,6 +19,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Technician")]
         public async Task<IActionResult> CreateTaskLog([FromBody] CreateTaskLogDTO dto)
         {
             await MainTaskLogService.CreateTaskLog(dto);
@@ -25,6 +27,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpGet("{taskId}")]
+        [Authorize(Roles = "Admin,Technician")]
         public async Task<ActionResult<List<TaskLogDTO>>> GetAllLogs(int taskId)
         {
             var logs = await MainTaskLogService.GetAllTaskLog(taskId);
@@ -32,6 +35,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin,Technician")]
         public async Task<IActionResult> UpdateLog([FromBody] TaskLogDTO dto)
         {
             await MainTaskLogService.UpdateTaskLog(dto);
@@ -39,6 +43,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpDelete("{logId}")]
+        [Authorize(Roles = "Admin,Technician")]
         public async Task<IActionResult> DeleteLog(int logId)
         {
             await MainTaskLogService.DeleteTaskLog(logId);
