@@ -8,6 +8,7 @@ using Maintenance_Scheduling_System.Domain.Entities;
 using Maintenance_Scheduling_System.Domain.IRepo;
 using Maintenance_Scheduling_System.Infrastructure.DbContext;
 using Maintenance_Scheduling_System.Infrastructure.Repositories;
+using Maintenance_Scheduling_System.Infrastructure.Seeding;
 using Maintenance_Scheduling_System.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -125,6 +126,7 @@ namespace Maintenance_Scheduling_System
             builder.Services.AddScoped<IMaintenanceScheduleRepo, MaintenanceScheduleRepository>();
             builder.Services.AddScoped<IScheduleTaskRepo, ScheduleTaskRepository>();
             builder.Services.AddScoped<IAppUserRepo, AppUserRepository>();
+            builder.Services.AddScoped<IRefreshTokenRepo, RefreshTokenRepository>();
 
             builder.Services.AddScoped<IEquipmentService,EquipmentService>();
             builder.Services.AddScoped<IMaintenanceHistoryService, MaintenanceHistoryService>();
@@ -134,6 +136,7 @@ namespace Maintenance_Scheduling_System
             builder.Services.AddScoped<IMaintenanceScheduleService,MaintenanceScheduleService>();
             builder.Services.AddScoped<IScheduleTaskService,ScheduleTaskService>();
             builder.Services.AddScoped<IAppUserService,AppUserService>();
+            builder.Services.AddScoped<IRefreshTokenService,RefreshTokenService>();
 
             builder.Services.AddHostedService<TaskBackgroundService>();
             builder.Services.AddHostedService<ScheduleBackgroundService>();
