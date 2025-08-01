@@ -27,7 +27,7 @@ namespace Maintenance_Scheduling_System.Infrastructure.DbContext
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(ConnectionString, b => b.MigrationsAssembly("Maintenance_Scheduling_System"));
+            optionsBuilder.UseSqlServer(ConnectionString, b => b.MigrationsAssembly("Maintenance_Scheduling_System.Infrastructure"));
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -120,9 +120,21 @@ namespace Maintenance_Scheduling_System.Infrastructure.DbContext
             {
                 entity.HasKey(w => w.WorkShopId);
             });
+
+            builder.Entity<RefreshToken>(entity =>
+            {
+                entity.HasKey(rt => rt.TokenId);
+
+                entity.HasOne(rt => rt.User)
+                .WithMany(u => u.RefreshTokens)
+                .HasForeignKey(rt => rt.UserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+            });
         }
 
         public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Equipment> Equipment { get; set; }
         public DbSet<MaintenanceHistory> MaintenanceHistories { get; set; }
         public DbSet<MaintenanceSchedule> MaintenanceSchedules { get; set; }

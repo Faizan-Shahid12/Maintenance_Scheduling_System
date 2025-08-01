@@ -1,4 +1,5 @@
 ﻿using Maintenance_Scheduling_System.Domain.Entities;
+using Maintenance_Scheduling_System.Infrastructure.DbContext;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maintenance_Scheduling_System.Infrastructure.DbContext
+namespace Maintenance_Scheduling_System.Infrastructure.Seeding
 {
     public class SeedData
     {
