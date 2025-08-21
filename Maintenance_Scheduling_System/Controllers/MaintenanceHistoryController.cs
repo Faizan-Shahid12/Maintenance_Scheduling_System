@@ -13,10 +13,11 @@ namespace Maintenance_Scheduling_System.Controllers
     {
 
         private IMaintenanceHistoryService MaintenanceHistoryService;
-
-        public MaintenanceHistoryController(IMaintenanceHistoryService service)
+        private ICountService CountService;
+        public MaintenanceHistoryController(IMaintenanceHistoryService service, ICountService count)
         {
             MaintenanceHistoryService = service;
+            CountService = count;
         }
 
         [HttpGet]
@@ -24,6 +25,14 @@ namespace Maintenance_Scheduling_System.Controllers
         public async Task<IActionResult> GetAllMaintenanceHistory()
         {
             return Ok(await MaintenanceHistoryService.GetAllMaintenanceHistory());
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetTotalCount()
+        {
+            var counts = await CountService.GetTotalCount();
+            return Ok(counts);
         }
         [HttpGet]
         [Authorize(Roles = "Admin,Technician")]

@@ -10,11 +10,16 @@ namespace Maintenance_Scheduling_System.Application.Interfaces
 {
     public interface IAppUserService
     {
-        Task CreateAppUser(AppUserDTO appuser, string role);
-        Task DeleteAppUser(string id);
-        Task UpdateAppUser(string Id, AppUserDTO appdto);
+        Task<TechnicianDTO> CreateAppUser(AppUserDTO appuser, string role);
+        Task<TechnicianDTO> DeleteAppUser(string id);
+        Task<TechnicianDTO> UpdateAppUser(string Id, AppUserDTO appdto);
+        Task ChangePassword(string TechId, ChangePasswordDTO Password);
+        Task<TechnicianDTO> GetTechnicianById(string TechId);
+        Task<List<TechnicianDTO>> GetAllTechnicianUsersWithoutTask();
         Task<List<TechnicianDTO>> GetAllTechnicianUsers();
         Task<TokenResponseDTO> CreateToken(AppUser user);
         Task<AppUser> Login(LoginDTO LoginInfo);
+        Task<bool> CheckEmail(string newEmail);
+
     }
 }

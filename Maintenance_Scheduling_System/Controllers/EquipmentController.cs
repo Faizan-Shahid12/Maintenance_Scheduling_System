@@ -23,8 +23,8 @@ namespace Maintenance_Scheduling_System.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await EquipmentService.CreateEquipment(dto);
-            return Ok("Equipment created successfully.");
+            var equip = await EquipmentService.CreateEquipment(dto);
+            return Ok(equip);
         }
 
         [HttpPut]
@@ -34,19 +34,19 @@ namespace Maintenance_Scheduling_System.Controllers
             if (dto.EquipmentId == null)
                 return BadRequest("Equipment ID is required.");
 
-            await EquipmentService.UpdateEquipment(dto);
-            return Ok("Equipment updated successfully.");
+           var equip = await EquipmentService.UpdateEquipment(dto);
+            return Ok(equip);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteEquipment(int id)
+        public async Task<IActionResult> DeleteEquipment([FromQuery] int equipid)
         {
-            if (id == null)
+            if (equipid == null)
                 return BadRequest("Equipment ID is required.");
 
-            await EquipmentService.DeleteEquipment(id);
-            return Ok("Equipment soft-deleted.");
+           var equip = await EquipmentService.DeleteEquipment(equipid);
+            return Ok(equip);
         }
 
         [HttpGet]
@@ -64,9 +64,9 @@ namespace Maintenance_Scheduling_System.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{name}")]
+        [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetEquipmentByName(string name)
+        public async Task<IActionResult> GetEquipmentByName([FromQuery] string name)
         {
             if (string.IsNullOrWhiteSpace(name))
                 return BadRequest("Name is required.");
@@ -78,9 +78,9 @@ namespace Maintenance_Scheduling_System.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetEquipmentById(int id)
+        public async Task<IActionResult> GetEquipmentById([FromQuery] int id)
         {
             var result = await EquipmentService.GetEquipmentById(id);
             if (result == null)
@@ -89,43 +89,52 @@ namespace Maintenance_Scheduling_System.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{equipId}")]
+        [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AssignEquipType(int equipId, [FromQuery] string type)
+        public async Task<IActionResult> AssignEquipType([FromQuery] int equipId, [FromQuery] string type)
         {
             if (string.IsNullOrWhiteSpace(type))
                 return BadRequest("Type is required.");
 
-            await EquipmentService.AssignEquipType(equipId, type);
-            return Ok("Equipment type assigned.");
+            var equip = await EquipmentService.AssignEquipType(equipId, type);
+            return Ok(equip);
         }
 
-        [HttpPut("{equipId}")]
+        [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AssignWorkShopLocation(int equipId, [FromQuery] int workShopId)
+        public async Task<IActionResult> AssignWorkShopLocation([FromQuery] int equipId, [FromQuery] int workShopId)
         {
-            if (workShopId <= 0)
-                return BadRequest("Workshop ID must be greater than 0.");
-
-            await EquipmentService.AssignWorkShopLocation(equipId, workShopId);
-            return Ok("Workshop location assigned.");
+            
+           var equip = await EquipmentService.AssignWorkShopLocation(equipId, workShopId);
+            return Ok(equip);
         }
 
-        [HttpPut("{equipId}")]
+        [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> ArchiveEquipment(int equipId)
+        public async Task<IActionResult> ArchiveEquipment([FromQuery] int equipId)
         {
-            await EquipmentService.ArchiveEquipment(equipId);
-            return Ok("Equipment archived.");
+            var equip = await EquipmentService.ArchiveEquipment(equipId);
+            return Ok(equip);
         }
 
-        [HttpPut("{equipId}")]
+        [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UnArchiveEquipment(int equipId)
+        public async Task<IActionResult> UnArchiveEquipment([FromQuery] int equipId)
         {
-            await EquipmentService.UnArchiveEquipment(equipId);
-            return Ok("Equipment unarchived.");
+           var equip = await EquipmentService.UnArchiveEquipment(equipId);
+            return Ok(equip);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetAllWorkShops()
+        {
+            var result = await EquipmentService.GetAllWorkShops();
+
+            if (result == null || !result.Any())
+                return NotFound("No workshops found.");
+
+            return Ok(result);
+        }
     }
 }

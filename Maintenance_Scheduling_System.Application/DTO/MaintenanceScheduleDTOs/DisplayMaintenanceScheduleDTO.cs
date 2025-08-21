@@ -12,6 +12,8 @@ namespace Maintenance_Scheduling_System.Application.DTO.MaintenanceScheduleDTOs
         public int ScheduleId { get; set; }
         public string ScheduleName { get; set; } = string.Empty;
         public string ScheduleType { get; set; } = string.Empty;
+        public string EquipmentName { get; set; } = string.Empty;
+
         public bool IsActive { get; set; } = true;
 
         public List<ScheduleTaskDTO> ScheduleTasks { get; set; }

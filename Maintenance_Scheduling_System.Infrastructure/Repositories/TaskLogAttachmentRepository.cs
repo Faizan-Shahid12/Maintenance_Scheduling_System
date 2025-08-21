@@ -41,5 +41,10 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
             return await DbContext.TaskLogsAttachments
                 .Where(t => !t.IsDeleted && t.Id == attachId).FirstOrDefaultAsync();
         }
+
+        public async Task<int> TotalCountofLogAttachment()
+        {
+            return await DbContext.TaskLogsAttachments.CountAsync();
+        }
     }
 }

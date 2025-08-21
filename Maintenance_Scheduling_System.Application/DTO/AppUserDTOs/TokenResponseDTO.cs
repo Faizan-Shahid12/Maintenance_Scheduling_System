@@ -12,6 +12,7 @@ namespace Maintenance_Scheduling_System.Application.DTO.AppUserDTOs
         public string RefreshToken { get; set; }
         public DateTime AccessTokenExpiry { get; set; }
         public string UserId { get; set; }
+        public string Name { get; set; }
         public List<string> Roles { get; set; }
     }
 }

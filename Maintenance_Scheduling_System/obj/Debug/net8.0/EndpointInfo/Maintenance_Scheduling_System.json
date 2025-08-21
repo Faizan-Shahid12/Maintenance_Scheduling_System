@@ -92,7 +92,7 @@
         }
       }
     },
-    "/Authentication/DeleteTechnician/{id}": {
+    "/Authentication/DeleteTechnician": {
       "delete": {
         "tags": [
           "Authentication"
@@ -100,8 +100,7 @@
         "parameters": [
           {
             "name": "id",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "string"
             }
@@ -114,7 +113,7 @@
         }
       }
     },
-    "/Authentication/UpdateTechnician/{id}": {
+    "/Authentication/UpdateTechnician": {
       "put": {
         "tags": [
           "Authentication"
@@ -122,8 +121,7 @@
         "parameters": [
           {
             "name": "id",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "string"
             }
@@ -167,21 +165,26 @@
         }
       }
     },
-    "/Authentication/Login": {
-      "post": {
+    "/Authentication/GetTechniciansWithoutTask": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Authentication/GetTechniciansById": {
+      "get": {
         "tags": [
           "Authentication"
         ],
         "parameters": [
           {
-            "name": "Email",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Password",
+            "name": "TechId",
             "in": "query",
             "schema": {
               "type": "string"
@@ -195,7 +198,68 @@
         }
       }
     },
-    "/Authentication/RefreshToken/refresh-token": {
+    "/Authentication/CheckEmail": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Authentication/ChangePassword": {
+      "patch": {
+        "tags": [
+          "Authentication"
+        ],
+        "parameters": [
+          {
+            "name": "TechId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Authentication/Login": {
       "post": {
         "tags": [
           "Authentication"
@@ -204,21 +268,42 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "string"
+                "$ref": "#/components/schemas/LoginDTO"
               }
             },
             "text/json": {
               "schema": {
-                "type": "string"
+                "$ref": "#/components/schemas/LoginDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "type": "string"
+                "$ref": "#/components/schemas/LoginDTO"
               }
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Authentication/RefreshToken": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "parameters": [
+          {
+            "name": "Token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -288,16 +373,15 @@
         }
       }
     },
-    "/Equipment/DeleteEquipment/{id}": {
+    "/Equipment/DeleteEquipment": {
       "delete": {
         "tags": [
           "Equipment"
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
+            "name": "equipid",
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -335,7 +419,7 @@
         }
       }
     },
-    "/Equipment/GetEquipmentByName/{name}": {
+    "/Equipment/GetEquipmentByName": {
       "get": {
         "tags": [
           "Equipment"
@@ -343,8 +427,7 @@
         "parameters": [
           {
             "name": "name",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "string"
             }
@@ -357,7 +440,7 @@
         }
       }
     },
-    "/Equipment/GetEquipmentById/{id}": {
+    "/Equipment/GetEquipmentById": {
       "get": {
         "tags": [
           "Equipment"
@@ -365,8 +448,7 @@
         "parameters": [
           {
             "name": "id",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -380,7 +462,7 @@
         }
       }
     },
-    "/Equipment/AssignEquipType/{equipId}": {
+    "/Equipment/AssignEquipType": {
       "put": {
         "tags": [
           "Equipment"
@@ -388,8 +470,7 @@
         "parameters": [
           {
             "name": "equipId",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -410,7 +491,7 @@
         }
       }
     },
-    "/Equipment/AssignWorkShopLocation/{equipId}": {
+    "/Equipment/AssignWorkShopLocation": {
       "put": {
         "tags": [
           "Equipment"
@@ -418,8 +499,7 @@
         "parameters": [
           {
             "name": "equipId",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -441,7 +521,7 @@
         }
       }
     },
-    "/Equipment/ArchiveEquipment/{equipId}": {
+    "/Equipment/ArchiveEquipment": {
       "put": {
         "tags": [
           "Equipment"
@@ -449,8 +529,7 @@
         "parameters": [
           {
             "name": "equipId",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -464,7 +543,7 @@
         }
       }
     },
-    "/Equipment/UnArchiveEquipment/{equipId}": {
+    "/Equipment/UnArchiveEquipment": {
       "put": {
         "tags": [
           "Equipment"
@@ -472,13 +551,24 @@
         "parameters": [
           {
             "name": "equipId",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Equipment/GetAllWorkShops": {
+      "get": {
+        "tags": [
+          "Equipment"
         ],
         "responses": {
           "200": {
@@ -540,7 +630,7 @@
         }
       }
     },
-    "/MainTask/GetTaskByEquipId/{EquipId}": {
+    "/MainTask/GetTaskByEquipId": {
       "get": {
         "tags": [
           "MainTask"
@@ -548,8 +638,29 @@
         "parameters": [
           {
             "name": "EquipId",
-            "in": "path",
-            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MainTask/GetTaskByHistoryId": {
+      "get": {
+        "tags": [
+          "MainTask"
+        ],
+        "parameters": [
+          {
+            "name": "HistoryId",
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -616,7 +727,7 @@
         }
       }
     },
-    "/MainTask/UpdatePriority/{taskId}": {
+    "/MainTask/UpdatePriority": {
       "patch": {
         "tags": [
           "MainTask"
@@ -624,8 +735,7 @@
         "parameters": [
           {
             "name": "taskId",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -646,7 +756,7 @@
         }
       }
     },
-    "/MainTask/ChangeStatus/{taskId}": {
+    "/MainTask/ChangeStatus": {
       "patch": {
         "tags": [
           "MainTask"
@@ -654,8 +764,7 @@
         "parameters": [
           {
             "name": "taskId",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -782,7 +891,7 @@
         }
       }
     },
-    "/MainTaskLog/GetAllLogs/{taskId}": {
+    "/MainTaskLog/GetAllLogs": {
       "get": {
         "tags": [
           "MainTaskLog"
@@ -790,8 +899,7 @@
         "parameters": [
           {
             "name": "taskId",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -862,7 +970,7 @@
         }
       }
     },
-    "/MainTaskLog/DeleteLog/{logId}": {
+    "/MainTaskLog/DeleteLog": {
       "delete": {
         "tags": [
           "MainTaskLog"
@@ -870,8 +978,7 @@
         "parameters": [
           {
             "name": "logId",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -886,6 +993,18 @@
       }
     },
     "/MaintenanceHistory/GetAllMaintenanceHistory": {
+      "get": {
+        "tags": [
+          "MaintenanceHistory"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MaintenanceHistory/GetTotalCount": {
       "get": {
         "tags": [
           "MaintenanceHistory"
@@ -1034,16 +1153,15 @@
         }
       }
     },
-    "/MaintenanceSchedule/DeleteMaintenanceSchedule/{id}": {
+    "/MaintenanceSchedule/DeleteMaintenanceSchedule": {
       "delete": {
         "tags": [
           "MaintenanceSchedule"
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
+            "name": "ScheduleId",
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -1057,16 +1175,15 @@
         }
       }
     },
-    "/MaintenanceSchedule/AddNewTaskToSchedule/{scheduleId}/task": {
+    "/MaintenanceSchedule/AddNewTaskToSchedule": {
       "post": {
         "tags": [
           "MaintenanceSchedule"
         ],
         "parameters": [
           {
-            "name": "scheduleId",
-            "in": "path",
-            "required": true,
+            "name": "ScheduleId",
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -1099,16 +1216,15 @@
         }
       }
     },
-    "/MaintenanceSchedule/DeleteTaskFromSchedule/{scheduleId}/task/{taskId}": {
+    "/MaintenanceSchedule/DeleteTaskFromSchedule": {
       "delete": {
         "tags": [
           "MaintenanceSchedule"
         ],
         "parameters": [
           {
-            "name": "scheduleId",
-            "in": "path",
-            "required": true,
+            "name": "ScheduleId",
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -1116,8 +1232,7 @@
           },
           {
             "name": "taskId",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -1131,16 +1246,15 @@
         }
       }
     },
-    "/MaintenanceSchedule/GetScheduleByEquipment/{equipmentId}": {
+    "/MaintenanceSchedule/GetScheduleByEquipment": {
       "get": {
         "tags": [
           "MaintenanceSchedule"
         ],
         "parameters": [
           {
-            "name": "equipmentId",
-            "in": "path",
-            "required": true,
+            "name": "EquipId",
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -1178,16 +1292,15 @@
         }
       }
     },
-    "/MaintenanceSchedule/ActivateSchedule/{scheduleId}": {
+    "/MaintenanceSchedule/ActivateSchedule": {
       "put": {
         "tags": [
           "MaintenanceSchedule"
         ],
         "parameters": [
           {
-            "name": "scheduleId",
-            "in": "path",
-            "required": true,
+            "name": "ScheduleId",
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -1201,19 +1314,96 @@
         }
       }
     },
-    "/MaintenanceSchedule/UnActivateSchedule/{scheduleId}": {
+    "/MaintenanceSchedule/UnActivateSchedule": {
       "put": {
         "tags": [
           "MaintenanceSchedule"
         ],
         "parameters": [
           {
-            "name": "scheduleId",
-            "in": "path",
-            "required": true,
+            "name": "ScheduleId",
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MaintenanceSchedule/EditScheduleTask": {
+      "put": {
+        "tags": [
+          "MaintenanceSchedule"
+        ],
+        "parameters": [
+          {
+            "name": "ScheduleId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduleTaskDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduleTaskDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduleTaskDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MaintenanceSchedule/AssignTechnicianToScheduleTask": {
+      "put": {
+        "tags": [
+          "MaintenanceSchedule"
+        ],
+        "parameters": [
+          {
+            "name": "ScheduleId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ScheduleTaskId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "techId",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -1263,7 +1453,7 @@
         }
       }
     },
-    "/TaskLogAttachment/DownloadAttachment/{attachId}": {
+    "/TaskLogAttachment/DownloadAttachment": {
       "get": {
         "tags": [
           "TaskLogAttachment"
@@ -1271,8 +1461,7 @@
         "parameters": [
           {
             "name": "attachId",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -1286,7 +1475,7 @@
         }
       }
     },
-    "/TaskLogAttachment/DeleteAttachment/{attachId}": {
+    "/TaskLogAttachment/DeleteAttachment": {
       "delete": {
         "tags": [
           "TaskLogAttachment"
@@ -1294,8 +1483,29 @@
         "parameters": [
           {
             "name": "attachId",
-            "in": "path",
-            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/TaskLogAttachment/GetAllAttachments": {
+      "get": {
+        "tags": [
+          "TaskLogAttachment"
+        ],
+        "parameters": [
+          {
+            "name": "logId",
+            "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -1342,6 +1552,16 @@
         },
         "additionalProperties": false
       },
+      "ChangePasswordDTO": {
+        "type": "object",
+        "properties": {
+          "newPassword": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateEquipmentDTO": {
         "type": "object",
         "properties": {
@@ -1363,6 +1583,11 @@
           },
           "model": {
             "type": "string",
+            "nullable": true
+          },
+          "workShopId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },
@@ -1450,6 +1675,14 @@
           "dueDate": {
             "type": "string",
             "format": "date"
+          },
+          "interval": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "technicianId": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1509,6 +1742,20 @@
         },
         "additionalProperties": false
       },
+      "LoginDTO": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "MainTaskDTO": {
         "type": "object",
         "properties": {
@@ -1533,6 +1780,14 @@
           "dueDate": {
             "type": "string",
             "format": "date"
+          },
+          "assignedTo": {
+            "type": "string",
+            "nullable": true
+          },
+          "techEmail": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1605,6 +1860,43 @@
           "Urgent"
         ],
         "type": "string"
+      },
+      "ScheduleTaskDTO": {
+        "type": "object",
+        "properties": {
+          "scheduleTaskId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "taskName": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "priority": {
+            "$ref": "#/components/schemas/PriorityEnum"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "interval": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "assignedTo": {
+            "type": "string",
+            "nullable": true
+          },
+          "techEmail": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "StatusEnum": {
         "enum": [

@@ -25,40 +25,55 @@ namespace Maintenance_Scheduling_System.Application.Services
         public ICurrentUser currentUser { get; set; }
         public TokenSetting tokenOptions { get; set; }
         public IRefreshTokenService refreshTokenService { get; set; }
+        public IMainTaskService MainTaskService { get; set; }
 
-        public AppUserService(IAppUserRepo appuserrepo,IMapper mapper1,ICurrentUser user1, IOptions<TokenSetting> option,IRefreshTokenService tokenService)
+        public AppUserService(IAppUserRepo appuserrepo,IMapper mapper1,ICurrentUser user1, IOptions<TokenSetting> option,IRefreshTokenService tokenService, IMainTaskService mainTaskService)
         {
             AppUserRepository = appuserrepo;
             mapper = mapper1;
             currentUser = user1;
             tokenOptions = option.Value;
             refreshTokenService = tokenService;
+            MainTaskService = mainTaskService;
         }
 
-        public async Task CreateAppUser(AppUserDTO appuser,string role)
+        public async Task<TechnicianDTO> CreateAppUser(AppUserDTO appuser,string role)
         {
             AppUser user = new AppUser
             {
                 FullName = appuser.FullName,
-                UserName = appuser.FullName.Replace(" ",""),
+                UserName = appuser.FullName.Replace(" ","") + Guid.NewGuid(),
                 Email = appuser.Email,
                 PhoneNumber = appuser.PhoneNumber,
                 Address = appuser.Address,
                 Gender = appuser.Gender,
+                CreatedAt = DateTime.Now,
+                LastModifiedAt = DateTime.Now,
+                LastModifiedBy = currentUser.Name,
+                CreatedBy = currentUser.Name,
             };
 
             await AppUserRepository.CreateNewAppUser(user,appuser.Password,role);
 
+            return mapper.Map<TechnicianDTO>(user);
+
         }
-        public async Task DeleteAppUser(string id)
+        public async Task<TechnicianDTO> DeleteAppUser(string id)
         {
             var user = await AppUserRepository.GetAppUserById(id);
 
             user.IsDeleted = true;
 
+            user.LastModifiedBy = currentUser.Name;
+            user.LastModifiedAt = DateTime.UtcNow;
+
             await AppUserRepository.DeleteAppUser(user);
+
+            await MainTaskService.UnAssignTechnicianTaskUponDeletion(id);
+
+            return mapper.Map<TechnicianDTO>(user);
         }
-        public async Task UpdateAppUser(string Id,AppUserDTO appdto)
+        public async Task<TechnicianDTO> UpdateAppUser(string Id,AppUserDTO appdto)
         {
             var user = await AppUserRepository.GetAppUserById(Id);
 
@@ -67,12 +82,25 @@ namespace Maintenance_Scheduling_System.Application.Services
             user.PhoneNumber = appdto.PhoneNumber;
             user.Address = appdto.Address;
             user.Gender = appdto.Gender;
+            user.UserName = appdto.FullName.Replace(" ", "");
+
+            user.LastModifiedBy = currentUser.Name;
+            user.LastModifiedAt = DateTime.UtcNow;
 
             await AppUserRepository.UpdateAppUser(user);
+
+            return mapper.Map<TechnicianDTO>(user);
         }
         public async Task<List<TechnicianDTO>> GetAllTechnicianUsers()
         {
             var user = await AppUserRepository.GetTechniciansUsers();
+            var userdto = mapper.Map<List<TechnicianDTO>>(user);
+
+            return userdto;
+        }
+        public async Task<List<TechnicianDTO>> GetAllTechnicianUsersWithoutTask()
+        {
+            var user = await AppUserRepository.GetTechniciansUsersWithoutTasks();
             var userdto = mapper.Map<List<TechnicianDTO>>(user);
 
             return userdto;
@@ -114,6 +142,7 @@ namespace Maintenance_Scheduling_System.Application.Services
                 RefreshToken = refreshToken,
                 AccessTokenExpiry = token.ValidTo,
                 UserId = user.Id,
+                Name = user.FullName,
                 Roles = userRoles.ToList()
             };
         }
@@ -137,6 +166,29 @@ namespace Maintenance_Scheduling_System.Application.Services
 
             return null;
 
+        }
+        public async Task<TechnicianDTO> GetTechnicianById(string TechId)
+        {
+            var user = await AppUserRepository.GetAppUserById(TechId);
+
+            if (user == null)
+            {
+                return null;
+            }
+            var userdto = mapper.Map<TechnicianDTO>(user);
+
+            return userdto;
+
+        }
+
+        public async Task ChangePassword(string TechId, ChangePasswordDTO Password)
+        {
+            await AppUserRepository.ChangePassword(TechId,Password.newPassword);
+        }
+
+        public async Task<bool> CheckEmail(string newEmail)
+        {
+           return await AppUserRepository.CheckEmail(newEmail);
         }
     }
 }

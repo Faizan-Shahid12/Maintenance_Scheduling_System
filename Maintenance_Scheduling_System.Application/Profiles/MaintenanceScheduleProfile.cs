@@ -21,7 +21,10 @@ namespace Maintenance_Scheduling_System.Application.Profiles
 
             CreateMap<MaintenanceScheduleDTO, MaintenanceSchedule>().ReverseMap();
 
-            CreateMap<DisplayMaintenanceScheduleDTO, MaintenanceSchedule>().ReverseMap();
+            CreateMap<DisplayMaintenanceScheduleDTO, MaintenanceSchedule>().ReverseMap()
+                .ForMember(ms => ms.EquipmentName, ms => ms.MapFrom(ms => ms.equipment.Name))
+                .ForMember(dest => dest.ScheduleTasks, opt => opt.MapFrom(src => src.ScheduleTasks));
+
         }
     }
 }

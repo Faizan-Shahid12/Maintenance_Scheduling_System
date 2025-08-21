@@ -1,5 +1,7 @@
 ﻿using Maintenance_Scheduling_System.Application.DTO.AttachmentDTOs;
 using Maintenance_Scheduling_System.Application.Interfaces;
+using Maintenance_Scheduling_System.Domain.Entities;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,32 +26,52 @@ namespace Maintenance_Scheduling_System.Controllers
         [Authorize(Roles = "Admin,Technician")]
         public async Task<IActionResult> UploadAttachment([FromForm] UploadAttachmentDTO attach)
         {
-            await AttachmentService.UploadAttachment(attach.LogId, attach.File);
-            return Ok("File uploaded successfully.");
+            var attach1 = await AttachmentService.UploadAttachment(attach.LogId, attach.File);
+            return Ok(attach1);
         }
 
-        [HttpGet("{attachId}")]
+        [HttpGet]
         [Authorize(Roles = "Admin,Technician")]
-        public async Task<IActionResult> DownloadAttachment(int attachId)
+        public async Task<IActionResult> DownloadAttachment([FromQuery] int attachId)
         {
             var attachment = await AttachmentService.DownloadAttachment(attachId);
 
-            var fullPath = attachment.FilePath;
+            if (attachment == null)
+                return NotFound("Attachment not found.");
 
+            // Set webRoot path
+            var webRoot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+
+            // Build full physical path using stored relative path
+            var fullPath = Path.Combine(webRoot, attachment.FilePath.Replace("/", Path.DirectorySeparatorChar.ToString()));
+
+            // Ensure file physically exists
             if (!System.IO.File.Exists(fullPath))
                 return NotFound("File not found on server.");
 
-            var fileBytes = await System.IO.File.ReadAllBytesAsync(fullPath);
+            // Build public URL to access via browser
+            var fileUrl = $"{Request.Scheme}://{Request.Host}/{attachment.FilePath.Replace("\\", "/")}";
 
-            return File(fileBytes, attachment.ContentType, attachment.FileName);
+            return Ok(new { url = fileUrl });
         }
 
-        [HttpDelete("{attachId}")]
+
+
+        [HttpDelete]
         [Authorize(Roles = "Admin,Technician")]
-        public async Task<IActionResult> DeleteAttachment(int attachId)
+        public async Task<IActionResult> DeleteAttachment([FromQuery] int attachId)
         {
-            await AttachmentService.DeleteAttachment(attachId);
-            return Ok("Attachment soft deleted.");
+            var attach = await AttachmentService.DeleteAttachment(attachId);
+            return Ok(attach);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin,Technician")]
+        public async Task<IActionResult> GetAllAttachments([FromQuery] int logId)
+        {
+            var attach = await AttachmentService.GetAllAttachments(logId);
+            return Ok(attach);
         }
     }
+
 }

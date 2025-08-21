@@ -23,5 +23,10 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
         {
              return await DbContext.WorkShopLocs.ToListAsync();
         }
+
+        public async Task<WorkShopLoc> GetWorkShopById(int workshopId)
+        {
+            return await DbContext.WorkShopLocs.FindAsync(workshopId);
+        }
     }
 }

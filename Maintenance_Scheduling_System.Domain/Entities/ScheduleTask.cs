@@ -16,7 +16,9 @@ namespace Maintenance_Scheduling_System.Domain.Entities
         public string EquipmentName { get; set; } = string.Empty;
         public PriorityEnum Priority { get; set; } = PriorityEnum.Low;
         public DateOnly DueDate { get; set; }
-        
+        public TimeSpan Interval { get; set; }
+        public string? TechnicianId { get; set; }
+
         public int ScheduleId { get; set; }
         public MaintenanceSchedule schedule { get; set; }
 

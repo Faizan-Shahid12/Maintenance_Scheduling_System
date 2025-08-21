@@ -11,17 +11,19 @@ namespace Maintenance_Scheduling_System.Application.Interfaces
 {
     public interface IMainTaskService
     {
-        Task CreateNewMainTask(int EquipId, CreateMainTaskDTO Maintask);
-        Task CreateNewMainTaskByScheduleTask(int EquipId, List<ScheduleTask> scheduleTasks);
+        Task<MainTaskDTO> CreateNewMainTask(int EquipId, CreateMainTaskDTO Maintask);
+        Task<List<MainTaskDTO>> CreateNewMainTaskByScheduleTask(int EquipId, List<ScheduleTask> scheduleTasks);
         Task<List<MainTaskDTO>> GetAllMainTask();
         Task<List<MainTaskDTO>> GetMainTaskByEquipmentId(int EquipId);
-        Task DeleteTask(int TaskId);
-        Task UpdateTask(MainTaskDTO taskdto);
+        Task<MainTaskDTO> DeleteTask(int TaskId);
+        Task<MainTaskDTO> UpdateTask(MainTaskDTO taskdto);
         Task UpdatePriority(int TaskId, PriorityEnum priority);
-        Task ChangeTaskStatus(int TaskId, StatusEnum status);
-        Task AssignTechnician(int TaskId, string TechId);
+        Task<MainTaskDTO> ChangeTaskStatus(int TaskId, StatusEnum status);
+        Task<MainTaskDTO> AssignTechnician(int TaskId, string TechId);
         Task<List<MainTaskDTO>> GetAllOverDueTask();
         Task<List<MainTaskDTO>> GetAllCompletedTask();
+        Task<List<MainTaskDTO>> GetMainTaskByHistoryId(int HistoryId);
+        Task UnAssignTechnicianTaskUponDeletion(string TechId);
         Task OverDueTask();
 
     }

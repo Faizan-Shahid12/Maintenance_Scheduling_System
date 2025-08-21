@@ -42,6 +42,7 @@ namespace Maintenance_Scheduling_System.Application.Services
             mainhis.CreatedBy = currentUser.Name;
 
             AuditModify(mainhis);
+            RecalculateEndDate(mainhis);
 
             equip.LastModifiedAt = DateTime.Now;
             equip.LastModifiedBy = currentUser.Name;
@@ -55,6 +56,7 @@ namespace Maintenance_Scheduling_System.Application.Services
         {
             var main = await MaintenanceHistoryRepository.GetMaintenanceHistory(id);
             main.AddTask(Task);
+            RecalculateEndDate(main);
 
             AuditModify(main);
 
@@ -73,6 +75,7 @@ namespace Maintenance_Scheduling_System.Application.Services
             main1.EquipmentType = maindto.EquipmentType;
             main1.StartDate = maindto.StartDate;
             main1.EndDate = maindto.EndDate;
+            RecalculateEndDate(main1);
             AuditModify(main1);
 
             await MaintenanceHistoryRepository.UpdateMaintenanceHistory();
@@ -105,6 +108,15 @@ namespace Maintenance_Scheduling_System.Application.Services
             var main = await MaintenanceHistoryRepository.GetAllMaintenanceHistory();
             var mainDTO = mapper.Map<List<MaintenanceHistoryDTO>>(main);
             return mainDTO;
+        }
+        private void RecalculateEndDate(MaintenanceHistory history)
+        {
+            if (history.tasks != null && history.tasks.Any())
+            {
+                history.EndDate = history.tasks
+                    .Where(t => t.DueDate != null)
+                    .Max(t => t.DueDate); 
+            }
         }
 
 

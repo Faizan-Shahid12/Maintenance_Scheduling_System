@@ -60,5 +60,11 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
         {
             await DbContext.SaveChangesAsync();
         }
+
+        public async Task<int> TotalCountOfMaintenance()
+        {
+            var num = await DbContext.MaintenanceHistories.CountAsync();
+            return num;
+        }
     }
 }

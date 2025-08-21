@@ -1,4 +1,5 @@
-﻿using Maintenance_Scheduling_System.Domain.Entities;
+﻿using Maintenance_Scheduling_System.Application.DTO.ScheduleTaskDTOs;
+using Maintenance_Scheduling_System.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,12 @@ namespace Maintenance_Scheduling_System.Application.Interfaces
         Task CreateAuditScheduleTask(ScheduleTask scheduleTask);
         Task DeleteScheduleTasks(List<ScheduleTask> scheduleTasks);
         Task DeleteScheduleTask(ScheduleTask scheduleTask);
-        Task ChangeDueDate(List<ScheduleTask> scheduleTasks, DateOnly startDate);
+        Task<ScheduleTaskDTO> EditScheduleTask(ScheduleTask Task,ScheduleTaskDTO STDTO);
+        Task<ScheduleTaskDTO> AssignTechnician(ScheduleTask Task, string techId);
+
+        Task ChangeDueDate(DateOnly ScheduleDate, List<ScheduleTask> scheduleTasks);
+        Task ChangeAssignedInDTO(ScheduleTaskDTO task, ScheduleTask scheduleTask);
+
 
     }
 }

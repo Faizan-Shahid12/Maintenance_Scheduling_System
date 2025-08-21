@@ -15,5 +15,7 @@ namespace Maintenance_Scheduling_System.Application.DTO.MainTaskDTOs
         public PriorityEnum Priority { get; set; } = PriorityEnum.Low;
         public StatusEnum Status { get; set; } = StatusEnum.Pending;
         public DateOnly DueDate { get; set; }
+        public string? AssignedTo { get; set; }
+        public string? TechEmail { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Maintenance_Scheduling_System.Domain.Entities
@@ -15,6 +16,7 @@ namespace Maintenance_Scheduling_System.Domain.Entities
         public string ContentType { get; set; } = string.Empty;
 
         public int LogId { get; set; }
+        [JsonIgnore]
         public TaskLogs TaskLog { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;

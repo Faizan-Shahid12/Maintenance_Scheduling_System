@@ -106,7 +106,9 @@ namespace Maintenance_Scheduling_System.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
+                        .IsUnique()
+                        .HasDatabaseName("EmailIndex")
+                        .HasFilter("[NormalizedEmail] IS NOT NULL");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
@@ -394,6 +396,9 @@ namespace Maintenance_Scheduling_System.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("Interval")
+                        .HasColumnType("float");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -412,6 +417,9 @@ namespace Maintenance_Scheduling_System.Migrations
 
                     b.Property<string>("TaskName")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TechnicianId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ScheduleTaskId");

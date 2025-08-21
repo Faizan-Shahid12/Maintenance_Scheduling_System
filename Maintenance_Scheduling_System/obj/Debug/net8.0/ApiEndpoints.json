@@ -1,6 +1,43 @@
 [
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
+    "Method": "ChangePassword",
+    "RelativePath": "Authentication/ChangePassword",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TechId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "newPassword",
+        "Type": "Maintenance_Scheduling_System.Application.DTO.AppUserDTOs.ChangePasswordDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
+    "Method": "CheckEmail",
+    "RelativePath": "Authentication/CheckEmail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
     "Method": "CreateAdmin",
     "RelativePath": "Authentication/CreateAdmin",
     "HttpMethod": "POST",
@@ -59,7 +96,7 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
     "Method": "DeleteTechnician",
-    "RelativePath": "Authentication/DeleteTechnician/{id}",
+    "RelativePath": "Authentication/DeleteTechnician",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -67,7 +104,7 @@
       {
         "Name": "id",
         "Type": "System.String",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -84,6 +121,32 @@
   },
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
+    "Method": "GetTechniciansById",
+    "RelativePath": "Authentication/GetTechniciansById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TechId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
+    "Method": "GetTechniciansWithoutTask",
+    "RelativePath": "Authentication/GetTechniciansWithoutTask",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
     "Method": "Login",
     "RelativePath": "Authentication/Login",
     "HttpMethod": "POST",
@@ -91,14 +154,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Email",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Password",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "login",
+        "Type": "Maintenance_Scheduling_System.Application.DTO.AppUserDTOs.LoginDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -106,15 +164,15 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
     "Method": "RefreshToken",
-    "RelativePath": "Authentication/RefreshToken/refresh-token",
+    "RelativePath": "Authentication/RefreshToken",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "token",
+        "Name": "Token",
         "Type": "System.String",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -122,7 +180,7 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.AuthenticationController",
     "Method": "UpdateTechnician",
-    "RelativePath": "Authentication/UpdateTechnician/{id}",
+    "RelativePath": "Authentication/UpdateTechnician",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -130,7 +188,7 @@
       {
         "Name": "id",
         "Type": "System.String",
-        "IsRequired": true
+        "IsRequired": false
       },
       {
         "Name": "dto",
@@ -143,7 +201,7 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.EquipmentController",
     "Method": "ArchiveEquipment",
-    "RelativePath": "Equipment/ArchiveEquipment/{equipId}",
+    "RelativePath": "Equipment/ArchiveEquipment",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -151,7 +209,7 @@
       {
         "Name": "equipId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -159,7 +217,7 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.EquipmentController",
     "Method": "AssignEquipType",
-    "RelativePath": "Equipment/AssignEquipType/{equipId}",
+    "RelativePath": "Equipment/AssignEquipType",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -167,7 +225,7 @@
       {
         "Name": "equipId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       },
       {
         "Name": "type",
@@ -180,7 +238,7 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.EquipmentController",
     "Method": "AssignWorkShopLocation",
-    "RelativePath": "Equipment/AssignWorkShopLocation/{equipId}",
+    "RelativePath": "Equipment/AssignWorkShopLocation",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -188,7 +246,7 @@
       {
         "Name": "equipId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       },
       {
         "Name": "workShopId",
@@ -217,15 +275,15 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.EquipmentController",
     "Method": "DeleteEquipment",
-    "RelativePath": "Equipment/DeleteEquipment/{id}",
+    "RelativePath": "Equipment/DeleteEquipment",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "equipid",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -234,6 +292,16 @@
     "ContainingType": "Maintenance_Scheduling_System.Controllers.EquipmentController",
     "Method": "GetAllEquipments",
     "RelativePath": "Equipment/GetAllEquipments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.EquipmentController",
+    "Method": "GetAllWorkShops",
+    "RelativePath": "Equipment/GetAllWorkShops",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -253,7 +321,7 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.EquipmentController",
     "Method": "GetEquipmentById",
-    "RelativePath": "Equipment/GetEquipmentById/{id}",
+    "RelativePath": "Equipment/GetEquipmentById",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -261,7 +329,7 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -269,7 +337,7 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.EquipmentController",
     "Method": "GetEquipmentByName",
-    "RelativePath": "Equipment/GetEquipmentByName/{name}",
+    "RelativePath": "Equipment/GetEquipmentByName",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -277,7 +345,7 @@
       {
         "Name": "name",
         "Type": "System.String",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -285,7 +353,7 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.EquipmentController",
     "Method": "UnArchiveEquipment",
-    "RelativePath": "Equipment/UnArchiveEquipment/{equipId}",
+    "RelativePath": "Equipment/UnArchiveEquipment",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -293,7 +361,7 @@
       {
         "Name": "equipId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -359,7 +427,7 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskController",
     "Method": "ChangeStatus",
-    "RelativePath": "MainTask/ChangeStatus/{taskId}",
+    "RelativePath": "MainTask/ChangeStatus",
     "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
@@ -367,7 +435,7 @@
       {
         "Name": "taskId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       },
       {
         "Name": "status",
@@ -442,7 +510,7 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskController",
     "Method": "GetTaskByEquipId",
-    "RelativePath": "MainTask/GetTaskByEquipId/{EquipId}",
+    "RelativePath": "MainTask/GetTaskByEquipId",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -450,7 +518,23 @@
       {
         "Name": "EquipId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskController",
+    "Method": "GetTaskByHistoryId",
+    "RelativePath": "MainTask/GetTaskByHistoryId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "HistoryId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -458,7 +542,7 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskController",
     "Method": "UpdatePriority",
-    "RelativePath": "MainTask/UpdatePriority/{taskId}",
+    "RelativePath": "MainTask/UpdatePriority",
     "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
@@ -466,7 +550,7 @@
       {
         "Name": "taskId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       },
       {
         "Name": "priority",
@@ -511,7 +595,7 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskLogController",
     "Method": "DeleteLog",
-    "RelativePath": "MainTaskLog/DeleteLog/{logId}",
+    "RelativePath": "MainTaskLog/DeleteLog",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -519,7 +603,7 @@
       {
         "Name": "logId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -527,7 +611,7 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskLogController",
     "Method": "GetAllLogs",
-    "RelativePath": "MainTaskLog/GetAllLogs/{taskId}",
+    "RelativePath": "MainTaskLog/GetAllLogs",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -535,7 +619,7 @@
       {
         "Name": "taskId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -625,17 +709,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MaintenanceHistoryController",
+    "Method": "GetTotalCount",
+    "RelativePath": "MaintenanceHistory/GetTotalCount",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
     "Method": "ActivateSchedule",
-    "RelativePath": "MaintenanceSchedule/ActivateSchedule/{scheduleId}",
+    "RelativePath": "MaintenanceSchedule/ActivateSchedule",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "scheduleId",
+        "Name": "ScheduleId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -643,20 +737,46 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
     "Method": "AddNewTaskToSchedule",
-    "RelativePath": "MaintenanceSchedule/AddNewTaskToSchedule/{scheduleId}/task",
+    "RelativePath": "MaintenanceSchedule/AddNewTaskToSchedule",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "scheduleId",
+        "Name": "ScheduleId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       },
       {
         "Name": "dto",
         "Type": "Maintenance_Scheduling_System.Application.DTO.ScheduleTaskDTOs.CreateScheduleTaskDTO",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
+    "Method": "AssignTechnicianToScheduleTask",
+    "RelativePath": "MaintenanceSchedule/AssignTechnicianToScheduleTask",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ScheduleId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "ScheduleTaskId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "techId",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -680,15 +800,15 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
     "Method": "DeleteMaintenanceSchedule",
-    "RelativePath": "MaintenanceSchedule/DeleteMaintenanceSchedule/{id}",
+    "RelativePath": "MaintenanceSchedule/DeleteMaintenanceSchedule",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "ScheduleId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -696,19 +816,40 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
     "Method": "DeleteTaskFromSchedule",
-    "RelativePath": "MaintenanceSchedule/DeleteTaskFromSchedule/{scheduleId}/task/{taskId}",
+    "RelativePath": "MaintenanceSchedule/DeleteTaskFromSchedule",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "scheduleId",
+        "Name": "ScheduleId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       },
       {
         "Name": "taskId",
         "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
+    "Method": "EditScheduleTask",
+    "RelativePath": "MaintenanceSchedule/EditScheduleTask",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ScheduleId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "ScheduleTaskDTO",
+        "Type": "Maintenance_Scheduling_System.Application.DTO.ScheduleTaskDTOs.ScheduleTaskDTO",
         "IsRequired": true
       }
     ],
@@ -737,15 +878,15 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
     "Method": "GetScheduleByEquipment",
-    "RelativePath": "MaintenanceSchedule/GetScheduleByEquipment/{equipmentId}",
+    "RelativePath": "MaintenanceSchedule/GetScheduleByEquipment",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "equipmentId",
+        "Name": "EquipId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -753,15 +894,15 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.API.Controllers.MaintenanceScheduleController",
     "Method": "UnActivateSchedule",
-    "RelativePath": "MaintenanceSchedule/UnActivateSchedule/{scheduleId}",
+    "RelativePath": "MaintenanceSchedule/UnActivateSchedule",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "scheduleId",
+        "Name": "ScheduleId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -785,7 +926,7 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.TaskLogAttachmentController",
     "Method": "DeleteAttachment",
-    "RelativePath": "TaskLogAttachment/DeleteAttachment/{attachId}",
+    "RelativePath": "TaskLogAttachment/DeleteAttachment",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -793,7 +934,7 @@
       {
         "Name": "attachId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -801,7 +942,7 @@
   {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.TaskLogAttachmentController",
     "Method": "DownloadAttachment",
-    "RelativePath": "TaskLogAttachment/DownloadAttachment/{attachId}",
+    "RelativePath": "TaskLogAttachment/DownloadAttachment",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -809,7 +950,23 @@
       {
         "Name": "attachId",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.TaskLogAttachmentController",
+    "Method": "GetAllAttachments",
+    "RelativePath": "TaskLogAttachment/GetAllAttachments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "logId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

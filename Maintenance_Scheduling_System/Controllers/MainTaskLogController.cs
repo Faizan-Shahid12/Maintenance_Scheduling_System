@@ -22,13 +22,13 @@ namespace Maintenance_Scheduling_System.Controllers
         [Authorize(Roles = "Admin,Technician")]
         public async Task<IActionResult> CreateTaskLog([FromBody] CreateTaskLogDTO dto)
         {
-            await MainTaskLogService.CreateTaskLog(dto);
-            return Ok("Task log created successfully.");
+            var log = await MainTaskLogService.CreateTaskLog(dto);
+            return Ok(log);
         }
 
-        [HttpGet("{taskId}")]
+        [HttpGet]
         [Authorize(Roles = "Admin,Technician")]
-        public async Task<ActionResult<List<TaskLogDTO>>> GetAllLogs(int taskId)
+        public async Task<ActionResult<List<TaskLogDTO>>> GetAllLogs([FromQuery] int taskId)
         {
             var logs = await MainTaskLogService.GetAllTaskLog(taskId);
             return Ok(logs);
@@ -38,16 +38,16 @@ namespace Maintenance_Scheduling_System.Controllers
         [Authorize(Roles = "Admin,Technician")]
         public async Task<IActionResult> UpdateLog([FromBody] TaskLogDTO dto)
         {
-            await MainTaskLogService.UpdateTaskLog(dto);
-            return Ok("Task log updated successfully.");
+            var log = await MainTaskLogService.UpdateTaskLog(dto);
+            return Ok(log);
         }
 
-        [HttpDelete("{logId}")]
+        [HttpDelete]
         [Authorize(Roles = "Admin,Technician")]
-        public async Task<IActionResult> DeleteLog(int logId)
+        public async Task<IActionResult> DeleteLog([FromQuery] int logId)
         {
-            await MainTaskLogService.DeleteTaskLog(logId);
-            return Ok("Task log deleted successfully.");
+            var log = await MainTaskLogService.DeleteTaskLog(logId);
+            return Ok(log);
         }
     }
 }

@@ -10,9 +10,10 @@ namespace Maintenance_Scheduling_System.Application.Interfaces
 {
     public interface ITaskLogAttachmentService
     {
-        Task UploadAttachment(int logId, IFormFile file);
+        Task<TaskLogAttachment> UploadAttachment(int logId, IFormFile file);
         Task<TaskLogAttachment> DownloadAttachment(int attachId);
-        Task DeleteAttachment(int attachId);
+        Task<List<TaskLogAttachment>> GetAllAttachments(int logId);
+        Task<TaskLogAttachment> DeleteAttachment(int attachId);
         Task DeleteAttachmentByLog(int logId);
     }
 }

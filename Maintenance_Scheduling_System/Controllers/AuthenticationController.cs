@@ -24,8 +24,8 @@ namespace Maintenance_Scheduling_System.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateTechnician([FromBody] AppUserDTO request)
         {
-            await _appUserService.CreateAppUser(request, "Technician");
-            return Ok("Technician created successfully.");
+           var tech =  await _appUserService.CreateAppUser(request, "Technician");
+            return Ok(tech);
         }
 
         [HttpPost]
@@ -36,20 +36,20 @@ namespace Maintenance_Scheduling_System.Controllers
             return Ok("Admin created successfully.");
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteTechnician(string id)
+        public async Task<IActionResult> DeleteTechnician([FromQuery] string id)
         {
-            await _appUserService.DeleteAppUser(id);
-            return Ok("User soft-deleted successfully.");
+            var tech = await _appUserService.DeleteAppUser(id);
+            return Ok(tech);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateTechnician(string id, [FromBody] AppUserDTO dto)
+        public async Task<IActionResult> UpdateTechnician([FromQuery] string id, [FromBody] AppUserDTO dto)
         {
-            await _appUserService.UpdateAppUser(id, dto);
-            return Ok("User updated successfully.");
+            var tech = await _appUserService.UpdateAppUser(id, dto);
+            return Ok(tech);
         }
 
         [HttpGet]
@@ -60,9 +60,39 @@ namespace Maintenance_Scheduling_System.Controllers
                return Ok(technicians);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetTechniciansWithoutTask()
+        {
+               var technicians = await _appUserService.GetAllTechnicianUsersWithoutTask();
+               return Ok(technicians);
+        }
+        [HttpGet]
+        [Authorize(Roles = "Admin,Technician")]
+        public async Task<IActionResult> GetTechniciansById([FromQuery] string TechId)
+        {
+            var tech = await _appUserService.GetTechnicianById(TechId);
+            return Ok(tech);
+        }
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> CheckEmail([FromQuery] string email)
+        {
+            var tech = await _appUserService.CheckEmail(email);
+            return Ok(tech);
+        }
+
+        [HttpPatch]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ChangePassword([FromQuery] string TechId, [FromBody] ChangePasswordDTO newPassword)
+        {
+            await _appUserService.ChangePassword(TechId, newPassword);
+            return Ok();
+        }
+
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login([FromQuery] LoginDTO login)
+        public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
             var user = await _appUserService.Login(login);
 
@@ -74,9 +104,9 @@ namespace Maintenance_Scheduling_System.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> RefreshToken([FromBody] string token)
+        public async Task<IActionResult> RefreshToken([FromQuery] string Token)
         {
-            var RefreshToken = await RefreshTokenService.GetRefreshToken(token);
+            var RefreshToken = await RefreshTokenService.GetRefreshToken(Token);
             
             if (await RefreshTokenService.ValidateRefreshTokenAsync(RefreshToken))
             {

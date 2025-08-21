@@ -75,6 +75,12 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
            
             return users;
         }
+        public async Task<List<AppUser>> GetTechniciansUsersWithoutTasks()
+        {
+            var users = (await _userManager.GetUsersInRoleAsync("Technician")).Where(u => !u.IsDeleted).ToList();
+
+            return users;
+        }
 
         public async Task<List<string>> GetRoles(AppUser user)
         {
@@ -89,12 +95,31 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
         public async Task<AppUser> GetAppUserById(string id)
         {
             var user  = await _userManager.FindByIdAsync(id);
+            var tasks = await DbContext.MainTask.Where(u => !u.IsDeleted && u.TechnicianId == user.Id).ToListAsync();
+            user.AssignedTasks = tasks;
             return user;
         }
 
         public async Task UpdateAppUser(AppUser user)
         {
             await _userManager.UpdateAsync(user);
+        }
+
+        public async Task ChangePassword(string TechId, string Password)
+        {
+            var user = await GetAppUserById(TechId);
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var result = await _userManager.ResetPasswordAsync(user, token, Password);
+        }
+
+        public async Task<bool> CheckEmail(string newEmail)
+        {
+            if (string.IsNullOrWhiteSpace(newEmail))
+                return false;
+
+            return await DbContext.Users.AnyAsync(u => u.Email == newEmail);
         }
     }
 }

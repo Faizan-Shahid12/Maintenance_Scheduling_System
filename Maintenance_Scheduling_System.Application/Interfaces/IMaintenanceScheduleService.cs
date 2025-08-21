@@ -10,13 +10,15 @@ namespace Maintenance_Scheduling_System.Application.Interfaces
 {
     public interface IMaintenanceScheduleService
     {
-        Task CreateMaintenanceSchedule(CreateMaintenanceScheduleDTO msdto);
-        Task UpdateMaintenanceSchedule(MaintenanceScheduleDTO msdto);
-        Task DeleteMaintenanceSchedule(int MSId);
-        Task AddNewTasktoSchedule(int ScheduleId, CreateScheduleTaskDTO stdto);
-        Task DeleteTaskFromSchedule(int ScheduleId, int ScheduleTaskId);
-        Task UnActivateSchedule(int ScheduleId);
-        Task ActivateSchedule(int ScheduleId);
+        Task<DisplayMaintenanceScheduleDTO> CreateMaintenanceSchedule(CreateMaintenanceScheduleDTO msdto);
+        Task<DisplayMaintenanceScheduleDTO> UpdateMaintenanceSchedule(MaintenanceScheduleDTO msdto);
+        Task<DisplayMaintenanceScheduleDTO> DeleteMaintenanceSchedule(int MSId);
+        Task<DisplayMaintenanceScheduleDTO> AddNewTasktoSchedule(int ScheduleId, CreateScheduleTaskDTO stdto);
+        Task<DisplayMaintenanceScheduleDTO> DeleteTaskFromSchedule(int ScheduleId, int ScheduleTaskId);
+        Task<DisplayMaintenanceScheduleDTO> UnActivateSchedule(int ScheduleId);
+        Task<DisplayMaintenanceScheduleDTO> ActivateSchedule(int ScheduleId);
+        Task<DisplayMaintenanceScheduleDTO> EditScheduleTask(int ScheduleId, ScheduleTaskDTO scheduleTaskDTO);
+        Task<DisplayMaintenanceScheduleDTO> AssignTechnicianToScheduleTask(int ScheduleId, int ScheduleTaskId, string? TechId);
         Task<List<DisplayMaintenanceScheduleDTO>> GetMaintenanceScheduleByEquipmentId(int EquipmentId);
         Task<List<DisplayMaintenanceScheduleDTO>> GetAllMaintenanceSchedule();
         Task<List<DisplayMaintenanceScheduleDTO>> GetAllMaintenanceScheduleByStartDate();

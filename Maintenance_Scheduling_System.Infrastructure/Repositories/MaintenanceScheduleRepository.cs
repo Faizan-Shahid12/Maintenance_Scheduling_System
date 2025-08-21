@@ -36,41 +36,49 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
 
         public async Task<List<MaintenanceSchedule>> GetAllMaintenanceSchedule()
         {
-            return await DbContext.MaintenanceSchedules.Include(ms => ms.ScheduleTasks.Where(st => !st.IsDeleted))
-                .Where(ms => !ms.IsDeleted)
-                .ToListAsync();
+            return await DbContext.MaintenanceSchedules.Where(ms => !ms.equipment.IsDeleted && !ms.IsDeleted)
+                .Include(ms => ms.equipment).Include(ms => ms.ScheduleTasks.Where(st => !st.IsDeleted)).ToListAsync();
         }
 
         public async Task<List<MaintenanceSchedule>> GetAllMaintenanceScheduleByStartDate(DateOnly date)
         {
-            return await DbContext.MaintenanceSchedules.Include(ms => ms.ScheduleTasks.Where(st => !st.IsDeleted))
-                .Where(ms => !ms.IsDeleted && ms.StartDate == date)
+            return await DbContext.MaintenanceSchedules.Where(ms => !ms.IsDeleted && ms.StartDate == date && !ms.equipment.IsDeleted)
+                .Include(ms => ms.equipment).Include(ms => ms.ScheduleTasks.Where(st => !st.IsDeleted))
                 .ToListAsync();
         }
 
         public async Task<List<MaintenanceSchedule>> GetAllMaintenanceScheduleByType(string type)
         {
-            return await DbContext.MaintenanceSchedules.Include(ms => ms.ScheduleTasks.Where(st => !st.IsDeleted))
+            return await DbContext.MaintenanceSchedules.Include(ms => ms.equipment)
+                .Include(ms => ms.ScheduleTasks.Where(st => !st.IsDeleted))
                 .Where(ms => !ms.IsDeleted && ms.ScheduleType.ToLower() == type.ToLower())
                 .ToListAsync();
         }
 
         public async Task<List<MaintenanceSchedule>> GetMaintenanceScheduleByName(string name)
         {
-            return await DbContext.MaintenanceSchedules.Include(ms => ms.ScheduleTasks.Where(st => !st.IsDeleted))
+            return await DbContext.MaintenanceSchedules.Include(ms => ms.equipment)
+                .Include(ms => ms.ScheduleTasks.Where(st => !st.IsDeleted))
                 .Where(ms => !ms.IsDeleted && ms.ScheduleName.ToLower() == name.ToLower())
                 .ToListAsync();
         }
+
         public async Task<MaintenanceSchedule> GetMaintenanceScheduleById(int id)
         {
-            return await DbContext.MaintenanceSchedules.Include(ms => ms.ScheduleTasks.Where(st => !st.IsDeleted))
-                .Where(ms => !ms.IsDeleted && ms.ScheduleId == id).FirstOrDefaultAsync();
+            return await DbContext.MaintenanceSchedules
+                .Include(ms => ms.equipment)
+                .Include(ms => ms.ScheduleTasks.Where(st => !st.IsDeleted))
+                .Where(ms => !ms.IsDeleted && ms.ScheduleId == id)
+                .FirstOrDefaultAsync();
         }
-        public async Task<List<MaintenanceSchedule>> GetAllMaintenanceScheduleByEquipId(int EquipId)
+
+        public async Task<List<MaintenanceSchedule>> GetAllMaintenanceScheduleByEquipId(int equipId)
         {
-            return await DbContext.MaintenanceSchedules.Include(ms => ms.ScheduleTasks.Where(st => !st.IsDeleted))
-                .Where(ms => !ms.IsDeleted && ms.EquipmentId == EquipId)
+            return await DbContext.MaintenanceSchedules.Include(ms => ms.equipment)
+                .Include(ms => ms.ScheduleTasks.Where(st => !st.IsDeleted))
+                .Where(ms => !ms.IsDeleted && ms.EquipmentId == equipId)
                 .ToListAsync();
         }
+
     }
 }

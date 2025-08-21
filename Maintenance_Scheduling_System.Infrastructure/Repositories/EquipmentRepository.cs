@@ -32,25 +32,22 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
             await DbContext.SaveChangesAsync();
         }
 
-        public async Task CreateNewEquipment(Equipment equip)
+        public async Task<Equipment> CreateNewEquipment(Equipment equip)
         {
             await DbContext.Equipment.AddAsync(equip);
             await DbContext.SaveChangesAsync();
+            return equip;
 
         }
 
         public async Task DeleteEquipment(Equipment equip1)
         {
             equip1.IsDeleted = true;
-
-            DbContext.Equipment.Update(equip1);
-
             await DbContext.SaveChangesAsync();
         }
 
         public async Task UpdateEquipment(Equipment equip)
         {
-            DbContext.Equipment.Update(equip);
             await DbContext.SaveChangesAsync();
         }
 

@@ -18,10 +18,11 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
             DbContext = dbContext;
         }
 
-        public async Task CreateNewTask(MainTask task)
+        public async Task<MainTask> CreateNewTask(MainTask task)
         {
             await DbContext.MainTask.AddAsync(task);
             await DbContext.SaveChangesAsync();
+            return task;
         }
 
         public async Task DeleteTask()
@@ -38,6 +39,7 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
         {
             return await DbContext.MainTask
                 .Where(t => t.TaskId == id && !t.IsDeleted)
+                .Include(t => t.Technician)
                 .FirstOrDefaultAsync();
         }
 
@@ -45,12 +47,14 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
         {
             return await DbContext.MainTask
                 .Where(t => !t.IsDeleted)
+                .Include(t => t.Technician)
                 .ToListAsync();
         }
         public async Task<List<MainTask>> GetAllTaskByEquipId(int Id)
         {
             return await DbContext.MainTask
                 .Where(t => !t.IsDeleted && t.EquipmentId == Id)
+                .Include (t => t.Technician)
                 .ToListAsync();
         }
 
@@ -58,6 +62,7 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
         {
             return await DbContext.MainTask
                 .Where(t => t.TaskName.ToLower() == name.ToLower() && !t.IsDeleted)
+                .Include(t => t.Technician)
                 .ToListAsync();
         }
 
@@ -65,7 +70,34 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
         {
             return await DbContext.MainTask
                 .Where(t => t.Status == status && !t.IsDeleted)
+                .Include(t => t.Technician)
                 .ToListAsync();
         }
+
+        public async Task<List<MainTask>> GetMainTaskByHistoryId(int HistoryId)
+        {
+            return await DbContext.MainTask.Where(t => t.HistoryId == HistoryId && !t.IsDeleted).Include(t => t.Technician).ToListAsync();
+        }
+
+        public async Task UnAssignTechnicianTask(string TechId)
+        {
+            var tasks = await DbContext.MainTask
+                .Where(t => t.TechnicianId == TechId)
+                .ToListAsync();
+
+            foreach (var task in tasks)
+            {
+                task.TechnicianId = null;
+                task.Technician = null;
+            }
+
+            await DbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> TotalCountofTask()
+        {
+            return await DbContext.MainTask.CountAsync();
+        }
+
     }
 }

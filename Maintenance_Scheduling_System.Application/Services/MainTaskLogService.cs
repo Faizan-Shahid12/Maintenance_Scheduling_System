@@ -35,7 +35,7 @@ namespace Maintenance_Scheduling_System.Application.Services
             equip.LastModifiedAt = DateTime.Now;
             equip.LastModifiedBy = currentUser.Name;
         }
-        public async Task CreateTaskLog(CreateTaskLogDTO taskdto)
+        public async Task<TaskLogDTO> CreateTaskLog(CreateTaskLogDTO taskdto)
         {
             var Mtask = await MainTaskRepository.GetTaskById(taskdto.TaskId);
             var tasklog = mapper.Map<TaskLogs>(taskdto);
@@ -46,6 +46,8 @@ namespace Maintenance_Scheduling_System.Application.Services
             AuditModify(tasklog);
 
             await TaskLogRepository.CreateNewTaskLogs(tasklog);
+
+            return mapper.Map<TaskLogDTO>(tasklog);
         }
 
         public async Task<List<TaskLogDTO>> GetAllTaskLog(int TaskId)
@@ -55,7 +57,7 @@ namespace Maintenance_Scheduling_System.Application.Services
             return logdto;
         }
 
-        public async Task UpdateTaskLog(TaskLogDTO tasklog)
+        public async Task<TaskLogDTO> UpdateTaskLog(TaskLogDTO tasklog)
         {
             var log = await TaskLogRepository.GetTaskLogByLogId(tasklog.LogId);
             log.Note = tasklog.Note;
@@ -64,9 +66,11 @@ namespace Maintenance_Scheduling_System.Application.Services
             AuditModify(log);
 
             await TaskLogRepository.UpdateTaskLogs(log);
+
+            return mapper.Map<TaskLogDTO>(log);
         }
 
-        public async Task DeleteTaskLog(int logId)
+        public async Task<TaskLogDTO> DeleteTaskLog(int logId)
         {
             var log = await TaskLogRepository.GetTaskLogByLogId(logId);
             log.IsDeleted = true;
@@ -75,6 +79,8 @@ namespace Maintenance_Scheduling_System.Application.Services
             await TaskLogRepository.DeleteTaskLogs(log);
 
             await TaskLogAttachmentService.DeleteAttachmentByLog(logId);
+
+            return mapper.Map<TaskLogDTO>(log);
         }
     }
 }

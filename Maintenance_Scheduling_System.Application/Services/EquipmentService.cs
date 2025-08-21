@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Maintenance_Scheduling_System.Application.DTO;
 using Maintenance_Scheduling_System.Application.DTO.EquipmentDTOs;
 using Maintenance_Scheduling_System.Application.Interfaces;
 using Maintenance_Scheduling_System.Domain.Entities;
@@ -14,14 +15,16 @@ namespace Maintenance_Scheduling_System.Application.Services
     public class EquipmentService : IEquipmentService
     {
         private readonly IEquipmentRepo EquipRepository;
+        private readonly IWorkShopLocRepo WorkShopRepository;
         private readonly IMapper mapper;
         private ICurrentUser currentUser;
 
-        public EquipmentService(IEquipmentRepo equipment, IMapper mapper, ICurrentUser currentUser)
+        public EquipmentService(IEquipmentRepo equipment, IMapper mapper, ICurrentUser currentUser,IWorkShopLocRepo workShopRepository)
         {
             EquipRepository = equipment;
             this.mapper = mapper;
             this.currentUser = currentUser;
+            WorkShopRepository = workShopRepository;
         }
 
         private void AuditModify(Equipment equip)
@@ -30,25 +33,40 @@ namespace Maintenance_Scheduling_System.Application.Services
             equip.LastModifiedBy = currentUser.Name;
         }
 
-        public async Task CreateEquipment(CreateEquipmentDTO equipmentDTO)
+        private EquipmentDTO MapToDTO(Equipment equip)
+        {
+            var dto = mapper.Map<EquipmentDTO>(equip);
+           
+            return dto;
+        }
+
+        public async Task<EquipmentDTO> CreateEquipment(CreateEquipmentDTO equipmentDTO)
         {
             var equip = mapper.Map<Equipment>(equipmentDTO);
             equip.CreatedBy = currentUser.Name;
+
+            if(equipmentDTO.WorkShopId != null)
+                equip.AssignWorkShopLocation((int)equipmentDTO.WorkShopId);
+
             AuditModify(equip);
+
             await EquipRepository.CreateNewEquipment(equip);
+
+            return MapToDTO(equip);
+
         }
 
-        public async Task DeleteEquipment(int EquipId)
+        public async Task<EquipmentDTO> DeleteEquipment(int EquipId)
         {
             var equip = await EquipRepository.GetEquipmentById(EquipId);
             AuditModify(equip);
             equip.IsDeleted = true;
             await EquipRepository.DeleteEquipment(equip);
 
-
+            return MapToDTO(equip);
         }
 
-        public async Task UpdateEquipment(EquipmentDTO equipmentDTO)
+        public async Task<EquipmentDTO> UpdateEquipment(EquipmentDTO equipmentDTO)
         {
             var existingEquip = await EquipRepository.GetEquipmentById(equipmentDTO.EquipmentId);
 
@@ -60,6 +78,8 @@ namespace Maintenance_Scheduling_System.Application.Services
             AuditModify(existingEquip);
 
             await EquipRepository.UpdateEquipment(existingEquip);
+
+            return MapToDTO(existingEquip);
         }
 
         public async Task<List<EquipmentDTO>> GetAllEquipments()
@@ -83,44 +103,74 @@ namespace Maintenance_Scheduling_System.Application.Services
             return Dto;
         }
 
-        public async Task AssignEquipType(int EquipId,string Type)
+        public async Task<EquipmentDTO> AssignEquipType(int EquipId,string Type)
         {
             var equip = await EquipRepository.GetEquipmentById(EquipId);
             int check = equip.AssignType(Type);
 
             if (check == -1)
-                return;
+                return null;
 
             AuditModify(equip);
             await EquipRepository.UpdateEquipment(equip);
+
+            return MapToDTO(equip);
         }
 
-        public async Task AssignWorkShopLocation(int EquipId, int WorkShopId)
+        public async Task<EquipmentDTO> AssignWorkShopLocation(int EquipId, int WorkShopId)
         {
             var equip = await EquipRepository.GetEquipmentById(EquipId);
+
+            if(WorkShopId <=0)
+            {
+                equip.WorkshopId = null;
+
+                AuditModify(equip);
+                await EquipRepository.UpdateEquipment(equip);
+
+                return MapToDTO(equip);
+            }
+
             int check = equip.AssignWorkShopLocation(WorkShopId);
 
             if (check == -1)
-                return;
+                return null;
 
             AuditModify(equip);
             await EquipRepository.UpdateEquipment(equip);
+
+            var equipdto = MapToDTO(equip);
+
+            var workshop = await WorkShopRepository.GetWorkShopById(WorkShopId);
+
+            if(workshop == null)
+            {
+                return equipdto;
+            }
+
+            equipdto.WorkShopLocation = workshop.Location;
+            equipdto.WorkShopName = workshop.Name;
+
+            return equipdto;
         }
 
-        public async Task ArchiveEquipment(int EquipId)
+        public async Task<EquipmentDTO> ArchiveEquipment(int EquipId)
         {
             var equip = await EquipRepository.GetEquipmentById(EquipId);
             equip.Archive();
             AuditModify(equip);
             await EquipRepository.UpdateEquipment(equip);
+
+            return MapToDTO(equip);
         }
 
-        public async Task UnArchiveEquipment(int EquipId)
+        public async Task<EquipmentDTO> UnArchiveEquipment(int EquipId)
         {
             var equip = await EquipRepository.GetEquipmentById(EquipId);
             equip.UnArchive();
             AuditModify(equip);
             await EquipRepository.UpdateEquipment(equip);
+            return MapToDTO(equip);
         }
 
         public async Task<List<EquipmentDTO>> GetArchivedEquipments()
@@ -130,6 +180,16 @@ namespace Maintenance_Scheduling_System.Application.Services
             var archivedDtos = mapper.Map<List<EquipmentDTO>>(archivedEquip);
 
             return archivedDtos;
+        }
+
+        public async Task<List<WorkShopDTO>> GetAllWorkShops()
+        {
+            var list = await WorkShopRepository.GetAllWorkShopLoc();
+
+            var workshopDTO = mapper.Map<List<WorkShopDTO>>(list);
+
+            return workshopDTO;
+
         }
     }
 }

@@ -74,9 +74,12 @@ namespace Maintenance_Scheduling_System
 
             builder.Services.Configure<ConnectionSettings>(builder.Configuration.GetSection("ConnectionStrings"));
 
-            builder.Services.AddIdentity<AppUser, IdentityRole>()
-               .AddEntityFrameworkStores<Maintenance_DbContext>()
-               .AddDefaultTokenProviders();
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+            })
+            .AddEntityFrameworkStores<Maintenance_DbContext>()
+            .AddDefaultTokenProviders();
 
 
             builder.Services.AddAuthentication(opt =>
@@ -98,7 +101,8 @@ namespace Maintenance_Scheduling_System
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwt.Issuer,
                     ValidAudience = jwt.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key)),
+                    ClockSkew = TimeSpan.Zero
                 };
 
             });
@@ -109,16 +113,26 @@ namespace Maintenance_Scheduling_System
                 opt.AddPolicy("TechnicianPolicy", policy => policy.RequireRole("Technician"));
             });
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontEnd",
+                    builder => builder.WithOrigins("http://localhost:5173")
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader());
+            });
+
             builder.Services.AddAutoMapper(typeof(AssemblyReference).Assembly);
 
-           builder.Services.AddHttpContextAccessor();
+            builder.Services.AddHttpContextAccessor();
 
-           builder.Services.AddDbContext<Maintenance_DbContext>();
+            builder.Services.AddDbContext<Maintenance_DbContext>();
 
-          
-           builder.Services.AddScoped<ICurrentUser, CurrentUserService>();
+            builder.Services.AddSignalR();
+
+            builder.Services.AddScoped<ICurrentUser, CurrentUserService>();
 
             builder.Services.AddScoped<IEquipmentRepo, EquipmentRepository>();
+            builder.Services.AddScoped<IWorkShopLocRepo, WorkShopLocRepository>();
             builder.Services.AddScoped<IMaintenanceHistoryRepo, MaintenanceHistoryRepository>();
             builder.Services.AddScoped<IMainTaskRepo, MainTaskRepository>();
             builder.Services.AddScoped<ITaskLogRepo, TaskLogsRepository>();
@@ -137,12 +151,14 @@ namespace Maintenance_Scheduling_System
             builder.Services.AddScoped<IScheduleTaskService,ScheduleTaskService>();
             builder.Services.AddScoped<IAppUserService,AppUserService>();
             builder.Services.AddScoped<IRefreshTokenService,RefreshTokenService>();
+            builder.Services.AddScoped<ICountService, CountService>();
 
             builder.Services.AddHostedService<TaskBackgroundService>();
             builder.Services.AddHostedService<ScheduleBackgroundService>();
 
             
             var app = builder.Build();
+            app.UseStaticFiles();
 
 
             using var scope = app.Services.CreateScope();
@@ -157,7 +173,6 @@ namespace Maintenance_Scheduling_System
                 Console.WriteLine($"Seeding failed: {ex.Message}");
             }
 
-
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -166,6 +181,8 @@ namespace Maintenance_Scheduling_System
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowFrontEnd");
 
             app.UseAuthentication();
 

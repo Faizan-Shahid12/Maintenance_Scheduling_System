@@ -9,9 +9,9 @@ namespace Maintenance_Scheduling_System.Application.Interfaces
 {
     public interface IMainTaskLogService
     {
-        Task CreateTaskLog(CreateTaskLogDTO taskdto);
+        Task<TaskLogDTO> CreateTaskLog(CreateTaskLogDTO taskdto);
         Task<List<TaskLogDTO>> GetAllTaskLog(int taskId);
-        Task UpdateTaskLog(TaskLogDTO tasklog);
-        Task DeleteTaskLog(int logId);
+        Task<TaskLogDTO> UpdateTaskLog(TaskLogDTO tasklog);
+        Task<TaskLogDTO> DeleteTaskLog(int logId);
     }
 }

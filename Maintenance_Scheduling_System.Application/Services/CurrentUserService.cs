@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Maintenance_Scheduling_System.Application.Services
 {
@@ -20,9 +21,16 @@ namespace Maintenance_Scheduling_System.Application.Services
 
         public string? UserId =>
             _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        public string Name
+        {
+            get
+            {
+                var name = _httpContextAccessor.HttpContext?.User?.FindFirstValue("FullName");
+                return string.IsNullOrEmpty(name) ? "System" : name;
+            }
+        }
 
-        public string? Name =>
-            _httpContextAccessor.HttpContext?.User?.FindFirstValue("FullName");
+
     }
 
 }

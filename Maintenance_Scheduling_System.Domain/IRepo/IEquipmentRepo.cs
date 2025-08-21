@@ -9,7 +9,7 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
 {
     public interface IEquipmentRepo
     {
-        public Task CreateNewEquipment(Equipment equip);
+        public Task<Equipment> CreateNewEquipment(Equipment equip);
         public Task DeleteEquipment(Equipment equip);
         public Task UpdateEquipment(Equipment equip);
         public Task<Equipment> GetEquipmentById(int equipId);

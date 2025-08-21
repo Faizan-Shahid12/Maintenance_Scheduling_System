@@ -17,5 +17,7 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
         public Task AddTask();
         public Task<MaintenanceHistory?> GetMaintenanceHistory(int Id);
         public Task<List<MaintenanceHistory>> GetAllMaintenanceHistory();
+        public Task<int> TotalCountOfMaintenance();
+
     }
 }

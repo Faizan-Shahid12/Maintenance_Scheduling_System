@@ -47,5 +47,10 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
             DbContext.TaskLogs.Update(tasklogs);
             await DbContext.SaveChangesAsync();
         }
+
+        public async Task<int> TotalCountofTaskLog()
+        {
+            return await DbContext.TaskLogs.CountAsync();
+        }
     }
 }

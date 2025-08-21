@@ -13,5 +13,7 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
         public Task DeleteTaskLogAttachment();
         public Task<List<TaskLogAttachment>> GetAllTaskLogAttachmentByTaskLogId(int LogId);
         public Task<TaskLogAttachment> GetTaskLogAttachmentById(int attachId);
+        public Task<int> TotalCountofLogAttachment();
+
     }
 }

@@ -26,6 +26,7 @@ namespace Maintenance_Scheduling_System.Application.Profiles
                     ? null
                     : src.AssignedTasks
             ));
+
         }
     }
 }

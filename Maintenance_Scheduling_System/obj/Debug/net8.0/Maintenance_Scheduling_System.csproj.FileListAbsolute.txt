@@ -191,3 +191,4 @@ C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Sc
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\obj\Debug\net8.0\Maintenance_Scheduling_System.pdb
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\obj\Debug\net8.0\Maintenance_Scheduling_System.genruntimeconfig.cache
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\obj\Debug\net8.0\ref\Maintenance_Scheduling_System.dll
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\bin\Debug\net8.0\Maintenance_Scheduling_System.staticwebassets.runtime.json

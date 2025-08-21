@@ -26,7 +26,7 @@ namespace Maintenance_Scheduling_System.Application.Services.BackgroundServices
                 var taskService = scope.ServiceProvider.GetRequiredService<IMainTaskService>();
                 await taskService.OverDueTask();
 
-                await Task.Delay(TimeSpan.FromHours(24), stoppingToken);
+                await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
             }
         }
     }

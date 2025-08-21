@@ -16,8 +16,12 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
         public Task<AppUser> GetAppUserByEmail(string Name);
         public Task<List<AppUser>> GetAppUsersByRole(string Role);
         public Task<List<AppUser>> GetTechniciansUsers();
+        public Task<List<AppUser>> GetTechniciansUsersWithoutTasks();
         public Task<AppUser> GetAppUserById(string id);
         public Task<List<string>> GetRoles(AppUser user);
+        public Task ChangePassword(string TechId, string Password);
+        public Task<bool> CheckEmail(string newEmail);
+
 
 
     }

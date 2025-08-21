@@ -14,5 +14,8 @@ namespace Maintenance_Scheduling_System.Application.DTO.ScheduleTaskDTOs
         public string EquipmentName { get; set; } = string.Empty;
         public PriorityEnum Priority { get; set; } = PriorityEnum.Low;
         public DateOnly DueDate { get; set; }
+        public TimeSpan Interval { get; set; }
+        public string? AssignedTo { get; set; }
+        public string? TechEmail { get; set; }
     }
 }

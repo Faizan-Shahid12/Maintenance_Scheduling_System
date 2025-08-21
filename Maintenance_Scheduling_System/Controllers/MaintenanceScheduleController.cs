@@ -11,12 +11,7 @@ namespace Maintenance_Scheduling_System.API.Controllers
     [Route("[controller]/[Action]")]
     public class MaintenanceScheduleController : ControllerBase
     {
-        /// <summary>
-        /// 
-        /// Apply the logic to Add Existing Task to Schedules
-        /// 
-        /// </summary>
-
+      
         private IMaintenanceScheduleService MaintenanceScheduleService {  get; set; }
 
         public MaintenanceScheduleController(IMaintenanceScheduleService maintenanceScheduleService)
@@ -28,47 +23,47 @@ namespace Maintenance_Scheduling_System.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateMaintenanceSchedule([FromBody] CreateMaintenanceScheduleDTO dto)
         {
-            await MaintenanceScheduleService.CreateMaintenanceSchedule(dto);
-            return Ok("Schedule created.");
+            var schedule = await MaintenanceScheduleService.CreateMaintenanceSchedule(dto);
+            return Ok(schedule);
         }
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateMaintenanceSchedule([FromBody] MaintenanceScheduleDTO dto)
         {
-            await MaintenanceScheduleService.UpdateMaintenanceSchedule(dto);
-            return Ok("Schedule updated.");
+            var schedule = await MaintenanceScheduleService.UpdateMaintenanceSchedule(dto);
+            return Ok(schedule);
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteMaintenanceSchedule(int id)
+        public async Task<IActionResult> DeleteMaintenanceSchedule([FromQuery] int ScheduleId)
         {
-            await MaintenanceScheduleService.DeleteMaintenanceSchedule(id);
-            return Ok("Schedule deleted.");
+            var schedule = await MaintenanceScheduleService.DeleteMaintenanceSchedule(ScheduleId);
+            return Ok(schedule);
         }
 
-        [HttpPost("{scheduleId:int}/task")]
+        [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AddNewTaskToSchedule(int scheduleId, [FromBody] CreateScheduleTaskDTO dto)
+        public async Task<IActionResult> AddNewTaskToSchedule([FromQuery] int ScheduleId, [FromBody] CreateScheduleTaskDTO dto)
         {
-            await MaintenanceScheduleService.AddNewTasktoSchedule(scheduleId, dto);
-            return Ok("Task added to schedule.");
+            var schedule = await MaintenanceScheduleService.AddNewTasktoSchedule(ScheduleId, dto);
+            return Ok(schedule);
         }
 
-        [HttpDelete("{scheduleId:int}/task/{taskId:int}")]
+        [HttpDelete]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteTaskFromSchedule(int scheduleId, int taskId)
+        public async Task<IActionResult> DeleteTaskFromSchedule([FromQuery] int ScheduleId, [FromQuery] int taskId)
         {
-            await MaintenanceScheduleService.DeleteTaskFromSchedule(scheduleId, taskId);
-            return Ok("Task removed from schedule.");
+            var schedule = await MaintenanceScheduleService.DeleteTaskFromSchedule(ScheduleId, taskId);
+            return Ok(schedule);
         }
 
-        [HttpGet("{equipmentId:int}")]
+        [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetScheduleByEquipment(int equipmentId)
+        public async Task<IActionResult> GetScheduleByEquipment(int EquipId)
         {
-            var result = await MaintenanceScheduleService.GetMaintenanceScheduleByEquipmentId(equipmentId);
+            var result = await MaintenanceScheduleService.GetMaintenanceScheduleByEquipmentId(EquipId);
             return Ok(result);
         }
 
@@ -88,14 +83,15 @@ namespace Maintenance_Scheduling_System.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{scheduleId}")]
+        [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> ActivateSchedule(int scheduleId)
+        public async Task<IActionResult> ActivateSchedule([FromQuery] int ScheduleId)
         {
             try
             {
-                await MaintenanceScheduleService.ActivateSchedule(scheduleId);
-                return Ok(new { message = "Schedule activated successfully." });
+                var schedule = await MaintenanceScheduleService.ActivateSchedule(ScheduleId);
+                return Ok(schedule);
+
             }
             catch (Exception ex)
             {
@@ -103,14 +99,43 @@ namespace Maintenance_Scheduling_System.API.Controllers
             }
         }
 
-        [HttpPut("{scheduleId}")]
+        [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UnActivateSchedule(int scheduleId)
+        public async Task<IActionResult> UnActivateSchedule([FromQuery] int ScheduleId)
         {
             try
             {
-                await MaintenanceScheduleService.UnActivateSchedule(scheduleId);
-                return Ok(new { message = "Schedule deactivated successfully." });
+                var schedule = await MaintenanceScheduleService.UnActivateSchedule(ScheduleId);
+                return Ok(schedule);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
+        [HttpPut]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> EditScheduleTask([FromQuery] int ScheduleId, [FromBody] ScheduleTaskDTO ScheduleTaskDTO)
+        {
+            try
+            {
+                var schedule = await MaintenanceScheduleService.EditScheduleTask(ScheduleId,ScheduleTaskDTO);
+                return Ok(schedule);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+        [HttpPut]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AssignTechnicianToScheduleTask([FromQuery] int ScheduleId,[FromQuery] int ScheduleTaskId, [FromQuery] string? techId)
+        {
+            try
+            {
+                var schedule = await MaintenanceScheduleService.AssignTechnicianToScheduleTask(ScheduleId,ScheduleTaskId,techId);
+                return Ok(schedule);
             }
             catch (Exception ex)
             {

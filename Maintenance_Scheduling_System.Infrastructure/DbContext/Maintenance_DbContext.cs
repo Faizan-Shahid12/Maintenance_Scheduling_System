@@ -38,6 +38,10 @@ namespace Maintenance_Scheduling_System.Infrastructure.DbContext
 
                 entity.HasKey(x => x.Id);
 
+                entity.HasQueryFilter(x => !x.IsDeleted);
+
+                entity.HasIndex(x => x.NormalizedEmail).IsUnique();
+
                 entity.HasMany(x => x.AssignedTasks)
                 .WithOne(t => t.Technician)
                 .HasForeignKey(t => t.TechnicianId)
@@ -80,6 +84,16 @@ namespace Maintenance_Scheduling_System.Infrastructure.DbContext
                 .WithOne(st => st.schedule)
                 .HasForeignKey(st => st.ScheduleId)
                 .IsRequired();
+
+                entity.Property(s => s.Interval)
+                    .HasConversion(interval => interval.TotalDays, interval => TimeSpan.FromDays(interval))
+                    .HasColumnType("float");
+
+            });
+
+            builder.Entity<ScheduleTask>(entity =>
+            {
+                entity.HasKey(s => s.ScheduleTaskId);
 
                 entity.Property(s => s.Interval)
                     .HasConversion(interval => interval.TotalDays, interval => TimeSpan.FromDays(interval))
