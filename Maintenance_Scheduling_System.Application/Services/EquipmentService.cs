@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 
 namespace Maintenance_Scheduling_System.Application.Services
 {
+    //DONE
+
     public class EquipmentService : IEquipmentService
     {
         private readonly IEquipmentRepo EquipRepository;
@@ -66,8 +68,6 @@ namespace Maintenance_Scheduling_System.Application.Services
             equip.IsDeleted = true;
            
             await EquipRepository.DeleteEquipment(equip);
-
-      
 
             return MapToDTO(equip);
         }

@@ -1,6 +1,11 @@
-﻿using Maintenance_Scheduling_System.Application.DTO.AppUserDTOs;
+﻿using Maintenance_Scheduling_System.Application.CQRS.AppUserManager.cs.Commands;
+using Maintenance_Scheduling_System.Application.CQRS.AppUserManager.cs.Queries;
+using Maintenance_Scheduling_System.Application.CQRS.RefreshTokenManager.cs.Commands;
+using Maintenance_Scheduling_System.Application.CQRS.RefreshTokenManager.cs.Queries;
+using Maintenance_Scheduling_System.Application.DTO.AppUserDTOs;
 using Maintenance_Scheduling_System.Application.Interfaces;
 using Maintenance_Scheduling_System.Application.Services;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,28 +16,25 @@ namespace Maintenance_Scheduling_System.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private readonly IAppUserService _appUserService;
-        private readonly IRefreshTokenService RefreshTokenService;
-
-        public AuthenticationController(IAppUserService appUserService, IRefreshTokenService rtser)
+        private readonly IMediator _mediator;
+        public AuthenticationController(IMediator mediator)
         {
-            _appUserService = appUserService;
-            RefreshTokenService = rtser;
+            _mediator = mediator;
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateTechnician([FromBody] AppUserDTO request)
         {
-           var tech =  await _appUserService.CreateAppUser(request, "Technician");
-            return Ok(tech);
+            var result = await _mediator.Send(new CreateAppUserCommand(request, "Technician"));
+            return Ok(result);
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> CreateAdmin([FromQuery] AppUserDTO request)
+        public async Task<IActionResult> CreateAdmin([FromBody] AppUserDTO request)
         {
-            await _appUserService.CreateAppUser(request, "Admin");
+            var result = await _mediator.Send(new CreateAppUserCommand(request, "Admin"));
             return Ok("Admin created successfully.");
         }
 
@@ -40,53 +42,55 @@ namespace Maintenance_Scheduling_System.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteTechnician([FromQuery] string id)
         {
-            var tech = await _appUserService.DeleteAppUser(id);
-            return Ok(tech);
+            var result = await _mediator.Send(new DeleteAppUserCommand(id));
+            return Ok(result);
         }
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateTechnician([FromQuery] string id, [FromBody] AppUserDTO dto)
         {
-            var tech = await _appUserService.UpdateAppUser(id, dto);
-            return Ok(tech);
+            var result = await _mediator.Send(new UpdateAppUserCommand(id, dto));
+            return Ok(result);
         }
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetTechnicians()
         {
-               var technicians = await _appUserService.GetAllTechnicianUsers();
-               return Ok(technicians);
+            var result = await _mediator.Send(new GetAllTechniciansQuery());
+            return Ok(result);
         }
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetTechniciansWithoutTask()
         {
-               var technicians = await _appUserService.GetAllTechnicianUsersWithoutTask();
-               return Ok(technicians);
+            var result = await _mediator.Send(new GetAllTechniciansWithoutTaskQuery());
+            return Ok(result);
         }
+
         [HttpGet]
         [Authorize(Roles = "Admin,Technician")]
-        public async Task<IActionResult> GetTechniciansById([FromQuery] string TechId)
+        public async Task<IActionResult> GetTechniciansById([FromQuery] string techId)
         {
-            var tech = await _appUserService.GetTechnicianById(TechId);
-            return Ok(tech);
+            var result = await _mediator.Send(new GetTechnicianByIdQuery(techId));
+            return Ok(result);
         }
+
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CheckEmail([FromQuery] string email)
         {
-            var tech = await _appUserService.CheckEmail(email);
-            return Ok(tech);
+            var result = await _mediator.Send(new CheckEmailQuery(email));
+            return Ok(result);
         }
 
         [HttpPatch]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> ChangePassword([FromQuery] string TechId, [FromBody] ChangePasswordDTO newPassword)
+        public async Task<IActionResult> ChangePassword([FromQuery] string techId, [FromBody] ChangePasswordDTO newPassword)
         {
-            await _appUserService.ChangePassword(TechId, newPassword);
+            await _mediator.Send(new ChangePasswordCommand(techId, newPassword));
             return Ok();
         }
 
@@ -94,33 +98,41 @@ namespace Maintenance_Scheduling_System.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
-            var user = await _appUserService.Login(login);
+            var user = await _mediator.Send(new LoginQuery(login));
 
             if (user == null)
                 return Unauthorized("Invalid credentials");
 
-            var token = await _appUserService.CreateToken(user);
+            var token = await _mediator.Send(new CreateTokenCommand(user));
             return Ok(token);
         }
+
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> RefreshToken([FromQuery] string Token)
+        public async Task<IActionResult> RefreshToken([FromQuery] string token)
         {
-            var RefreshToken = await RefreshTokenService.GetRefreshToken(Token);
-            
-            if (await RefreshTokenService.ValidateRefreshTokenAsync(RefreshToken))
+            var refreshToken = await _mediator.Send(new GetRefreshTokenByTokenQuery(token));
+            if (refreshToken == null)
             {
-                return Unauthorized("Invalid refresh Token");
+                return Unauthorized("Refresh token not found");
             }
 
-            if (await RefreshTokenService.IsRefreshTokenExpiredAsync(RefreshToken))
+            var isValid = await _mediator.Send(new ValidateRefreshTokenQuery(refreshToken));
+            if (!isValid)
+            {
+                return Unauthorized("Invalid refresh token");
+            }
+
+            var isExpired = await _mediator.Send(new IsRefreshTokenExpiredQuery(refreshToken));
+            if (isExpired)
             {
                 return Unauthorized("Refresh token expired");
             }
 
-            await RefreshTokenService.RevokeRefreshTokenAsync(RefreshToken);
+            await _mediator.Send(new RevokeRefreshTokenCommand(refreshToken));
 
-            var response = await _appUserService.CreateToken(RefreshToken.User);
+            var response = await _mediator.Send(new CreateTokenCommand(refreshToken.User));
+
 
             return Ok(response);
         }

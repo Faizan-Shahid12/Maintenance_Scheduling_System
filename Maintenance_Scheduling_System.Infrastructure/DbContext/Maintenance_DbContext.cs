@@ -1,5 +1,8 @@
-﻿using Maintenance_Scheduling_System.Domain.Entities;
+﻿using Maintenance_Scheduling_System.Application.Interfaces;
+using Maintenance_Scheduling_System.Application.Services;
+using Maintenance_Scheduling_System.Domain.Entities;
 using Maintenance_Scheduling_System.Domain.Enums;
+using Maintenance_Scheduling_System.Domain.Interface;
 using Maintenance_Scheduling_System.Infrastructure.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -17,10 +20,12 @@ namespace Maintenance_Scheduling_System.Infrastructure.DbContext
     public class Maintenance_DbContext : IdentityDbContext<AppUser>
     {
         public string ConnectionString { get; set; }
+        public ICurrentUser currentUser { get; set; }
 
-        public Maintenance_DbContext(DbContextOptions<Maintenance_DbContext> options, IOptions<ConnectionSettings> options1) : base(options)
+        public Maintenance_DbContext(DbContextOptions<Maintenance_DbContext> options, IOptions<ConnectionSettings> options1, ICurrentUser currentUser1) : base(options)
         {
                   ConnectionString = options1.Value.DefaultString;
+                  currentUser = currentUser1;
         }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -145,6 +150,42 @@ namespace Maintenance_Scheduling_System.Infrastructure.DbContext
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
             });
+        }
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var now = DateTime.UtcNow;
+            var user = currentUser.Name ?? "System";
+
+            foreach (var entry in ChangeTracker.Entries<IAudit>())
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Entity.CreatedAt = now;
+                    entry.Entity.CreatedBy = user;
+                    entry.Entity.LastModifiedAt = now;
+                    entry.Entity.LastModifiedBy = user;
+                }
+                else if (entry.State == EntityState.Modified)
+                {
+                    var modifiedProps = entry.Properties
+                                             .Where(p => p.IsModified && !Equals(p.OriginalValue, p.CurrentValue) && p.Metadata.Name != nameof(IAudit.LastModifiedAt) 
+                                              && p.Metadata.Name != nameof(IAudit.LastModifiedBy))
+                                             .ToList();
+
+                    if (modifiedProps.Any())
+                    {
+                        entry.Entity.LastModifiedAt = now;
+                        entry.Entity.LastModifiedBy = user;
+                    }
+                    else
+                    {
+                        entry.Property(e => e.LastModifiedAt).IsModified = false;
+                        entry.Property(e => e.LastModifiedBy).IsModified = false;
+                    }
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
         }
 
         public DbSet<AppUser> AppUsers { get; set; }

@@ -1,5 +1,8 @@
-﻿using Maintenance_Scheduling_System.Application.DTO.EquipmentDTOs;
+﻿using Maintenance_Scheduling_System.Application.CQRS.EquipmentManager.Commands;
+using Maintenance_Scheduling_System.Application.CQRS.EquipmentManager.Queries;
+using Maintenance_Scheduling_System.Application.DTO.EquipmentDTOs;
 using Maintenance_Scheduling_System.Application.Interfaces;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,11 +12,11 @@ namespace Maintenance_Scheduling_System.Controllers
     [ApiController]
     public class EquipmentController : ControllerBase
     {
-        private readonly IEquipmentService EquipmentService;
+        private readonly IMediator _mediator;
 
-        public EquipmentController(IEquipmentService equipmentService)
+        public EquipmentController(IMediator mediator)
         {
-            EquipmentService = equipmentService;
+            _mediator = mediator;
         }
 
         [HttpPost]
@@ -23,7 +26,7 @@ namespace Maintenance_Scheduling_System.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var equip = await EquipmentService.CreateEquipment(dto);
+            var equip = await _mediator.Send(new CreateEquipmentCommand(dto));
             return Ok(equip);
         }
 
@@ -34,7 +37,8 @@ namespace Maintenance_Scheduling_System.Controllers
             if (dto.EquipmentId == null)
                 return BadRequest("Equipment ID is required.");
 
-           var equip = await EquipmentService.UpdateEquipment(dto);
+            var equip = await _mediator.Send(new UpdateEquipmentCommand(dto));
+
             return Ok(equip);
         }
 
@@ -42,25 +46,25 @@ namespace Maintenance_Scheduling_System.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteEquipment([FromQuery] int equipid)
         {
-            if (equipid == null)
-                return BadRequest("Equipment ID is required.");
+            var success = await _mediator.Send(new DeleteEquipmentCommand(equipid));
 
-           var equip = await EquipmentService.DeleteEquipment(equipid);
-            return Ok(equip);
+            return Ok(success);
         }
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllEquipments()
         {
-            var result = await EquipmentService.GetAllEquipments();
+            var result = await _mediator.Send(new GetAllEquipmentsQuery());
             return Ok(result);
         }
+
         [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetArchivedEquipments()
         {
-            var result = await EquipmentService.GetArchivedEquipments();
+            var result = await _mediator.Send(new GetArchivedEquipmentsQuery());
+
             return Ok(result);
         }
 
@@ -71,7 +75,8 @@ namespace Maintenance_Scheduling_System.Controllers
             if (string.IsNullOrWhiteSpace(name))
                 return BadRequest("Name is required.");
 
-            var result = await EquipmentService.GetEquipmentByName(name);
+            var result = await _mediator.Send(new GetEquipmentByNameQuery(name));
+
             if (result == null || !result.Any())
                 return NotFound("No equipment found with the given name.");
 
@@ -82,7 +87,8 @@ namespace Maintenance_Scheduling_System.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetEquipmentById([FromQuery] int id)
         {
-            var result = await EquipmentService.GetEquipmentById(id);
+            var result = await _mediator.Send(new GetEquipmentByIdQuery(id));
+
             if (result == null)
                 return NotFound($"No equipment found with ID {id}");
 
@@ -96,7 +102,7 @@ namespace Maintenance_Scheduling_System.Controllers
             if (string.IsNullOrWhiteSpace(type))
                 return BadRequest("Type is required.");
 
-            var equip = await EquipmentService.AssignEquipType(equipId, type);
+            var equip = await _mediator.Send(new AssignEquipmentTypeCommand(equipId, type));
             return Ok(equip);
         }
 
@@ -104,8 +110,7 @@ namespace Maintenance_Scheduling_System.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AssignWorkShopLocation([FromQuery] int equipId, [FromQuery] int workShopId)
         {
-            
-           var equip = await EquipmentService.AssignWorkShopLocation(equipId, workShopId);
+            var equip = await _mediator.Send(new AssignWorkshopCommand(equipId, workShopId));
             return Ok(equip);
         }
 
@@ -113,7 +118,7 @@ namespace Maintenance_Scheduling_System.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ArchiveEquipment([FromQuery] int equipId)
         {
-            var equip = await EquipmentService.ArchiveEquipment(equipId);
+            var equip = await _mediator.Send(new ArchiveEquipmentCommand(equipId));
             return Ok(equip);
         }
 
@@ -121,7 +126,7 @@ namespace Maintenance_Scheduling_System.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UnArchiveEquipment([FromQuery] int equipId)
         {
-           var equip = await EquipmentService.UnArchiveEquipment(equipId);
+            var equip = await _mediator.Send(new UnArchiveEquipmentCommand(equipId));
             return Ok(equip);
         }
 
@@ -129,7 +134,7 @@ namespace Maintenance_Scheduling_System.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllWorkShops()
         {
-            var result = await EquipmentService.GetAllWorkShops();
+            var result = await _mediator.Send(new GetAllWorkShopsQuery());
 
             if (result == null || !result.Any())
                 return NotFound("No workshops found.");

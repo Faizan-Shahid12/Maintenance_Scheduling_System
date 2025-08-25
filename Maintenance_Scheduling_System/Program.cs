@@ -13,6 +13,7 @@ using Maintenance_Scheduling_System.Infrastructure.HubService;
 using Maintenance_Scheduling_System.Infrastructure.Repositories;
 using Maintenance_Scheduling_System.Infrastructure.Seeding;
 using Maintenance_Scheduling_System.Infrastructure.Settings;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -183,7 +184,11 @@ namespace Maintenance_Scheduling_System
             builder.Services.AddHostedService<TaskBackgroundService>();
             builder.Services.AddHostedService<ScheduleBackgroundService>();
 
-            
+            builder.Services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssemblyContaining<AssemblyReference>();
+            });
+
             var app = builder.Build();
             app.UseStaticFiles();
 

@@ -15,10 +15,11 @@ namespace Maintenance_Scheduling_System.Application.Services
 {
     public class TaskLogAttachmentService : ITaskLogAttachmentService
     {
-   
+        
         public ITaskLogRepo TaskLogRepository { get; set; }
         public ITaskLogAttachmentsRepo LogAttachmentRepository { get; set; }
         public ICurrentUser currentUser { get; set; }
+
         private readonly string webRoot;
 
         public TaskLogAttachmentService(ITaskLogRepo logrepo, ITaskLogAttachmentsRepo attachrepo, ICurrentUser user, IWebHostEnvironment env)

@@ -41,50 +41,25 @@
         "tags": [
           "Authentication"
         ],
-        "parameters": [
-          {
-            "name": "FullName",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Email",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Password",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "PhoneNumber",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Address",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Gender",
-            "in": "query",
-            "schema": {
-              "type": "string"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppUserDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppUserDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppUserDTO"
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -184,7 +159,7 @@
         ],
         "parameters": [
           {
-            "name": "TechId",
+            "name": "techId",
             "in": "query",
             "schema": {
               "type": "string"
@@ -226,7 +201,7 @@
         ],
         "parameters": [
           {
-            "name": "TechId",
+            "name": "techId",
             "in": "query",
             "schema": {
               "type": "string"
@@ -297,7 +272,7 @@
         ],
         "parameters": [
           {
-            "name": "Token",
+            "name": "token",
             "in": "query",
             "schema": {
               "type": "string"
@@ -1483,6 +1458,28 @@
         "parameters": [
           {
             "name": "attachId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/TaskLogAttachment/DeleteAttachmentsByLog/ByLog": {
+      "delete": {
+        "tags": [
+          "TaskLogAttachment"
+        ],
+        "parameters": [
+          {
+            "name": "logId",
             "in": "query",
             "schema": {
               "type": "integer",

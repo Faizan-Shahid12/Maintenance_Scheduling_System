@@ -8,7 +8,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "TechId",
+        "Name": "techId",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -45,34 +45,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "FullName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Email",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Password",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "PhoneNumber",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Address",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Gender",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "request",
+        "Type": "Maintenance_Scheduling_System.Application.DTO.AppUserDTOs.AppUserDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -128,7 +103,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "TechId",
+        "Name": "techId",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -170,7 +145,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Token",
+        "Name": "token",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -933,6 +908,22 @@
     "Parameters": [
       {
         "Name": "attachId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.TaskLogAttachmentController",
+    "Method": "DeleteAttachmentsByLog",
+    "RelativePath": "TaskLogAttachment/DeleteAttachmentsByLog/ByLog",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "logId",
         "Type": "System.Int32",
         "IsRequired": false
       }

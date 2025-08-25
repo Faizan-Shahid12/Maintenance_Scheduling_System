@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Maintenance_Scheduling_System.Application.Setting
 {
-    public static class AssemblyReference
+    public class AssemblyReference
     {
     }
 }
