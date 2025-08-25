@@ -1,4 +1,5 @@
-﻿using Maintenance_Scheduling_System.Application.CQRS.AppUserManager.cs.Commands;
+﻿using Maintenance_Scheduling_System.Application.CQRS.AppUserManager.Commands;
+using Maintenance_Scheduling_System.Application.CQRS.AppUserManager.cs.Commands;
 using Maintenance_Scheduling_System.Application.CQRS.AppUserManager.cs.Queries;
 using Maintenance_Scheduling_System.Application.CQRS.RefreshTokenManager.cs.Commands;
 using Maintenance_Scheduling_System.Application.CQRS.RefreshTokenManager.cs.Queries;

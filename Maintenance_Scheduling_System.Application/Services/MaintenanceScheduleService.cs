@@ -22,6 +22,7 @@ namespace Maintenance_Scheduling_System.Application.Services
         private IMainTaskService MainTaskService { get; set; }
         private IEquipmentService EquipmentService { get; set; }
 
+        // IN PROGRESS
         public MaintenanceScheduleService(IMaintenanceScheduleRepo maintenanceScheduleRepository, IMapper mapper, ICurrentUser currentUser,IScheduleTaskService scheduleTaskService,IMainTaskService main,IEquipmentService equip)
         {
             MaintenanceScheduleRepository = maintenanceScheduleRepository;

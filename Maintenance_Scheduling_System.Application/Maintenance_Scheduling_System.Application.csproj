@@ -23,14 +23,6 @@
   <ItemGroup>
     <Folder Include="CQRS\CountManager\Commands\" />
     <Folder Include="CQRS\CountManager\Handler\CommandHandlers\" />
-    <Folder Include="CQRS\MaintenanceHistoryManager\Commands\" />
-    <Folder Include="CQRS\MaintenanceHistoryManager\Handlers\CommandHandlers\" />
-    <Folder Include="CQRS\MaintenanceHistoryManager\Handlers\QueryHandlers\" />
-    <Folder Include="CQRS\MaintenanceHistoryManager\Queries\" />
-    <Folder Include="CQRS\MaintenanceScheduleManager\Commands\" />
-    <Folder Include="CQRS\MaintenanceScheduleManager\Handlers\CommandHandlers\" />
-    <Folder Include="CQRS\MaintenanceScheduleManager\Handlers\QueryHandlers\" />
-    <Folder Include="CQRS\MaintenanceScheduleManager\Queries\" />
     <Folder Include="CQRS\ScheduleTaskManager\Handlers\QueryHandlers\" />
     <Folder Include="CQRS\ScheduleTaskManager\Queries\" />
   </ItemGroup>
