@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Maintenance_Scheduling_System.Application.CQRS.MainTaskManager.Commands;
 using Maintenance_Scheduling_System.Application.DTO.MainTaskDTOs;
+using Maintenance_Scheduling_System.Application.HubInterfaces;
 using Maintenance_Scheduling_System.Application.Interfaces;
 using Maintenance_Scheduling_System.Domain.IRepo;
 using MediatR;
@@ -16,11 +17,13 @@ namespace Maintenance_Scheduling_System.Application.CQRS.MainTaskManager.Handler
     {
         private readonly IMapper _mapper;
         private readonly IMainTaskRepo _taskRepo;
+        private readonly ITaskHub _taskHub;
 
-        public DeleteTaskHandler(IMapper mapper, IMainTaskRepo taskRepo)
+        public DeleteTaskHandler(IMapper mapper, IMainTaskRepo taskRepo, ITaskHub taskhub)
         {
             _mapper = mapper;
             _taskRepo = taskRepo;
+            _taskHub = taskhub;
         }
 
         public async Task<MainTaskDTO> Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
@@ -30,7 +33,11 @@ namespace Maintenance_Scheduling_System.Application.CQRS.MainTaskManager.Handler
 
             await _taskRepo.DeleteTask();
 
-            return _mapper.Map<MainTaskDTO>(task);
+            var dto = _mapper.Map<MainTaskDTO>(task);
+
+            await _taskHub.SendRemovedTaskToClient(dto,task.TechnicianId);
+
+            return dto;
         }
     }
 }

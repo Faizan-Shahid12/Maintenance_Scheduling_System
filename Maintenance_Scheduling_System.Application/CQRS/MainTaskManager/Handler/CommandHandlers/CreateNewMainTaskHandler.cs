@@ -42,7 +42,7 @@ namespace Maintenance_Scheduling_System.Application.CQRS.MainTaskManager.Handler
 
         public async Task<MainTaskDTO> Handle(CreateNewMainTaskCommand request, CancellationToken cancellationToken)
         {
-            var mainTask = _mapper.Map<MainTask>(request);
+            var mainTask = _mapper.Map<MainTask>(request.Maintask);
 
             var histories = await _mediator.Send(new GetMaintenanceHistoryByEquipmentIdQuery(request.EquipId));
             var equip = await _equipmentRepo.GetEquipmentById(request.EquipId);
