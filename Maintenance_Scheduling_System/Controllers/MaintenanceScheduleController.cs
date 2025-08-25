@@ -1,7 +1,11 @@
-﻿using Maintenance_Scheduling_System.Application.DTO.MaintenanceScheduleDTOs;
+﻿using Maintenance_Scheduling_System.Application.CQRS.MaintenanceScheduleManager.Commands;
+using Maintenance_Scheduling_System.Application.CQRS.MaintenanceScheduleManager.Queries;
+using Maintenance_Scheduling_System.Application.CQRS.ScheduleTaskManager.Commands;
+using Maintenance_Scheduling_System.Application.DTO.MaintenanceScheduleDTOs;
 using Maintenance_Scheduling_System.Application.DTO.ScheduleTaskDTOs;
 using Maintenance_Scheduling_System.Application.Interfaces;
 using Maintenance_Scheduling_System.Application.Services;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,59 +15,58 @@ namespace Maintenance_Scheduling_System.API.Controllers
     [Route("[controller]/[Action]")]
     public class MaintenanceScheduleController : ControllerBase
     {
-      
-        private IMaintenanceScheduleService MaintenanceScheduleService {  get; set; }
+        private readonly IMediator _mediator;
 
-        public MaintenanceScheduleController(IMaintenanceScheduleService maintenanceScheduleService)
+        public MaintenanceScheduleController(IMediator mediator)
         {
-            MaintenanceScheduleService = maintenanceScheduleService;
+            _mediator = mediator;
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateMaintenanceSchedule([FromBody] CreateMaintenanceScheduleDTO dto)
         {
-            var schedule = await MaintenanceScheduleService.CreateMaintenanceSchedule(dto);
-            return Ok(schedule);
+            var result = await _mediator.Send(new CreateMaintenanceScheduleCommand(dto));
+            return Ok(result);
         }
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateMaintenanceSchedule([FromBody] MaintenanceScheduleDTO dto)
         {
-            var schedule = await MaintenanceScheduleService.UpdateMaintenanceSchedule(dto);
-            return Ok(schedule);
+            var result = await _mediator.Send(new UpdateMaintenanceScheduleCommand(dto));
+            return Ok(result);
         }
 
         [HttpDelete]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteMaintenanceSchedule([FromQuery] int ScheduleId)
+        public async Task<IActionResult> DeleteMaintenanceSchedule([FromQuery] int scheduleId)
         {
-            var schedule = await MaintenanceScheduleService.DeleteMaintenanceSchedule(ScheduleId);
-            return Ok(schedule);
+            var result = await _mediator.Send(new DeleteMaintenanceScheduleCommand(scheduleId));
+            return Ok(result);
         }
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AddNewTaskToSchedule([FromQuery] int ScheduleId, [FromBody] CreateScheduleTaskDTO dto)
+        public async Task<IActionResult> AddNewTaskToSchedule([FromQuery] int scheduleId, [FromBody] CreateScheduleTaskDTO dto)
         {
-            var schedule = await MaintenanceScheduleService.AddNewTasktoSchedule(ScheduleId, dto);
-            return Ok(schedule);
+            var result = await _mediator.Send(new AddNewTaskToScheduleCommand(scheduleId, dto));
+            return Ok(result);
         }
 
         [HttpDelete]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteTaskFromSchedule([FromQuery] int ScheduleId, [FromQuery] int taskId)
+        public async Task<IActionResult> DeleteTaskFromSchedule([FromQuery] int scheduleId, [FromQuery] int taskId)
         {
-            var schedule = await MaintenanceScheduleService.DeleteTaskFromSchedule(ScheduleId, taskId);
-            return Ok(schedule);
+            var result = await _mediator.Send(new DeleteTaskFromScheduleCommand(scheduleId, taskId));
+            return Ok(result);
         }
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetScheduleByEquipment(int EquipId)
+        public async Task<IActionResult> GetScheduleByEquipment([FromQuery] int equipId)
         {
-            var result = await MaintenanceScheduleService.GetMaintenanceScheduleByEquipmentId(EquipId);
+            var result = await _mediator.Send(new GetMaintenanceSchedulesByEquipmentIdQuery(equipId));
             return Ok(result);
         }
 
@@ -71,7 +74,7 @@ namespace Maintenance_Scheduling_System.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllMaintenanceSchedules()
         {
-            var result = await MaintenanceScheduleService.GetAllMaintenanceSchedule();
+            var result = await _mediator.Send(new GetAllMaintenanceSchedulesQuery());
             return Ok(result);
         }
 
@@ -79,68 +82,40 @@ namespace Maintenance_Scheduling_System.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllSortedByStartDate()
         {
-            var result = await MaintenanceScheduleService.GetAllMaintenanceScheduleByStartDate();
+            var result = await _mediator.Send(new GetAllMaintenanceSchedulesByStartDateQuery());
             return Ok(result);
         }
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> ActivateSchedule([FromQuery] int ScheduleId)
+        public async Task<IActionResult> ActivateSchedule([FromQuery] int scheduleId)
         {
-            try
-            {
-                var schedule = await MaintenanceScheduleService.ActivateSchedule(ScheduleId);
-                return Ok(schedule);
-
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { error = ex.Message });
-            }
+            var result = await _mediator.Send(new ActivateScheduleCommand(scheduleId));
+            return Ok(result);
         }
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UnActivateSchedule([FromQuery] int ScheduleId)
+        public async Task<IActionResult> UnActivateSchedule([FromQuery] int scheduleId)
         {
-            try
-            {
-                var schedule = await MaintenanceScheduleService.UnActivateSchedule(ScheduleId);
-                return Ok(schedule);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { error = ex.Message });
-            }
+            var result = await _mediator.Send(new UnActivateScheduleCommand(scheduleId));
+            return Ok(result);
         }
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> EditScheduleTask([FromQuery] int ScheduleId, [FromBody] ScheduleTaskDTO ScheduleTaskDTO)
+        public async Task<IActionResult> EditScheduleTask([FromQuery] int scheduleId, [FromBody] ScheduleTaskDTO dto)
         {
-            try
-            {
-                var schedule = await MaintenanceScheduleService.EditScheduleTask(ScheduleId,ScheduleTaskDTO);
-                return Ok(schedule);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { error = ex.Message });
-            }
+            var result = await _mediator.Send(new EditScheduleTaskInScheduleCommand(scheduleId, dto));
+            return Ok(result);
         }
+
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AssignTechnicianToScheduleTask([FromQuery] int ScheduleId,[FromQuery] int ScheduleTaskId, [FromQuery] string? techId)
+        public async Task<IActionResult> AssignTechnicianToScheduleTask([FromQuery] int scheduleId, [FromQuery] int scheduleTaskId, [FromQuery] string? techId)
         {
-            try
-            {
-                var schedule = await MaintenanceScheduleService.AssignTechnicianToScheduleTask(ScheduleId,ScheduleTaskId,techId);
-                return Ok(schedule);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { error = ex.Message });
-            }
+            var result = await _mediator.Send(new AssignTechnicianToTaskCommand(scheduleId, scheduleTaskId, techId));
+            return Ok(result);
         }
     }
 }
