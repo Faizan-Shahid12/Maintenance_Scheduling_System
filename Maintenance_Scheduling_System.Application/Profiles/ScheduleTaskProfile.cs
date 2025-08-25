@@ -13,9 +13,6 @@ namespace Maintenance_Scheduling_System.Application.Profiles
 {
     public class ScheduleTaskProfile : Profile
     {
-        private readonly IScheduleTaskService _scheduleTaskService;
-
-       
         public ScheduleTaskProfile()
         {
             CreateMap<CreateScheduleTaskDTO, ScheduleTask>()

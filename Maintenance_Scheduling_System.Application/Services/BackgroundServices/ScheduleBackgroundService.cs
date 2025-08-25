@@ -1,4 +1,6 @@
-﻿using Maintenance_Scheduling_System.Application.Interfaces;
+﻿using Maintenance_Scheduling_System.Application.CQRS.MaintenanceScheduleManager.Commands;
+using Maintenance_Scheduling_System.Application.Interfaces;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -23,9 +25,9 @@ namespace Maintenance_Scheduling_System.Application.Services.BackgroundServices
             while (!stoppingToken.IsCancellationRequested)
             {
                 using var scope = _serviceProvider.CreateScope();
-                var ScheduleService = scope.ServiceProvider.GetRequiredService<IMaintenanceScheduleService>();
-                await ScheduleService.AutomaticallyUnactivate();
-                await ScheduleService.AutomaticallyGenerate();
+                var _mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+                await _mediator.Send(new AutomaticallyUnactivateCommand());
+                await _mediator.Send(new AutomaticallyGenerateCommand());
 
                 await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
             }

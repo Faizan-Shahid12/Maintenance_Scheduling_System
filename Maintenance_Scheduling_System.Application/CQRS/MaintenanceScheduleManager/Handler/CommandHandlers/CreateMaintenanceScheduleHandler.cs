@@ -19,7 +19,6 @@ namespace Maintenance_Scheduling_System.Application.CQRS.MaintenanceScheduleMana
         private readonly IMaintenanceScheduleRepo _repo;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
-        private readonly IScheduleTaskService _scheduleTaskService;
 
         public CreateMaintenanceScheduleHandler(IMaintenanceScheduleRepo repo,IMapper mapper,IMediator mediator)
         {
@@ -32,8 +31,6 @@ namespace Maintenance_Scheduling_System.Application.CQRS.MaintenanceScheduleMana
         {
             var schedule = _mapper.Map<MaintenanceSchedule>(request.MaintenanceSchedule);
             var tasks = _mapper.Map<List<ScheduleTask>>(request.MaintenanceSchedule.ScheduleTasks);
-
-            await _scheduleTaskService.CreateAuditScheduleTasks(tasks);
 
             schedule.ScheduleTasks = tasks;
             schedule.EquipmentId = request.MaintenanceSchedule.EquipId;

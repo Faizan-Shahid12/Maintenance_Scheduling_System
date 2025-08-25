@@ -169,16 +169,6 @@ namespace Maintenance_Scheduling_System
             builder.Services.AddScoped<IAppUserRepo, AppUserRepository>();
             builder.Services.AddScoped<IRefreshTokenRepo, RefreshTokenRepository>();
 
-            builder.Services.AddScoped<IEquipmentService,EquipmentService>();
-            builder.Services.AddScoped<IMaintenanceHistoryService, MaintenanceHistoryService>();
-            builder.Services.AddScoped<IMainTaskService,MainTaskService>();
-            builder.Services.AddScoped<IMainTaskLogService,MainTaskLogService>();
-            builder.Services.AddScoped<ITaskLogAttachmentService,TaskLogAttachmentService>();
-            builder.Services.AddScoped<IMaintenanceScheduleService,MaintenanceScheduleService>();
-            builder.Services.AddScoped<IScheduleTaskService,ScheduleTaskService>();
-            builder.Services.AddScoped<IAppUserService,AppUserService>();
-            builder.Services.AddScoped<IRefreshTokenService,RefreshTokenService>();
-            builder.Services.AddScoped<ICountService, CountService>();
             builder.Services.AddScoped<ITaskHub, TaskHubService>();
 
             builder.Services.AddHostedService<TaskBackgroundService>();

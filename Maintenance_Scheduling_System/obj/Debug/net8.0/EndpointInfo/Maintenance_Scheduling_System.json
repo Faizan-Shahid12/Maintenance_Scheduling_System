@@ -559,7 +559,7 @@
         ],
         "parameters": [
           {
-            "name": "equipid",
+            "name": "equipId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -612,7 +612,7 @@
         ],
         "parameters": [
           {
-            "name": "EquipId",
+            "name": "equipId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -634,7 +634,7 @@
         ],
         "parameters": [
           {
-            "name": "HistoryId",
+            "name": "historyId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -656,7 +656,7 @@
         ],
         "parameters": [
           {
-            "name": "TaskId",
+            "name": "taskId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -791,7 +791,7 @@
         ],
         "parameters": [
           {
-            "name": "TaskId",
+            "name": "taskId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -813,7 +813,7 @@
         ],
         "parameters": [
           {
-            "name": "TaskId",
+            "name": "taskId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -821,7 +821,7 @@
             }
           },
           {
-            "name": "TechId",
+            "name": "techId",
             "in": "query",
             "schema": {
               "type": "string"
@@ -998,7 +998,7 @@
         ],
         "parameters": [
           {
-            "name": "EquipId",
+            "name": "equipId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1020,7 +1020,7 @@
         ],
         "parameters": [
           {
-            "name": "HistoryId",
+            "name": "historyId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1135,7 +1135,7 @@
         ],
         "parameters": [
           {
-            "name": "ScheduleId",
+            "name": "scheduleId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1157,7 +1157,7 @@
         ],
         "parameters": [
           {
-            "name": "ScheduleId",
+            "name": "scheduleId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1198,7 +1198,7 @@
         ],
         "parameters": [
           {
-            "name": "ScheduleId",
+            "name": "scheduleId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1228,7 +1228,7 @@
         ],
         "parameters": [
           {
-            "name": "EquipId",
+            "name": "equipId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1274,7 +1274,7 @@
         ],
         "parameters": [
           {
-            "name": "ScheduleId",
+            "name": "scheduleId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1296,7 +1296,7 @@
         ],
         "parameters": [
           {
-            "name": "ScheduleId",
+            "name": "scheduleId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1318,7 +1318,7 @@
         ],
         "parameters": [
           {
-            "name": "ScheduleId",
+            "name": "scheduleId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1359,7 +1359,7 @@
         ],
         "parameters": [
           {
-            "name": "ScheduleId",
+            "name": "scheduleId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -1367,7 +1367,7 @@
             }
           },
           {
-            "name": "ScheduleTaskId",
+            "name": "scheduleTaskId",
             "in": "query",
             "schema": {
               "type": "integer",

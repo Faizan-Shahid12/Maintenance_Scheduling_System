@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Maintenance_Scheduling_System.Application.CQRS.AppUserManager.Commands;
+using Maintenance_Scheduling_System.Application.CQRS.MainTaskManager.Commands;
 using Maintenance_Scheduling_System.Application.DTO.AppUserDTOs;
 using Maintenance_Scheduling_System.Application.Interfaces;
 using Maintenance_Scheduling_System.Domain.IRepo;
@@ -16,15 +17,13 @@ namespace Maintenance_Scheduling_System.Application.CQRS.AppUserManager.cs.Comma
     {
         private readonly IAppUserRepo _repo;
         private readonly IMapper _mapper;
-        private readonly ICurrentUser _currentUser;
-        private readonly IMainTaskService _mainTaskService;
+        private readonly IMediator _mediator;
 
-        public DeleteAppUserHandler(IAppUserRepo repo, IMapper mapper, ICurrentUser currentUser, IMainTaskService mainTaskService)
+        public DeleteAppUserHandler(IAppUserRepo repo, IMapper mapper, IMediator mediator)
         {
             _repo = repo;
             _mapper = mapper;
-            _currentUser = currentUser;
-            _mainTaskService = mainTaskService;
+            _mediator = mediator;
         }
 
         public async Task<TechnicianDTO> Handle(DeleteAppUserCommand request, CancellationToken cancellationToken)
@@ -35,7 +34,7 @@ namespace Maintenance_Scheduling_System.Application.CQRS.AppUserManager.cs.Comma
             user.IsDeleted = true;
 
             await _repo.DeleteAppUser(user);
-            await _mainTaskService.UnAssignTechnicianTaskUponDeletion(request.Id);
+            await _mediator.Send(new UnAssignTechnicianTaskUponDeletionCommand(request.Id));
 
             return _mapper.Map<TechnicianDTO>(user);
         }

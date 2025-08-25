@@ -16,20 +16,21 @@ namespace Maintenance_Scheduling_System.Application.CQRS.MainTaskLogManager.Hand
     public class CreateTaskLogHandler : IRequestHandler<CreateTaskLogCommand, TaskLogDTO>
     {
         private readonly ITaskLogRepo _taskLogRepo;
+        private readonly IMainTaskRepo _mainTaskRepo;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
-        public CreateTaskLogHandler(IMainTaskRepo mainTaskRepo, ITaskLogRepo taskLogRepo, IMapper mapper, IMediator mediator)
+        public CreateTaskLogHandler(IMainTaskRepo mainTaskRepo, ITaskLogRepo taskLogRepo, IMapper mapper, IMainTaskRepo MainTaskRepo)
         {
             _taskLogRepo = taskLogRepo;
             _mapper = mapper;
-            _mediator = mediator;
+            _mainTaskRepo = MainTaskRepo;
         }
 
         public async Task<TaskLogDTO> Handle(CreateTaskLogCommand request, CancellationToken cancellationToken)
         {
             var dto = request.TaskLogDTO;
 
-            var mainTask = await _mediator.Send(new GetMainTaskByIdCommand(dto.TaskId));
+            var mainTask = await _mainTaskRepo.GetTaskById(dto.TaskId);
 
             if (mainTask == null) throw new Exception("Main task not found");
 

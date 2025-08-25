@@ -366,12 +366,12 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "equipid",
+        "Name": "equipId",
         "Type": "System.Int32",
         "IsRequired": false
       },
       {
-        "Name": "MTdto",
+        "Name": "dto",
         "Type": "Maintenance_Scheduling_System.Application.DTO.MainTaskDTOs.CreateMainTaskDTO",
         "IsRequired": true
       }
@@ -387,12 +387,12 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "TaskId",
+        "Name": "taskId",
         "Type": "System.Int32",
         "IsRequired": false
       },
       {
-        "Name": "TechId",
+        "Name": "techId",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -429,7 +429,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "TaskId",
+        "Name": "taskId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -445,7 +445,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "TaskId",
+        "Name": "taskId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -491,7 +491,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "EquipId",
+        "Name": "equipId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -507,7 +507,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "HistoryId",
+        "Name": "historyId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -544,7 +544,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "taskDto",
+        "Name": "dto",
         "Type": "Maintenance_Scheduling_System.Application.DTO.MainTaskDTOs.MainTaskDTO",
         "IsRequired": true
       }
@@ -634,7 +634,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "HistoryId",
+        "Name": "historyId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -650,7 +650,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "DTO",
+        "Name": "dto",
         "Type": "Maintenance_Scheduling_System.Application.DTO.MaintenanceHistoryDTOs.MaintenanceHistoryDTO",
         "IsRequired": true
       }
@@ -676,7 +676,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "EquipId",
+        "Name": "equipId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -702,7 +702,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ScheduleId",
+        "Name": "scheduleId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -718,7 +718,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ScheduleId",
+        "Name": "scheduleId",
         "Type": "System.Int32",
         "IsRequired": false
       },
@@ -739,12 +739,12 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ScheduleId",
+        "Name": "scheduleId",
         "Type": "System.Int32",
         "IsRequired": false
       },
       {
-        "Name": "ScheduleTaskId",
+        "Name": "scheduleTaskId",
         "Type": "System.Int32",
         "IsRequired": false
       },
@@ -781,7 +781,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ScheduleId",
+        "Name": "scheduleId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -797,7 +797,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ScheduleId",
+        "Name": "scheduleId",
         "Type": "System.Int32",
         "IsRequired": false
       },
@@ -818,12 +818,12 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ScheduleId",
+        "Name": "scheduleId",
         "Type": "System.Int32",
         "IsRequired": false
       },
       {
-        "Name": "ScheduleTaskDTO",
+        "Name": "dto",
         "Type": "Maintenance_Scheduling_System.Application.DTO.ScheduleTaskDTOs.ScheduleTaskDTO",
         "IsRequired": true
       }
@@ -859,7 +859,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "EquipId",
+        "Name": "equipId",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -875,7 +875,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ScheduleId",
+        "Name": "scheduleId",
         "Type": "System.Int32",
         "IsRequired": false
       }
