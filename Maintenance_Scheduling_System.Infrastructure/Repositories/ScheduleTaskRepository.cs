@@ -43,8 +43,9 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public async Task UpdateScheduleTask()
+        public async Task UpdateScheduleTask(ScheduleTask task)
         {
+            DbContext.ScheduleTasks.Update(task);
             await DbContext.SaveChangesAsync();
         }
     }

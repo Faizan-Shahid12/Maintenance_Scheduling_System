@@ -12,5 +12,7 @@ namespace Maintenance_Scheduling_System.Application.Services
         public string? UserId => "AS";
 
         public string? Name => "Faizan12345689r";
+
+        public string? Role => "Admin";
     }
 }

@@ -21,6 +21,7 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
         public Task<List<MainTask>> GetMainTaskByHistoryId(int HistoryId);
         public Task UnAssignTechnicianTask(string TechId);
         public Task<int> TotalCountofTask();
+        public Task LoadTechnician(MainTask Task);
 
 
     }

@@ -1,4 +1,5 @@
 
+using Maintenance_Scheduling_System.Application.HubInterfaces;
 using Maintenance_Scheduling_System.Application.Interfaces;
 using Maintenance_Scheduling_System.Application.Services;
 using Maintenance_Scheduling_System.Application.Services.BackgroundServices;
@@ -7,6 +8,8 @@ using Maintenance_Scheduling_System.Application.Settings;
 using Maintenance_Scheduling_System.Domain.Entities;
 using Maintenance_Scheduling_System.Domain.IRepo;
 using Maintenance_Scheduling_System.Infrastructure.DbContext;
+using Maintenance_Scheduling_System.Infrastructure.Hubs;
+using Maintenance_Scheduling_System.Infrastructure.HubService;
 using Maintenance_Scheduling_System.Infrastructure.Repositories;
 using Maintenance_Scheduling_System.Infrastructure.Seeding;
 using Maintenance_Scheduling_System.Infrastructure.Settings;
@@ -105,6 +108,20 @@ namespace Maintenance_Scheduling_System
                     ClockSkew = TimeSpan.Zero
                 };
 
+                opt.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    { 
+                        var accessToken = context.Request.Query["access_token"];
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/TaskHub"))
+                        {
+                            context.Token = accessToken;
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
+
             });
 
             builder.Services.AddAuthorization(opt =>
@@ -118,7 +135,8 @@ namespace Maintenance_Scheduling_System
                 options.AddPolicy("AllowFrontEnd",
                     builder => builder.WithOrigins("http://localhost:5173")
                                       .AllowAnyMethod()
-                                      .AllowAnyHeader());
+                                      .AllowAnyHeader()
+                                      .AllowCredentials());
             });
 
             builder.Services.AddAutoMapper(typeof(AssemblyReference).Assembly);
@@ -127,7 +145,15 @@ namespace Maintenance_Scheduling_System
 
             builder.Services.AddDbContext<Maintenance_DbContext>();
 
-            builder.Services.AddSignalR();
+            builder.Services.AddSignalR()
+                .AddHubOptions<TaskHub>(opt =>
+                {
+                    opt.EnableDetailedErrors = true;
+                })
+                .AddJsonProtocol(opt =>
+                {
+                    opt.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
 
             builder.Services.AddScoped<ICurrentUser, CurrentUserService>();
 
@@ -152,6 +178,7 @@ namespace Maintenance_Scheduling_System
             builder.Services.AddScoped<IAppUserService,AppUserService>();
             builder.Services.AddScoped<IRefreshTokenService,RefreshTokenService>();
             builder.Services.AddScoped<ICountService, CountService>();
+            builder.Services.AddScoped<ITaskHub, TaskHubService>();
 
             builder.Services.AddHostedService<TaskBackgroundService>();
             builder.Services.AddHostedService<ScheduleBackgroundService>();
@@ -187,6 +214,9 @@ namespace Maintenance_Scheduling_System
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.MapHub<TaskHub>("/TaskHub")
+                .RequireAuthorization();
 
             app.MapControllers();
 

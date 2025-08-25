@@ -73,7 +73,7 @@ namespace Maintenance_Scheduling_System.Application.Services
             Task.Priority = STDTO.Priority;
             Task.Interval = STDTO.Interval;
 
-            await ScheduleTaskRepository.UpdateScheduleTask();
+            await ScheduleTaskRepository.UpdateScheduleTask(Task);
 
             return mapper.Map<ScheduleTaskDTO>(Task);
         }
@@ -85,7 +85,7 @@ namespace Maintenance_Scheduling_System.Application.Services
                 Task.TechnicianId = techId;
             }
             await AuditModify(Task);
-            await ScheduleTaskRepository.UpdateScheduleTask();
+            await ScheduleTaskRepository.UpdateScheduleTask(Task);
             return mapper.Map<ScheduleTaskDTO>(Task);
         }
 
@@ -94,8 +94,9 @@ namespace Maintenance_Scheduling_System.Application.Services
             foreach(ScheduleTask scheduleTask in scheduleTasks.ToList())
             {
                 scheduleTask.DueDate = ScheduleDate.AddDays((int)scheduleTask.Interval.TotalDays);
+
+                await ScheduleTaskRepository.UpdateScheduleTask(scheduleTask);
             }
-            await ScheduleTaskRepository.UpdateScheduleTask();
         }
 
         public async Task ChangeAssignedInDTO (ScheduleTaskDTO task,ScheduleTask scheduleTask)

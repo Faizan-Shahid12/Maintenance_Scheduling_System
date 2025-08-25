@@ -57,6 +57,12 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
                 .Where(e => !e.IsDeleted)
                 .ToListAsync();
         }
+        public async Task<List<Equipment>> GetAllArchivedEquipment()
+        {
+            return await DbContext.Equipment.Include(ws => ws.WorkShopLocation)
+                .Where(e => !e.IsDeleted && e.IsArchived)
+                .ToListAsync();
+        }
 
         public async Task<List<Equipment>> GetEquipmentByName(string name)
         {

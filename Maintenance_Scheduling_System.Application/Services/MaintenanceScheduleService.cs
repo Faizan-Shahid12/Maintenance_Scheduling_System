@@ -39,6 +39,7 @@ namespace Maintenance_Scheduling_System.Application.Services
         public async Task<DisplayMaintenanceScheduleDTO> CreateMaintenanceSchedule(CreateMaintenanceScheduleDTO msdto)
         {
             var MaintenanceSchedule = mapper.Map<MaintenanceSchedule>(msdto);
+
             var ScheduleTask = mapper.Map<List<ScheduleTask>>(msdto.ScheduleTasks);
 
             await ScheduleTaskService.CreateAuditScheduleTasks(ScheduleTask);
@@ -46,6 +47,7 @@ namespace Maintenance_Scheduling_System.Application.Services
             MaintenanceSchedule.CreatedBy = currentUser.Name;
             MaintenanceSchedule.ScheduleTasks = ScheduleTask;
             MaintenanceSchedule.EquipmentId = msdto.EquipId;
+
             ModifyAudit(MaintenanceSchedule);
             
             await MaintenanceScheduleRepository.CreateNewMaintenanceSchedule(MaintenanceSchedule);
@@ -64,12 +66,19 @@ namespace Maintenance_Scheduling_System.Application.Services
             if (MaintenanceSchedule == null)
                 throw new Exception("Schedule not found");
 
+            if(MaintenanceSchedule.StartDate != msdto.StartDate)
+            {
+                MaintenanceSchedule.StartDate = msdto.StartDate;
+
+                await ScheduleTaskService.ChangeDueDate(msdto.StartDate, MaintenanceSchedule.ScheduleTasks);
+            }
+
             MaintenanceSchedule.ScheduleName = msdto.ScheduleName;
             MaintenanceSchedule.ScheduleType = msdto.ScheduleType;
-            MaintenanceSchedule.StartDate = msdto.StartDate;
             MaintenanceSchedule.EndDate = msdto.EndDate;
             MaintenanceSchedule.IsActive = msdto.IsActive;
             MaintenanceSchedule.Interval = msdto.Interval;
+
             ModifyAudit(MaintenanceSchedule);
 
             await MaintenanceScheduleRepository.UpdateMaintenanceSchedule();
@@ -222,17 +231,16 @@ namespace Maintenance_Scheduling_System.Application.Services
                 var schedule1 = schedule[i];
                 var schedule2 = ScheduleDTO[i];
 
-                var ScheduleTaskDTO1 = schedule1.ScheduleTasks
-                    .Select(task =>
-                    {
-                        var dto = mapper.Map<ScheduleTaskDTO>(task);
+                var scheduleTaskDTO1 = new List<ScheduleTaskDTO>();
 
-                        ScheduleTaskService.ChangeAssignedInDTO(dto, task);
+                foreach (var task in schedule1.ScheduleTasks)
+                {
+                    var dto = mapper.Map<ScheduleTaskDTO>(task);
+                    await ScheduleTaskService.ChangeAssignedInDTO(dto, task);
+                    scheduleTaskDTO1.Add(dto);
+                }
 
-                        return dto;
-                    })
-                    .ToList();
-                ScheduleDTO[i].ScheduleTasks = ScheduleTaskDTO1;
+                ScheduleDTO[i].ScheduleTasks = scheduleTaskDTO1;
             }
 
             return ScheduleDTO;
@@ -345,10 +353,13 @@ namespace Maintenance_Scheduling_System.Application.Services
         public async Task AutomaticallyGenerate()
         {
             var Schedules = await MaintenanceScheduleRepository.GetAllMaintenanceSchedule();
+            var Equipments = await EquipmentService.GetAllEquipments();
 
             foreach (MaintenanceSchedule maintenanceSchedule in Schedules)
             {
                 if(maintenanceSchedule == null) continue;
+
+                if(Equipments.FirstOrDefault(t => t.EquipmentId == maintenanceSchedule.EquipmentId) == null || Equipments.FirstOrDefault(t => t.EquipmentId == maintenanceSchedule.EquipmentId).isArchived)  continue;
 
                 if(maintenanceSchedule.StartDate <= DateOnly.FromDateTime(DateTime.Now) && maintenanceSchedule.IsActive)
                 {

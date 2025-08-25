@@ -10,5 +10,6 @@ namespace Maintenance_Scheduling_System.Application.Interfaces
     {
         string? UserId { get; }
         string? Name { get; }
+        string? Role { get; }
     }
 }

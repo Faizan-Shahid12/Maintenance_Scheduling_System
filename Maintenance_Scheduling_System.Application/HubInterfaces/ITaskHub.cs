@@ -1,0 +1,20 @@
+﻿using Maintenance_Scheduling_System.Application.DTO.MainTaskDTOs;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Maintenance_Scheduling_System.Application.HubInterfaces
+{
+    public interface ITaskHub
+    {
+        public Task SendTaskToClient(MainTaskDTO mainTaskDTO, string? TechnicianId);
+        public Task SendUpdatedAssignTaskToClient(MainTaskDTO mainTaskdto, string? TechnicianId);
+        public Task SendRemoveAssignTaskToClient(MainTaskDTO mainTaskdto, string TechnicianId);
+        public Task SendChangeTaskStatusToClient(MainTaskDTO mainTaskDTO, string? TechnicianId, string userRole);
+        public Task SendEditedTaskToClient(MainTaskDTO mainTaskDTO, string? TechnicianId);
+
+
+    }
+}

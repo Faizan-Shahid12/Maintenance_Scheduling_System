@@ -30,6 +30,27 @@ namespace Maintenance_Scheduling_System.Application.Services
             }
         }
 
+        public string Role
+        {
+            get
+            {
+                if (_httpContextAccessor.HttpContext == null)
+                {
+                    return "System";
+                }
+
+                if (_httpContextAccessor.HttpContext.User.IsInRole("Admin"))
+                {
+                    return "Admin";
+                }
+                else if (_httpContextAccessor.HttpContext.User.IsInRole("Technician"))
+                {
+                    return "Technician";
+                }
+
+                return "System";
+            }
+        }
 
     }
 

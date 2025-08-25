@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Maintenance_Scheduling_System.Application.DTO.MainTaskDTOs;
 using Maintenance_Scheduling_System.Application.DTO.MaintenanceHistoryDTOs;
+using Maintenance_Scheduling_System.Application.HubInterfaces;
 using Maintenance_Scheduling_System.Application.Interfaces;
 using Maintenance_Scheduling_System.Domain.Entities;
 using Maintenance_Scheduling_System.Domain.Enums;
 using Maintenance_Scheduling_System.Domain.IRepo;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,14 +22,16 @@ namespace Maintenance_Scheduling_System.Application.Services
         public IMainTaskRepo MainTaskRepository { get; set; }
         public IMaintenanceHistoryService MaintenanceHistoryService { get; set; }
         public ICurrentUser currentUser { get; set; }
+        public ITaskHub TaskHub {  get; set; }
 
-        public MainTaskService(IMapper mapper1,IEquipmentRepo Erepo, IMaintenanceHistoryService MHS,ICurrentUser cu,IMainTaskRepo task)
+        public MainTaskService(IMapper mapper1,IEquipmentRepo Erepo, IMaintenanceHistoryService MHS,ICurrentUser cu,IMainTaskRepo task,ITaskHub hub)
         {
             mapper = mapper1;
             EquipmentReposity = Erepo;
             MaintenanceHistoryService = MHS;
             currentUser = cu;
             MainTaskRepository = task;
+            TaskHub = hub;
         }
 
         private void AuditModify(MainTask equip)
@@ -81,6 +85,8 @@ namespace Maintenance_Scheduling_System.Application.Services
             }
 
             var task1 = mapper.Map<MainTaskDTO>(task);
+
+            await TaskHub.SendTaskToClient(task1, task.TechnicianId);
 
             return task1;
 
@@ -141,10 +147,17 @@ namespace Maintenance_Scheduling_System.Application.Services
 
                     equip.AddMainTask(mainTask);
                 }
+                
+                if(mainTask.TechnicianId != null)
+                  await MainTaskRepository.LoadTechnician(mainTask);
+
 
                 var task1 = mapper.Map<MainTaskDTO>(task);
 
                 taskdto.Add(task1);
+
+                await TaskHub.SendTaskToClient(task1, task.TechnicianId);
+
             }
 
             return taskdto;
@@ -160,6 +173,7 @@ namespace Maintenance_Scheduling_System.Application.Services
         public async Task<List<MainTaskDTO>> GetAllOverDueTask()
         {
             var task = await MainTaskRepository.GetTaskByStatus(StatusEnum.OverDue);
+
             var taskdto = mapper.Map<List<MainTaskDTO>>(task);
 
             return taskdto;
@@ -167,6 +181,7 @@ namespace Maintenance_Scheduling_System.Application.Services
         public async Task<List<MainTaskDTO>> GetAllCompletedTask()
         {
             var task = await MainTaskRepository.GetTaskByStatus(StatusEnum.Completed);
+
             var taskdto = mapper.Map<List<MainTaskDTO>>(task);
 
             return taskdto;
@@ -175,6 +190,7 @@ namespace Maintenance_Scheduling_System.Application.Services
         public async Task<List<MainTaskDTO>> GetMainTaskByEquipmentId(int EquipId)
         {
             var task = await MainTaskRepository.GetAllTaskByEquipId(EquipId);
+
             var taskDto = mapper.Map<List<MainTaskDTO>>(task);
 
             return taskDto;
@@ -183,14 +199,19 @@ namespace Maintenance_Scheduling_System.Application.Services
         public async Task<List<MainTaskDTO>> GetMainTaskByHistoryId(int HistoryId)
         {
             var task = await MainTaskRepository.GetMainTaskByHistoryId(HistoryId);
+
             var taskDto = mapper.Map<List<MainTaskDTO>>(task);
+
             return taskDto;
         }
         public async Task<MainTaskDTO> DeleteTask(int TaskId)
         {
             var task = await MainTaskRepository.GetTaskById(TaskId);
+
             task.IsDeleted = true;
+
             AuditModify(task);
+
             await MainTaskRepository.DeleteTask();
 
             return mapper.Map<MainTaskDTO>(task);
@@ -198,6 +219,7 @@ namespace Maintenance_Scheduling_System.Application.Services
         public async Task<MainTaskDTO> UpdateTask(MainTaskDTO taskdto)
         {
             var task = await MainTaskRepository.GetTaskById(taskdto.TaskId);
+
             task.TaskName = taskdto.TaskName;
             task.EquipmentName = taskdto.EquipmentName;
             task.DueDate = taskdto.DueDate;
@@ -207,7 +229,11 @@ namespace Maintenance_Scheduling_System.Application.Services
             AuditModify(task);
             await MainTaskRepository.UpdateTask();
 
-            return mapper.Map<MainTaskDTO>(task);
+            var editedtaskdto = mapper.Map<MainTaskDTO>(task);
+
+            await TaskHub.SendEditedTaskToClient(editedtaskdto, task.TechnicianId);
+
+            return editedtaskdto;
         }
 
         public async Task UpdatePriority(int TaskId,PriorityEnum priority)
@@ -221,11 +247,18 @@ namespace Maintenance_Scheduling_System.Application.Services
         public async Task<MainTaskDTO> ChangeTaskStatus(int TaskId, StatusEnum status)
         {
             var task = await MainTaskRepository.GetTaskById(TaskId);
+
             task.Status = status;
+            
             AuditModify(task);
+
             await MainTaskRepository.UpdateTask();
 
-            return mapper.Map<MainTaskDTO>(task);
+            var taskdto = mapper.Map<MainTaskDTO>(task);
+
+            await TaskHub.SendChangeTaskStatusToClient(taskdto,task.TechnicianId,currentUser.Role);
+
+            return taskdto;
         }
 
         public async Task OverDueTask()
@@ -239,6 +272,7 @@ namespace Maintenance_Scheduling_System.Application.Services
                 if(mainTask.DueDate < DateOnly.FromDateTime(DateTime.Now) && mainTask.Status != StatusEnum.Completed)
                 {
                     mainTask.Status = StatusEnum.OverDue;
+
                     await MainTaskRepository.UpdateTask();
                 }
             }
@@ -247,6 +281,14 @@ namespace Maintenance_Scheduling_System.Application.Services
         public async Task<MainTaskDTO> AssignTechnician(int TaskId, string? TechId)
         {
             var task = await MainTaskRepository.GetTaskById(TaskId);
+
+            if (task.TechnicianId != null)
+            {
+                var taskdto1 = mapper.Map<MainTaskDTO>(task);
+
+                await TaskHub.SendRemoveAssignTaskToClient(taskdto1, task.TechnicianId);
+            }
+
             if (TechId != null)
             {
                
@@ -257,13 +299,18 @@ namespace Maintenance_Scheduling_System.Application.Services
                 task.TechnicianId = null;
 
             }
+            
             AuditModify(task);
+
             await MainTaskRepository.UpdateTask();
 
             var task1 = await MainTaskRepository.GetTaskById(TaskId);
 
+            var taskdto = mapper.Map<MainTaskDTO>(task1);
 
-            return mapper.Map<MainTaskDTO>(task1);
+            await TaskHub.SendUpdatedAssignTaskToClient(taskdto, TechId);
+
+            return taskdto;
         }
         
         public async Task UnAssignTechnicianTaskUponDeletion(string TechId)

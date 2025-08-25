@@ -1,0 +1,85 @@
+﻿using Maintenance_Scheduling_System.Application.DTO.MainTaskDTOs;
+using Maintenance_Scheduling_System.Application.HubInterfaces;
+using Maintenance_Scheduling_System.Infrastructure.Hubs;
+using Microsoft.AspNetCore.SignalR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Maintenance_Scheduling_System.Infrastructure.HubService
+{
+    public class TaskHubService : ITaskHub
+    {
+        public IHubContext<TaskHub> TaskHub {  get; set; }
+
+        public TaskHubService(IHubContext<TaskHub> hub)
+        {
+            TaskHub = hub;
+        }
+
+        public async Task SendTaskToClient(MainTaskDTO mainTaskdto, string? TechnicianId)
+        {
+            await TaskHub.Clients.Group("Admins").SendAsync("RecieveTaskFromServer", mainTaskdto);
+
+            if (TechnicianId != null && mainTaskdto.TechEmail != "N/A")
+            {
+                await TaskHub.Clients.Group($"user:{TechnicianId}").SendAsync("RecieveTaskFromServer", mainTaskdto);
+            }
+        }
+
+        public async Task SendRemoveAssignTaskToClient(MainTaskDTO mainTaskdto, string TechnicianId)
+        {
+            if (TechnicianId != null)
+            {
+                await TaskHub.Clients.Group($"user:{TechnicianId}").SendAsync("RecieveRemoveAssignTaskFromServer", mainTaskdto);
+            }
+        }
+
+        public async Task SendUpdatedAssignTaskToClient(MainTaskDTO mainTaskdto, string? TechnicianId)
+        {
+            if (TechnicianId != null)
+            {
+                await TaskHub.Clients.Group($"user:{TechnicianId}").SendAsync("RecieveUpdatedAssignTaskFromServer", mainTaskdto);
+            }
+        }
+
+        public async Task SendChangeTaskStatusToClient(MainTaskDTO mainTaskDTO, string? TechnicianId, string userRole)
+        {
+            switch (userRole)
+            {
+                case "Technician":
+                    await TaskHub.Clients.Group("Admins")
+                        .SendAsync("RecieveChangeTaskStatusFromServer", mainTaskDTO);
+                    break;
+
+                case "Admin":
+                    if (TechnicianId != null)
+                        await TaskHub.Clients.Group($"user:{TechnicianId}")
+                            .SendAsync("RecieveChangeTaskStatusFromServer", mainTaskDTO);
+                    break;
+
+                case "System":
+                    await TaskHub.Clients.Group("Admins")
+                        .SendAsync("RecieveChangeTaskStatusFromServer", mainTaskDTO);
+
+                    if (TechnicianId != null)
+                        await TaskHub.Clients.Group($"user:{TechnicianId}")
+                            .SendAsync("RecieveChangeTaskStatusFromServer", mainTaskDTO);
+                    break;
+
+                default:
+                    Console.WriteLine($"Unknown role: {userRole}");
+                    throw new Exception($"Unknown Role: {userRole}");
+                    break;
+            }
+        }       
+
+        public async Task SendEditedTaskToClient(MainTaskDTO mainTaskDTO, string? TechnicianId)
+        {
+            if (TechnicianId != null)
+                await TaskHub.Clients.Group($"user:{TechnicianId}").SendAsync("RecieveEditTaskFromServer", mainTaskDTO);
+        }
+    }
+}

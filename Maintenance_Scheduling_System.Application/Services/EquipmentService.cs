@@ -17,7 +17,7 @@ namespace Maintenance_Scheduling_System.Application.Services
         private readonly IEquipmentRepo EquipRepository;
         private readonly IWorkShopLocRepo WorkShopRepository;
         private readonly IMapper mapper;
-        private ICurrentUser currentUser;
+        private readonly ICurrentUser currentUser;
 
         public EquipmentService(IEquipmentRepo equipment, IMapper mapper, ICurrentUser currentUser,IWorkShopLocRepo workShopRepository)
         {
@@ -45,6 +45,7 @@ namespace Maintenance_Scheduling_System.Application.Services
             var equip = mapper.Map<Equipment>(equipmentDTO);
             equip.CreatedBy = currentUser.Name;
 
+
             if(equipmentDTO.WorkShopId != null)
                 equip.AssignWorkShopLocation((int)equipmentDTO.WorkShopId);
 
@@ -59,9 +60,14 @@ namespace Maintenance_Scheduling_System.Application.Services
         public async Task<EquipmentDTO> DeleteEquipment(int EquipId)
         {
             var equip = await EquipRepository.GetEquipmentById(EquipId);
+            
             AuditModify(equip);
+            
             equip.IsDeleted = true;
+           
             await EquipRepository.DeleteEquipment(equip);
+
+      
 
             return MapToDTO(equip);
         }
@@ -75,6 +81,7 @@ namespace Maintenance_Scheduling_System.Application.Services
             existingEquip.location = equipmentDTO.location;
             existingEquip.SerialNumber = equipmentDTO.SerialNumber;
             existingEquip.Model = equipmentDTO.Model;
+            
             AuditModify(existingEquip);
 
             await EquipRepository.UpdateEquipment(existingEquip);
@@ -93,25 +100,30 @@ namespace Maintenance_Scheduling_System.Application.Services
         public async Task<List<EquipmentDTO>> GetEquipmentByName(string Name)
         {
             var equip = await EquipRepository.GetEquipmentByName(Name);
+            
             var DTOS = mapper.Map<List<EquipmentDTO>>(equip);
+            
             return DTOS;
         }
 
         public async Task<EquipmentDTO> GetEquipmentById(int id)
         {
             var Dto = mapper.Map<EquipmentDTO>(await EquipRepository.GetEquipmentById(id));
+
             return Dto;
         }
 
         public async Task<EquipmentDTO> AssignEquipType(int EquipId,string Type)
         {
             var equip = await EquipRepository.GetEquipmentById(EquipId);
+          
             int check = equip.AssignType(Type);
 
             if (check == -1)
                 return null;
 
             AuditModify(equip);
+            
             await EquipRepository.UpdateEquipment(equip);
 
             return MapToDTO(equip);
@@ -126,6 +138,7 @@ namespace Maintenance_Scheduling_System.Application.Services
                 equip.WorkshopId = null;
 
                 AuditModify(equip);
+            
                 await EquipRepository.UpdateEquipment(equip);
 
                 return MapToDTO(equip);
@@ -137,6 +150,7 @@ namespace Maintenance_Scheduling_System.Application.Services
                 return null;
 
             AuditModify(equip);
+            
             await EquipRepository.UpdateEquipment(equip);
 
             var equipdto = MapToDTO(equip);
@@ -149,6 +163,7 @@ namespace Maintenance_Scheduling_System.Application.Services
             }
 
             equipdto.WorkShopLocation = workshop.Location;
+           
             equipdto.WorkShopName = workshop.Name;
 
             return equipdto;
@@ -158,7 +173,9 @@ namespace Maintenance_Scheduling_System.Application.Services
         {
             var equip = await EquipRepository.GetEquipmentById(EquipId);
             equip.Archive();
+
             AuditModify(equip);
+
             await EquipRepository.UpdateEquipment(equip);
 
             return MapToDTO(equip);
@@ -167,16 +184,20 @@ namespace Maintenance_Scheduling_System.Application.Services
         public async Task<EquipmentDTO> UnArchiveEquipment(int EquipId)
         {
             var equip = await EquipRepository.GetEquipmentById(EquipId);
+            
             equip.UnArchive();
+            
             AuditModify(equip);
+            
             await EquipRepository.UpdateEquipment(equip);
+           
             return MapToDTO(equip);
         }
 
         public async Task<List<EquipmentDTO>> GetArchivedEquipments()
         {
-            var equip = await EquipRepository.GetAllEquipment();
-            var archivedEquip = equip.Where(x => x.IsArchived == true).ToList();
+            var archivedEquip = await EquipRepository.GetAllArchivedEquipment();
+
             var archivedDtos = mapper.Map<List<EquipmentDTO>>(archivedEquip);
 
             return archivedDtos;

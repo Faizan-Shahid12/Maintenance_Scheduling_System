@@ -11,7 +11,7 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
     {
         public Task CreateNewScheduleTask(ScheduleTask equip);
         public Task DeleteScheduleTask();
-        public Task UpdateScheduleTask();
+        public Task UpdateScheduleTask(ScheduleTask task);
         public Task<ScheduleTask> GetScheduleTask(int ScheduleId);
         public Task<List<ScheduleTask>> GetAllScheduleTask(int id);
     }

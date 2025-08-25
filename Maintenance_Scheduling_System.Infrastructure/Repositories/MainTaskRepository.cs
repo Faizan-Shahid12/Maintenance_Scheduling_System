@@ -99,5 +99,9 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
             return await DbContext.MainTask.CountAsync();
         }
 
+        public async Task LoadTechnician(MainTask task)
+        {
+            await DbContext.Entry(task).Reference(t => t.Technician).LoadAsync();
+        }
     }
 }

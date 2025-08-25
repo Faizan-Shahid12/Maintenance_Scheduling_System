@@ -42,7 +42,7 @@ namespace Maintenance_Scheduling_System.Application.Services
             AppUser user = new AppUser
             {
                 FullName = appuser.FullName,
-                UserName = appuser.FullName.Replace(" ","") + Guid.NewGuid(),
+                UserName = appuser.FullName.Replace(" ", "") + Guid.NewGuid(),
                 Email = appuser.Email,
                 PhoneNumber = appuser.PhoneNumber,
                 Address = appuser.Address,
@@ -110,7 +110,7 @@ namespace Maintenance_Scheduling_System.Application.Services
         {
             var authClaims = new List<Claim>
             {
-                new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub, user.FullName),
+                new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.NameIdentifier, user.Id),                    
                 new Claim("FullName", user.FullName),
