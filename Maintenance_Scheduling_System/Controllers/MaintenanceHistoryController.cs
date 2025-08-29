@@ -37,7 +37,7 @@ namespace Maintenance_Scheduling_System.Controllers
             return Ok();
         }
         [HttpPut]
-        public async Task<IActionResult> EditMaintenanceHistory([FromBody] EditMaintenanceHistoryDTO DTO)
+        public async Task<IActionResult> EditMaintenanceHistory([FromBody] MaintenanceHistoryDTO DTO)
         {
              await MaintenanceHistoryService.EditHistory(DTO);
             return Ok();
