@@ -24,19 +24,13 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
             await DbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteTask(MainTask task)
+        public async Task DeleteTask()
         {
-            task.LastModifiedAt = DateTime.UtcNow;
-            task.IsDeleted = true;
-
-            DbContext.MainTask.Update(task);
             await DbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateTask(MainTask task)
+        public async Task UpdateTask()
         {
-            task.LastModifiedAt = DateTime.UtcNow;
-            DbContext.MainTask.Update(task);
             await DbContext.SaveChangesAsync();
         }
 
@@ -51,6 +45,12 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
         {
             return await DbContext.MainTask
                 .Where(t => !t.IsDeleted)
+                .ToListAsync();
+        }
+        public async Task<List<MainTask>> GetAllTaskByEquipId(int Id)
+        {
+            return await DbContext.MainTask
+                .Where(t => !t.IsDeleted && t.EquipmentId == Id)
                 .ToListAsync();
         }
 

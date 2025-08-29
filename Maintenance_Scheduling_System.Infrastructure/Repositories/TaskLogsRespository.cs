@@ -26,12 +26,14 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
 
         public async Task DeleteTaskLogs(TaskLogs taskLogs)
         {
-            taskLogs.IsDeleted = true; 
-            taskLogs.LastModifiedAt = DateTime.UtcNow;
             DbContext.TaskLogs.Update(taskLogs);
             await DbContext.SaveChangesAsync();
         }
-
+        public async Task<TaskLogs> GetTaskLogByLogId(int logId)
+        {
+            return await DbContext.TaskLogs
+                .Where(t => t.LogId == logId && !t.IsDeleted).FirstOrDefaultAsync();
+        }
         public async Task<List<TaskLogs>> GetAllTaskLogsByTaskId(int taskId)
         {
             return await DbContext.TaskLogs
@@ -42,7 +44,6 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
 
         public async Task UpdateTaskLogs(TaskLogs tasklogs)
         {
-            tasklogs.LastModifiedAt = DateTime.UtcNow;
             DbContext.TaskLogs.Update(tasklogs);
             await DbContext.SaveChangesAsync();
         }
