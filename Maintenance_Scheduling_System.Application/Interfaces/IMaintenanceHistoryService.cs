@@ -12,10 +12,10 @@ namespace Maintenance_Scheduling_System.Application.Interfaces
     {
         Task CreateMaintenanceHistoryFromTask(CreateMaintenanceHistoryDTO mainhisDTO, MainTask task,Equipment equip);
         Task AddNewTasktoHistory(int id, MainTask Task);
-        Task EditHistory(EditMaintenanceHistoryDTO mainDto);
+        Task EditHistory(MaintenanceHistoryDTO mainDto);
         Task DeleteHistory(int HistoryId);
-        Task<List<DisplayMaintenanceHistoryDTO>> GetMaintenanceHistoryByEquipmentId(int EquipmentId);
-        Task<List<EditMaintenanceHistoryDTO>> GetMaintenanceHistoryByEquipId(int EquipmentId);
-        Task<List<DisplayMaintenanceHistoryDTO>> GetAllMaintenanceHistory();
+        Task<List<MaintenanceHistoryDTO>> GetMaintenanceHistoryByEquipmentId(int EquipmentId);
+        Task<List<MaintenanceHistoryDTO>> GetMaintenanceHistoryByEquipId(int EquipmentId);
+        Task<List<MaintenanceHistoryDTO>> GetAllMaintenanceHistory();
     }
 }
