@@ -61,7 +61,7 @@ namespace Maintenance_Scheduling_System.Application.Services
             await MaintenanceHistoryRepository.AddTask();
         }
 
-        public async Task EditHistory(EditMaintenanceHistoryDTO mainDto)
+        public async Task EditHistory(MaintenanceHistoryDTO mainDto)
         {
             var maindto = mapper.Map<MaintenanceHistory>(mainDto); 
 
@@ -87,23 +87,23 @@ namespace Maintenance_Scheduling_System.Application.Services
             await MaintenanceHistoryRepository.UpdateMaintenanceHistory();
         }
 
-        public async Task<List<DisplayMaintenanceHistoryDTO>> GetMaintenanceHistoryByEquipmentId(int EquipmentId)
+        public async Task<List<MaintenanceHistoryDTO>> GetMaintenanceHistoryByEquipmentId(int EquipmentId)
         {
             var main = await MaintenanceHistoryRepository.GetMaintenanceHistoryByEquipId(EquipmentId);
-            var mainDTO = mapper.Map<List<DisplayMaintenanceHistoryDTO>>(main);
+            var mainDTO = mapper.Map<List<MaintenanceHistoryDTO>>(main);
             return mainDTO;
         }
-        public async Task<List<EditMaintenanceHistoryDTO>> GetMaintenanceHistoryByEquipId(int EquipmentId)
+        public async Task<List<MaintenanceHistoryDTO>> GetMaintenanceHistoryByEquipId(int EquipmentId)
         {
             var main = await MaintenanceHistoryRepository.GetMaintenanceHistoryByEquipId(EquipmentId);
-            var mainDTO = mapper.Map<List<EditMaintenanceHistoryDTO>>(main);
+            var mainDTO = mapper.Map<List<  MaintenanceHistoryDTO>>(main);
             return mainDTO;
         }
 
-        public async Task<List<DisplayMaintenanceHistoryDTO>> GetAllMaintenanceHistory()
+        public async Task<List<MaintenanceHistoryDTO>> GetAllMaintenanceHistory()
         {
             var main = await MaintenanceHistoryRepository.GetAllMaintenanceHistory();
-            var mainDTO = mapper.Map<List<DisplayMaintenanceHistoryDTO>>(main);
+            var mainDTO = mapper.Map<List<MaintenanceHistoryDTO>>(main);
             return mainDTO;
         }
 
