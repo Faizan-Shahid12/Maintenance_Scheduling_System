@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cJdaZBICfX4=",
+  "dgSpecHash": "0ATJpLVu6/0=",
   "success": true,
   "projectFilePath": "C:\\Users\\Administrator\\source\\repos\\Maintenance_Scheduling_System\\Maintenance_Scheduling_System.Infrastructure\\Maintenance_Scheduling_System.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -44,6 +44,9 @@
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.7\\microsoft.extensions.dependencyinjection.9.0.7.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.7\\microsoft.extensions.dependencyinjection.abstractions.9.0.7.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.dependencymodel\\9.0.7\\microsoft.extensions.dependencymodel.9.0.7.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.diagnostics.abstractions\\9.0.7\\microsoft.extensions.diagnostics.abstractions.9.0.7.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\9.0.7\\microsoft.extensions.fileproviders.abstractions.9.0.7.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\9.0.7\\microsoft.extensions.hosting.abstractions.9.0.7.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.identity.core\\8.0.18\\microsoft.extensions.identity.core.8.0.18.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.identity.stores\\8.0.18\\microsoft.extensions.identity.stores.8.0.18.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.logging\\9.0.7\\microsoft.extensions.logging.9.0.7.nupkg.sha512",

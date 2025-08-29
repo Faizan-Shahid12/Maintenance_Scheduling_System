@@ -195,6 +195,237 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskController",
+    "Method": "AssignTechnician",
+    "RelativePath": "MainTask/AssignTechnician",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TaskId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "TechId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskController",
+    "Method": "ChangeStatus",
+    "RelativePath": "MainTask/ChangeStatus/{taskId}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskController",
+    "Method": "CompleteTask",
+    "RelativePath": "MainTask/CompleteTask",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TaskId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskController",
+    "Method": "DeleteTask",
+    "RelativePath": "MainTask/DeleteTask",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TaskId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskController",
+    "Method": "GetAllOverDueTasks",
+    "RelativePath": "MainTask/GetAllOverDueTasks",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskController",
+    "Method": "GetAllTasks",
+    "RelativePath": "MainTask/GetAllTasks",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskController",
+    "Method": "GetCompletedTask",
+    "RelativePath": "MainTask/GetCompletedTask",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskController",
+    "Method": "GetTaskByEquipId",
+    "RelativePath": "MainTask/GetTaskByEquipId/{EquipId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EquipId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskController",
+    "Method": "UpdatePriority",
+    "RelativePath": "MainTask/UpdatePriority/{taskId}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "priority",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskController",
+    "Method": "UpdateTask",
+    "RelativePath": "MainTask/UpdateTask",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskDto",
+        "Type": "Maintenance_Scheduling_System.Application.DTO.MainTaskDTOs.MainTaskDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskLogController",
+    "Method": "CreateTaskLog",
+    "RelativePath": "MainTaskLog/CreateTaskLog",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Maintenance_Scheduling_System.Application.DTO.TaskLogDTOs.CreateTaskLogDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskLogController",
+    "Method": "DeleteLog",
+    "RelativePath": "MainTaskLog/DeleteLog/{logId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "logId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskLogController",
+    "Method": "GetAllLogs",
+    "RelativePath": "MainTaskLog/GetAllLogs/{taskId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Maintenance_Scheduling_System.Application.DTO.TaskLogDTOs.TaskLogDTO, Maintenance_Scheduling_System.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.MainTaskLogController",
+    "Method": "UpdateLog",
+    "RelativePath": "MainTaskLog/UpdateLog",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Maintenance_Scheduling_System.Application.DTO.TaskLogDTOs.TaskLogDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.MaintenanceHistoryController",
     "Method": "DeleteMaintenanceHistory",
     "RelativePath": "MaintenanceHistory/DeleteMaintenanceHistory",
@@ -220,7 +451,7 @@
     "Parameters": [
       {
         "Name": "DTO",
-        "Type": "Maintenance_Scheduling_System.Application.DTO.MaintenanceHistoryDTOs.EditMaintenanceHistoryDTO",
+        "Type": "Maintenance_Scheduling_System.Application.DTO.MaintenanceHistoryDTOs.MaintenanceHistoryDTO",
         "IsRequired": true
       }
     ],
@@ -247,6 +478,59 @@
       {
         "Name": "EquipId",
         "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.TaskLogAttachmentController",
+    "Method": "DeleteAttachment",
+    "RelativePath": "TaskLogAttachment/DeleteAttachment/{attachId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "attachId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.TaskLogAttachmentController",
+    "Method": "DownloadAttachment",
+    "RelativePath": "TaskLogAttachment/DownloadAttachment/{attachId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "attachId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.TaskLogAttachmentController",
+    "Method": "UploadAttachment",
+    "RelativePath": "TaskLogAttachment/UploadAttachment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "LogId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
       }
     ],

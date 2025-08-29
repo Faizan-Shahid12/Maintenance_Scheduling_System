@@ -39,6 +39,9 @@ C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Sc
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Administrator\source\repos\Maintenance_Scheduling_System\Maintenance_Scheduling_System\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll

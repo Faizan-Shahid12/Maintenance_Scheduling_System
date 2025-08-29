@@ -307,6 +307,363 @@
         }
       }
     },
+    "/MainTask/GetAllTasks": {
+      "get": {
+        "tags": [
+          "MainTask"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MainTask/GetTaskByEquipId/{EquipId}": {
+      "get": {
+        "tags": [
+          "MainTask"
+        ],
+        "parameters": [
+          {
+            "name": "EquipId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MainTask/DeleteTask": {
+      "delete": {
+        "tags": [
+          "MainTask"
+        ],
+        "parameters": [
+          {
+            "name": "TaskId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MainTask/UpdateTask": {
+      "put": {
+        "tags": [
+          "MainTask"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MainTaskDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MainTaskDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MainTaskDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MainTask/UpdatePriority/{taskId}": {
+      "patch": {
+        "tags": [
+          "MainTask"
+        ],
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "priority",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/PriorityEnum"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MainTask/ChangeStatus/{taskId}": {
+      "patch": {
+        "tags": [
+          "MainTask"
+        ],
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/StatusEnum"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MainTask/GetAllOverDueTasks": {
+      "get": {
+        "tags": [
+          "MainTask"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MainTask/GetCompletedTask": {
+      "get": {
+        "tags": [
+          "MainTask"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MainTask/CompleteTask": {
+      "patch": {
+        "tags": [
+          "MainTask"
+        ],
+        "parameters": [
+          {
+            "name": "TaskId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MainTask/AssignTechnician": {
+      "patch": {
+        "tags": [
+          "MainTask"
+        ],
+        "parameters": [
+          {
+            "name": "TaskId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TechId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MainTaskLog/CreateTaskLog": {
+      "post": {
+        "tags": [
+          "MainTaskLog"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTaskLogDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTaskLogDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTaskLogDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MainTaskLog/GetAllLogs/{taskId}": {
+      "get": {
+        "tags": [
+          "MainTaskLog"
+        ],
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TaskLogDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TaskLogDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TaskLogDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/MainTaskLog/UpdateLog": {
+      "put": {
+        "tags": [
+          "MainTaskLog"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskLogDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskLogDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskLogDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/MainTaskLog/DeleteLog/{logId}": {
+      "delete": {
+        "tags": [
+          "MainTaskLog"
+        ],
+        "parameters": [
+          {
+            "name": "logId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/MaintenanceHistory/GetAllMaintenanceHistory": {
       "get": {
         "tags": [
@@ -372,21 +729,106 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EditMaintenanceHistoryDTO"
+                "$ref": "#/components/schemas/MaintenanceHistoryDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/EditMaintenanceHistoryDTO"
+                "$ref": "#/components/schemas/MaintenanceHistoryDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/EditMaintenanceHistoryDTO"
+                "$ref": "#/components/schemas/MaintenanceHistoryDTO"
               }
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/TaskLogAttachment/UploadAttachment": {
+      "post": {
+        "tags": [
+          "TaskLogAttachment"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "LogId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "File": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "LogId": {
+                  "style": "form"
+                },
+                "File": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/TaskLogAttachment/DownloadAttachment/{attachId}": {
+      "get": {
+        "tags": [
+          "TaskLogAttachment"
+        ],
+        "parameters": [
+          {
+            "name": "attachId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/TaskLogAttachment/DeleteAttachment/{attachId}": {
+      "delete": {
+        "tags": [
+          "TaskLogAttachment"
+        ],
+        "parameters": [
+          {
+            "name": "attachId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -447,28 +889,16 @@
         },
         "additionalProperties": false
       },
-      "EditMaintenanceHistoryDTO": {
+      "CreateTaskLogDTO": {
         "type": "object",
         "properties": {
-          "historyId": {
+          "taskId": {
             "type": "integer",
             "format": "int32"
           },
-          "equipmentName": {
+          "note": {
             "type": "string",
             "nullable": true
-          },
-          "equipmentType": {
-            "type": "string",
-            "nullable": true
-          },
-          "startDate": {
-            "type": "string",
-            "format": "date"
-          },
-          "endDate": {
-            "type": "string",
-            "format": "date"
           }
         },
         "additionalProperties": false
@@ -514,24 +944,98 @@
         },
         "additionalProperties": false
       },
+      "MainTaskDTO": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "equipmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "taskName": {
+            "type": "string",
+            "nullable": true
+          },
+          "priority": {
+            "$ref": "#/components/schemas/PriorityEnum"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MaintenanceHistoryDTO": {
+        "type": "object",
+        "properties": {
+          "historyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "equipmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "equipmentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "additionalProperties": false
+      },
       "PriorityEnum": {
         "enum": [
-          0,
-          1,
-          2,
-          3
+          "Low",
+          "Medium",
+          "High",
+          "Urgent"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "StatusEnum": {
         "enum": [
-          0,
-          1,
-          2
+          "Pending",
+          "Completed",
+          "OverDue"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
+      },
+      "TaskLogDTO": {
+        "type": "object",
+        "properties": {
+          "logId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
       }
     }
   }
