@@ -1,4 +1,5 @@
-﻿using Maintenance_Scheduling_System.Domain.Interface;
+﻿using Maintenance_Scheduling_System.Domain.Enums;
+using Maintenance_Scheduling_System.Domain.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace Maintenance_Scheduling_System.Domain.Entities
 
         public string TaskName { get; set; } = string.Empty;
         public string EquipmentName { get; set; } = string.Empty;
+        public PriorityEnum Priority { get; set; } = PriorityEnum.Low;
+        public DateOnly DueDate { get; set; }
         
         public int ScheduleId { get; set; }
         public MaintenanceSchedule schedule { get; set; }
