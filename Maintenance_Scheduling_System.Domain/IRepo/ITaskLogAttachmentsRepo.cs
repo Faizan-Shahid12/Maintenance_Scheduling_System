@@ -10,8 +10,8 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
     public interface ITaskLogAttachmentsRepo
     {
         public Task CreateNewTaskLogAttachment(TaskLogAttachment tasklogs);
-        public Task DeleteTaskLogAttachment(TaskLogAttachment taskLogs);
-        public Task UpdateTaskLogAttachment(TaskLogAttachment tasklogs);
+        public Task DeleteTaskLogAttachment();
         public Task<List<TaskLogAttachment>> GetAllTaskLogAttachmentByTaskLogId(int LogId);
+        public Task<TaskLogAttachment> GetTaskLogAttachmentById(int attachId);
     }
 }
