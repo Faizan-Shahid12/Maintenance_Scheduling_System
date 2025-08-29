@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Maintenance_Scheduling_System.Application.DTO.MaintenanceHistoryDTOs
 {
-    public class EditMaintenanceHistoryDTO
+    public class MaintenanceHistoryDTO
     {
         public int HistoryId { get; set; }
         public string EquipmentName { get; set; } = string.Empty;
