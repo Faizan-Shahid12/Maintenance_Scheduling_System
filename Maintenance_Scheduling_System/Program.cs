@@ -1,6 +1,7 @@
 
 using Maintenance_Scheduling_System.Application.Interfaces;
 using Maintenance_Scheduling_System.Application.Services;
+using Maintenance_Scheduling_System.Application.Services.BackgroundServices;
 using Maintenance_Scheduling_System.Application.Setting;
 using Maintenance_Scheduling_System.Domain.Entities;
 using Maintenance_Scheduling_System.Domain.IRepo;
@@ -9,6 +10,7 @@ using Maintenance_Scheduling_System.Infrastructure.Repositories;
 using Maintenance_Scheduling_System.Infrastructure.Settings;
 using Microsoft.AspNetCore.Identity;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace Maintenance_Scheduling_System
 {
@@ -20,7 +22,12 @@ namespace Maintenance_Scheduling_System
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -42,10 +49,17 @@ namespace Maintenance_Scheduling_System
             builder.Services.AddScoped<IEquipmentRepo, EquipmentRepository>();
             builder.Services.AddScoped<IMaintenanceHistoryRepo, MaintenanceHistoryRepository>();
             builder.Services.AddScoped<IMainTaskRepo, MainTaskRepository>();
+            builder.Services.AddScoped<ITaskLogRepo, TaskLogsRepository>();
+            builder.Services.AddScoped<ITaskLogAttachmentsRepo, TaskLogAttachmentRepository>();
 
             builder.Services.AddScoped<IEquipmentService,EquipmentService>();
             builder.Services.AddScoped<IMaintenanceHistoryService, MaintenanceHistoryService>();
             builder.Services.AddScoped<IMainTaskService,MainTaskService>();
+            builder.Services.AddScoped<IMainTaskLogService,MainTaskLogService>();
+            builder.Services.AddScoped<ITaskLogAttachmentService,TaskLogAttachmentService>();
+
+            builder.Services.AddHostedService<TaskBackgroundService>();
+
 
             var app = builder.Build();
 
