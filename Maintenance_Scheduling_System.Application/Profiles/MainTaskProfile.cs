@@ -18,6 +18,8 @@ namespace Maintenance_Scheduling_System.Application.Profiles
                 .ForMember(M => M.EquipmentId, M => M.Ignore())
                 .ForMember(M => M.History, M => M.Ignore())
                 .ForMember(M => M.HistoryId, M => M.Ignore());
+
+            CreateMap<MainTaskDTO, MainTask>().ReverseMap();
                 
         }
     }

@@ -18,8 +18,7 @@ namespace Maintenance_Scheduling_System.Application.Profiles
                 .ForMember(mhdto => mhdto.equipment, mh => mh.Ignore())
                 .ForMember(mhdto => mhdto.tasks, mh => mh.Ignore());
 
-            CreateMap<DisplayMaintenanceHistoryDTO, MaintenanceHistory>().ReverseMap();
-            CreateMap<EditMaintenanceHistoryDTO, MaintenanceHistory>().ReverseMap();
+            CreateMap<MaintenanceHistoryDTO, MaintenanceHistory>().ReverseMap();
         }
     }
 }
