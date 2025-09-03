@@ -174,6 +174,38 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.BarCodeController",
+    "Method": "GenerateQRCode",
+    "RelativePath": "BarCode/GenerateQRCode",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "equipIds",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance_Scheduling_System.Controllers.BarCodeController",
+    "Method": "ReadQRCode",
+    "RelativePath": "BarCode/ReadQRCode",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "base64",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Maintenance_Scheduling_System.Controllers.EquipmentController",
     "Method": "ArchiveEquipment",
     "RelativePath": "Equipment/ArchiveEquipment",
@@ -224,9 +256,9 @@
         "IsRequired": false
       },
       {
-        "Name": "workShopId",
-        "Type": "System.Int32",
-        "IsRequired": false
+        "Name": "workShop",
+        "Type": "Maintenance_Scheduling_System.Application.DTO.WorkShopDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

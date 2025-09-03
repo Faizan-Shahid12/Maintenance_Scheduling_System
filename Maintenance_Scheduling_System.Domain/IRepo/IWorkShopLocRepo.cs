@@ -9,9 +9,10 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
 {
     public interface IWorkShopLocRepo
     {
-       public Task<List<WorkShopLoc>> GetAllWorkShopLoc();
+        public Task<List<WorkShopLoc>> GetAllWorkShopLoc();
+        public Task AddNewWorkShop(WorkShopLoc workShopLoc);
         public Task<WorkShopLoc> GetWorkShopById(int workshopId);
-
+        public Task<WorkShopLoc> GetWorkShopByLocation(string location);
 
     }
 }

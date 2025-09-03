@@ -1,4 +1,5 @@
-﻿using Maintenance_Scheduling_System.Application.DTO.EquipmentDTOs;
+﻿using Maintenance_Scheduling_System.Application.DTO;
+using Maintenance_Scheduling_System.Application.DTO.EquipmentDTOs;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,12 @@ namespace Maintenance_Scheduling_System.Application.CQRS.EquipmentManager.Comman
     public class AssignWorkshopCommand : IRequest<EquipmentDTO>
     {
         public int EquipmentId { get; }
-        public int WorkShopId { get; }
+        public WorkShopDTO WorkShop { get; }
 
-        public AssignWorkshopCommand(int equipmentId, int workShopId)
+        public AssignWorkshopCommand(int equipmentId, WorkShopDTO workShopId)
         {
             EquipmentId = equipmentId;
-            WorkShopId = workShopId;
+            WorkShop = workShopId;
         }
     }
 }

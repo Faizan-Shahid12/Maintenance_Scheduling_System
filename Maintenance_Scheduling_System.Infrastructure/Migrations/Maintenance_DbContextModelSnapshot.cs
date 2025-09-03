@@ -126,6 +126,9 @@ namespace Maintenance_Scheduling_System.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EquipmentId"));
 
+                    b.Property<Guid>("BarCodeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -530,9 +533,15 @@ namespace Maintenance_Scheduling_System.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WorkShopId"));
 
+                    b.Property<double>("Latitude")
+                        .HasColumnType("float");
+
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("float");
 
                     b.Property<string>("Name")
                         .IsRequired()

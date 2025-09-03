@@ -82,5 +82,20 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
 
             return equip;
         }
+
+        public async Task<Equipment> GetEquipmentByBarCodeId(string barCodeId)
+        {
+            if (!Guid.TryParse(barCodeId, out var BarCodeIdinGuid))
+                throw new ArgumentException("Invalid Barcode Id format", nameof(barCodeId));
+
+            var equip = await DbContext.Equipment.Include(ws => ws.WorkShopLocation)
+                .Where(e => e.BarCodeId == BarCodeIdinGuid && !e.IsDeleted)
+                .FirstOrDefaultAsync();
+
+            if (equip == null)
+                throw new Exception("Equipment not found");
+
+            return equip;
+        }
     }
 }

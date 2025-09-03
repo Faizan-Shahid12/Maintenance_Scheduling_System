@@ -94,11 +94,18 @@ namespace Maintenance_Scheduling_System.Infrastructure.Repositories
 
         public async Task<AppUser> GetAppUserById(string id)
         {
-            var user  = await _userManager.FindByIdAsync(id);
-            var tasks = await DbContext.MainTask.Where(u => !u.IsDeleted && u.TechnicianId == user.Id).ToListAsync();
+            var user = await _userManager.FindByIdAsync(id).ConfigureAwait(false);
+            if (user == null) return null;
+
+            var tasks = await DbContext.MainTask
+                .Where(u => !u.IsDeleted && u.TechnicianId == user.Id)
+                .ToListAsync()
+                .ConfigureAwait(false);
+
             user.AssignedTasks = tasks;
             return user;
         }
+
 
         public async Task UpdateAppUser(AppUser user)
         {

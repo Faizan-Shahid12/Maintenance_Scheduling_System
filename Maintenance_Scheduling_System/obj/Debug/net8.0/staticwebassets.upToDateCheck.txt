@@ -1,3 +1,6 @@
+wwwroot\barcodes\hi.png
+wwwroot\barcodes\hiok.png
+wwwroot\barcodes\ojip.png
 wwwroot\Uploads\1b6693b0-98e7-4594-90bc-773683e07e16_Maintenance History (2).pptx
 wwwroot\Uploads\2ac28c17-5b55-42b6-85a5-9539f6a9b900_Internship Form.xlsx
 wwwroot\Uploads\369bec06-6a13-4a5c-a753-50a191de775c_Internship Form.xlsx

@@ -12,6 +12,7 @@ namespace Maintenance_Scheduling_System.Domain.Entities
         public string Model { get;  set; }
         public bool IsArchived { get; set; } = false;
 
+        public Guid BarCodeId { get; set; } = Guid.NewGuid();
 
         public int? WorkshopId { get; set; } = null;
         public WorkShopLoc? WorkShopLocation { get; set; } = null;

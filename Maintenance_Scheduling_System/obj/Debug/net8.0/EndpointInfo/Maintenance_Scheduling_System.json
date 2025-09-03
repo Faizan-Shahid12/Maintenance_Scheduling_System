@@ -286,6 +286,70 @@
         }
       }
     },
+    "/BarCode/GenerateQRCode": {
+      "post": {
+        "tags": [
+          "BarCode"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/BarCode/ReadQRCode": {
+      "post": {
+        "tags": [
+          "BarCode"
+        ],
+        "parameters": [
+          {
+            "name": "base64",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Equipment/CreateEquipment": {
       "post": {
         "tags": [
@@ -479,16 +543,27 @@
               "type": "integer",
               "format": "int32"
             }
-          },
-          {
-            "name": "workShopId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkShopDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkShopDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkShopDTO"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1582,10 +1657,8 @@
             "type": "string",
             "nullable": true
           },
-          "workShopId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
+          "workShop": {
+            "$ref": "#/components/schemas/WorkShopDTO"
           }
         },
         "additionalProperties": false
@@ -1735,6 +1808,14 @@
           "workShopLocation": {
             "type": "string",
             "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false
@@ -1921,6 +2002,32 @@
           "createdAt": {
             "type": "string",
             "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WorkShopDTO": {
+        "type": "object",
+        "properties": {
+          "workShopId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "location": {
+            "type": "string",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false

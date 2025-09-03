@@ -8,8 +8,9 @@ using Maintenance_Scheduling_System.Application.Settings;
 using Maintenance_Scheduling_System.Domain.Entities;
 using Maintenance_Scheduling_System.Domain.IRepo;
 using Maintenance_Scheduling_System.Infrastructure.DbContext;
-using Maintenance_Scheduling_System.Infrastructure.Hubs;
-using Maintenance_Scheduling_System.Infrastructure.HubService;
+using Maintenance_Scheduling_System.Infrastructure.External_Libraries.BarCode;
+using Maintenance_Scheduling_System.Infrastructure.External_Libraries.Hubs;
+using Maintenance_Scheduling_System.Infrastructure.External_Libraries.HubService;
 using Maintenance_Scheduling_System.Infrastructure.Repositories;
 using Maintenance_Scheduling_System.Infrastructure.Seeding;
 using Maintenance_Scheduling_System.Infrastructure.Settings;
@@ -138,6 +139,7 @@ namespace Maintenance_Scheduling_System
                                       .AllowAnyMethod()
                                       .AllowAnyHeader()
                                       .AllowCredentials());
+
             });
 
             builder.Services.AddAutoMapper(typeof(AssemblyReference).Assembly);
@@ -170,6 +172,7 @@ namespace Maintenance_Scheduling_System
             builder.Services.AddScoped<IRefreshTokenRepo, RefreshTokenRepository>();
 
             builder.Services.AddScoped<ITaskHub, TaskHubService>();
+            builder.Services.AddScoped<IBarCodeService, BarCodeService>();
 
             builder.Services.AddHostedService<TaskBackgroundService>();
             builder.Services.AddHostedService<ScheduleBackgroundService>();

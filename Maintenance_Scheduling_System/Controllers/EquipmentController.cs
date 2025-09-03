@@ -1,5 +1,6 @@
 ﻿using Maintenance_Scheduling_System.Application.CQRS.EquipmentManager.Commands;
 using Maintenance_Scheduling_System.Application.CQRS.EquipmentManager.Queries;
+using Maintenance_Scheduling_System.Application.DTO;
 using Maintenance_Scheduling_System.Application.DTO.EquipmentDTOs;
 using Maintenance_Scheduling_System.Application.Interfaces;
 using MediatR;
@@ -52,7 +53,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Technician")]
         public async Task<IActionResult> GetAllEquipments()
         {
             var result = await _mediator.Send(new GetAllEquipmentsQuery());
@@ -108,9 +109,9 @@ namespace Maintenance_Scheduling_System.Controllers
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AssignWorkShopLocation([FromQuery] int equipId, [FromQuery] int workShopId)
+        public async Task<IActionResult> AssignWorkShopLocation([FromQuery] int equipId, [FromBody] WorkShopDTO workShop)
         {
-            var equip = await _mediator.Send(new AssignWorkshopCommand(equipId, workShopId));
+            var equip = await _mediator.Send(new AssignWorkshopCommand(equipId, workShop));
             return Ok(equip);
         }
 
@@ -131,7 +132,7 @@ namespace Maintenance_Scheduling_System.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Technician")]
         public async Task<IActionResult> GetAllWorkShops()
         {
             var result = await _mediator.Send(new GetAllWorkShopsQuery());

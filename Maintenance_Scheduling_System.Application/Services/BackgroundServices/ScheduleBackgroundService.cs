@@ -26,8 +26,8 @@ namespace Maintenance_Scheduling_System.Application.Services.BackgroundServices
             {
                 using var scope = _serviceProvider.CreateScope();
                 var _mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
-                await _mediator.Send(new AutomaticallyUnactivateCommand());
                 await _mediator.Send(new AutomaticallyGenerateCommand());
+                await _mediator.Send(new AutomaticallyUnactivateCommand());
 
                 await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
             }

@@ -17,5 +17,7 @@ namespace Maintenance_Scheduling_System.Application.DTO.EquipmentDTOs
         public bool isArchived { get; set; }
         public string WorkShopName { get; set; } = string.Empty;
         public string WorkShopLocation { get; set; } = string.Empty ;
+        public double Longitude { get; set; } = 0.0;
+        public double Latitude { get; set; } = 0.0;
     }
 }

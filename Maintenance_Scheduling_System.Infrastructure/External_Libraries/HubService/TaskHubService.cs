@@ -1,6 +1,6 @@
 ﻿using Maintenance_Scheduling_System.Application.DTO.MainTaskDTOs;
 using Maintenance_Scheduling_System.Application.HubInterfaces;
-using Maintenance_Scheduling_System.Infrastructure.Hubs;
+using Maintenance_Scheduling_System.Infrastructure.External_Libraries.Hubs;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maintenance_Scheduling_System.Infrastructure.HubService
+namespace Maintenance_Scheduling_System.Infrastructure.External_Libraries.HubService
 {
     public class TaskHubService : ITaskHub
     {

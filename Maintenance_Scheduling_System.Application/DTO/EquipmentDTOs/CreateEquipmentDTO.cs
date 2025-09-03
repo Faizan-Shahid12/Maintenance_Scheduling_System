@@ -13,6 +13,7 @@ namespace Maintenance_Scheduling_System.Application.DTO.EquipmentDTOs
         public string location { get; set; }
         public string SerialNumber { get; set; }
         public string Model { get; set; }
-        public int? WorkShopId { get; set; }
+        public WorkShopDTO WorkShop { get; set; }
+
     }
 }

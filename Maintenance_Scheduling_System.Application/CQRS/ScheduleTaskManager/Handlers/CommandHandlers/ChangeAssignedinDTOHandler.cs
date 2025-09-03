@@ -28,6 +28,7 @@ namespace Maintenance_Scheduling_System.Application.CQRS.ScheduleTaskManager.Han
             if (!string.IsNullOrEmpty(scheduleTask?.TechnicianId))
             {
                 var tech = await _mediator.Send(new GetTechnicianByIdQuery(scheduleTask.TechnicianId));
+
                 if (tech != null)
                 {
                     taskDTO.AssignedTo = tech.FullName;

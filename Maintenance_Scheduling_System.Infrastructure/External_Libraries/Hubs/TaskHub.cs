@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maintenance_Scheduling_System.Infrastructure.Hubs
+namespace Maintenance_Scheduling_System.Infrastructure.External_Libraries.Hubs
 {
     public class TaskHub : Hub
     {

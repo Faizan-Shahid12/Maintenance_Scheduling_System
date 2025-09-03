@@ -13,6 +13,7 @@ namespace Maintenance_Scheduling_System.Domain.IRepo
         public Task DeleteEquipment(Equipment equip);
         public Task UpdateEquipment(Equipment equip);
         public Task<Equipment> GetEquipmentById(int equipId);
+        public Task<Equipment> GetEquipmentByBarCodeId(string barCodeId);
         public Task<List<Equipment>> GetAllEquipment();
         public Task<List<Equipment>> GetEquipmentByName(string Name);
         public Task<List<Equipment>> GetAllArchivedEquipment();

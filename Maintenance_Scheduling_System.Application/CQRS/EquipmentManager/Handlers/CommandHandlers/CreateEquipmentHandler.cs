@@ -16,21 +16,23 @@ namespace Maintenance_Scheduling_System.Application.CQRS.EquipmentManager.Handle
     public class CreateEquipmentHandler : IRequestHandler<CreateEquipmentCommand, EquipmentDTO>
     {
         private readonly IEquipmentRepo EquipRepository;
+        private readonly IMediator _mediator;
         private readonly IMapper mapper;
 
-        public CreateEquipmentHandler(IEquipmentRepo EquipmentRepository, IMapper mapper)
+        public CreateEquipmentHandler(IEquipmentRepo EquipmentRepository, IMapper mapper, IMediator mediator)
         {
             this.EquipRepository = EquipmentRepository;
             this.mapper = mapper;
+            _mediator = mediator;
         }
         public async Task<EquipmentDTO> Handle(CreateEquipmentCommand request, CancellationToken cancellationToken)
         {
             var equip = mapper.Map<Equipment>(request.EquipmentDTO);
 
-            if (request.EquipmentDTO.WorkShopId != null)
-                equip.AssignWorkShopLocation((int)(request.EquipmentDTO.WorkShopId));
-
             await EquipRepository.CreateNewEquipment(equip);
+
+            if (request.EquipmentDTO.WorkShop != null)
+                await _mediator.Send(new AssignWorkshopCommand(equip.EquipmentId,request.EquipmentDTO.WorkShop));
 
             return mapper.Map<EquipmentDTO>(equip);
         }
